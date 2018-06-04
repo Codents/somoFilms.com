@@ -1,0 +1,148 @@
+body,
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-size: 6.2vw;
+}
+
+body,
+input,
+textarea {
+  font-family: 'PT Sans', sans-serif;
+}
+
+.app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+}
+
+.home {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+}
+
+.team {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+}
+
+.right-pane {
+  width: 100%;
+  position: relative;
+}
+.home-picture {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  opacity: 0;
+  transition: 4s;
+}
+.home-picture.uno {
+  background-image: url('./img-home-1.jpg');
+}
+.home-picture.dos {
+  background-image: url('./img-home-2.jpg');
+}
+.home-picture.tres {
+  background-image: url('./img-home-3.jpg');
+}
+.home-picture-active {
+  opacity: 1;
+}
+
+.team-picture {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.team-picture.uno {
+  background-image: url('./team-1.jpg');
+  clip-path: polygon(0 0, 75% 0, 50% 100%, 0% 100%);
+  width: 40%;
+  left: 0;
+}
+.team-picture.dos {
+  clip-path: polygon(25% 0, 100% 0, 75% 100%, 0% 100%);
+  background-image: url(./team-2.jpg);
+  width: 40%;
+  left: 20%;
+}
+
+.team-picture.tres {
+  clip-path: polygon(25% 0, 100% 0, 75% 100%, 0% 100%);
+  background-image: url(./team-3.jpg);
+  width: 40%;
+  left: 48%;
+}
+
+.team-picture.cuatro {
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 29% 100%);
+  background-image: url(./team-4.jpg);
+  width: 40%;
+  left: 64%;
+}
+
+.left-pane {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu {
+  z-index: 9;
+  color: #9d9d9d;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  justify-content: flex-start;
+  margin: 0.5em 0 0.5em 0;
+  background-color: white;
+  opacity: 0.9;
+}
+
+.menu .active {
+  color: lightskyblue;
+}
+
+.menu-item {
+  margin-left: 0.5em;
+  font-size: 0.6em;
+}
+
+.big-title {
+  margin: 0.5em 0.5em 0 0.5em;
+  font-size: 1.8em;
+  flex-grow: 2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

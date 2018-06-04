@@ -8,12 +8,14 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
+    "lint:css": "stylelint '**/*.vue' --syntax scss",
     "build": "node build/build.js"
   },
   "dependencies": {
+    "animate.css": "^3.6.1",
+    "gsap": "^2.0.1",
     "vue": "^2.5.2",
     "vue-i18n": "^7.7.0",
-    "vue-mq": "^0.2.1",
     "vue-router": "^3.0.1",
     "vue2-touch-events": "^1.0.0"
   },
@@ -48,10 +50,16 @@
     "portfinder": "^1.0.13",
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",
+    "postcss-reporter": "^5.0.0",
     "postcss-url": "^7.2.1",
+    "precss": "^3.1.2",
     "rimraf": "^2.6.0",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
+    "stylelint": "^9.2.1",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-processor-html": "^1.0.0",
+    "stylelint-webpack-plugin": "^0.10.5",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
@@ -69,6 +77,6 @@
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not ie <= 8"
+    "not ie <= 10"
   ]
 }

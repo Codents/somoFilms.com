@@ -14,11 +14,10 @@ html {
   margin: 0;
   padding: 0;
 }
-
 body,
 input,
 textarea {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .main {

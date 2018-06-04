@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>SKETCH: LANDSCAPE MOBILE [ somoFilms.com ]</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta id="viewport" name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+  <main id="app" class="app">
+    <nav class="menu">
+      <span class="menu-item active">Home</span>
+      <span class="menu-item">Team</span>
+      <span class="menu-item">Works</span>
+      <span class="menu-item">Contact</span>
+    </nav>
+    <div class="track">
+      <section class="home">
+        <div class="left-pane">
+          <div class="big-title">somoFilms</div>
+        </div>
+        <div class="right-pane">
+          <div class="home-picture uno home-picture-active"></div>
+          <div class="home-picture dos"></div>
+          <div class="home-picture tres"></div>
+        </div>
+      </section>
+      <section class="team">
+          <div class="team-picture uno"></div>
+          <div class="team-picture dos"></div>
+          <div class="team-picture tres"></div>
+          <div class="team-picture cuatro"></div>
+      </section>
+      <section class="works"></section>
+      <section class="contact"></section>
+    </div>
+  </main>
+</body>
+
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    setInterval(function () {
+      let p = false;
+      document.querySelectorAll('.home-picture').forEach((k, i, array) => {
+        if (k.classList.contains('home-picture-active')) {
+          if (i === array.length - 1) {
+            k.classList.remove('home-picture-active');
+            document.querySelector('.home-picture').classList.add('home-picture-active');
+          } else {
+            k.classList.remove('home-picture-active');
+            p = true;
+          }
+        } else if (p) {
+          k.classList.add('home-picture-active');
+          p = false;
+        }
+      });
+    }, 9000);
+  });
+</script>
+
+</html>
