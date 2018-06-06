@@ -11,8 +11,8 @@ export const responsive = () => {
   if ('screen' in window) {
     const orientation = getOrientation();
     if (
-      (orientation === LANDSCAPE && screen.availHeight < BREAKPOINTS.MOBILE) ||
-      (orientation === PORTRAIT && screen.availWidth < BREAKPOINTS.MOBILE)
+      (orientation === LANDSCAPE && window.innerHeight < BREAKPOINTS.MOBILE) ||
+      (orientation === PORTRAIT && window.innerWidth < BREAKPOINTS.MOBILE)
     ) {
       return MOBILE;
     }

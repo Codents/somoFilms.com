@@ -1,12 +1,10 @@
 <template>
-  <div :class="[isLandscape ? 'landscape' : 'portrait']">
-    <i class="material-icons icon-launcher"
-       v-if="!isLandscape"
-       @click="show = !show">menu</i>
+  <div class="container-menu">
+    <i class="material-icons icon-launcher" @click="show = !show">menu</i>
     <transition enter-active-class="animated zoomInLeft"
                 leave-active-class="animated zoomOutLeft">
       <nav class="menu"
-           v-show="isLandscape || show">
+           v-show="show">
         <span v-for="(menu, index) in menus"
               :key="index"
               :id="menu.id"
@@ -21,10 +19,9 @@
 
 <script>
 export default {
-  props: ['isLandscape'],
   data: function() {
     return {
-      show: this.isLandscape,
+      show: false,
       menus: [
         {
           id: 'home',
@@ -65,32 +62,7 @@ export default {
 
 <style lang="postcss" scoped>
 @import 'animate.css/animate.min.css';
-.landscape {
-  height: fit-content !important;
-  .menu {
-    z-index: 9;
-    color: #7b656d;
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    justify-content: flex-start;
-    margin-top: 0.6em;
-    background-color: white;
-    opacity: 0.8;
-    width: 100%;
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
-    max-height: fit-content;
-  }
-  .item {
-    font-size: 0.6em;
-    margin-left: 0.8em;
-    &.selected {
-      color: #2196f3;
-    }
-  }
-}
-.portrait {
+.container-menu {
   height: fit-content !important;
   .icon-launcher {
     position: absolute;

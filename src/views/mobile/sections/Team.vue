@@ -1,8 +1,8 @@
 <template>
-  <section :class="[isLandscape ? 'landscape' : 'portrait', 'team']">
+  <section class="team-container">
     <div class="row">
       <div class="cell one"
-           @click="handleClick"></div>
+           @click="showBio =! showBio"></div>
       <div class="cell two"></div>
     </div>
     <div class="row">
@@ -31,165 +31,84 @@
 
 <script>
 export default {
-  props: ['isLandscape'],
   data: function() {
     return {
       showBio: false
     };
-  },
-  methods: {
-    handleClick() {
-      this.showBio = !this.showBio;
-    }
   }
 };
 </script>
 
 <style lang="postcss" scoped>
 @import 'animate.css/animate.min.css';
-.portrait {
-  &.team {
-    position: relative;
-    width: 100%;
-    height: 100%;
+.team-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  .row {
+    height: 50%;
     display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    .row {
-      height: 50%;
+    .cell {
+      width: 50%;
       display: flex;
-      .cell {
-        width: 50%;
-        display: flex;
-        &.one {
-          background-image: url('../../../assets/img/team-1.jpg');
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: bottom;
-        }
-        &.three {
-          background-image: url('../../../assets/img/team-3.jpg');
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: bottom;
-        }
-        &.two {
-          background-image: url('../../../assets/img/team-2.jpg');
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: bottom;
-        }
-        &.four {
-          background-image: url('../../../assets/img/team-4.jpg');
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: bottom;
-        }
+      &.one {
+        background-image: url('../../../assets/img/team_portrait_david_palacios.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: bottom;
       }
-    }
-    .bio {
-      position: absolute;
-      overflow-y: auto;
-      height: 70%;
-      top: 4em;
-      border-radius: 5px;
-      background-color: white;
-      margin: 1em;
-      padding: 0.5em;
-      text-align: justify;
-      opacity: 0.9;
-      .profile {
-        display: flex;
-        flex-direction: column;
-        .text {
-          margin-top: 0.8em;
-        }
+      &.three {
+        background-image: url('../../../assets/img/team_portrait_kike_palacios.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: bottom;
       }
-      .header {
-        display: flex;
-        flex-direction: column-reverse;
-        justify-content: space-between;
-        align-items: flex-start;
-        .name {
-          font-size: 2em;
-          margin-top: 0.2em;
-        }
-        .picture {
-          border-radius: 5px;
-        }
+      &.two {
+        background-image: url('../../../assets/img/team-3.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: bottom;
+      }
+      &.four {
+        background-image: url('../../../assets/img/team-1.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: bottom;
       }
     }
   }
-}
-.landscape {
-  &.team {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    .row {
-      height: 50%;
+  .bio {
+    position: absolute;
+    overflow-y: auto;
+    height: 70%;
+    top: 4em;
+    border-radius: 5px;
+    background-color: white;
+    margin: 1em;
+    padding: 0.5em;
+    text-align: justify;
+    opacity: 0.9;
+    .profile {
       display: flex;
-      .cell {
-        width: 50%;
-        display: flex;
-        &.one {
-          background-image: url('../../../assets/img/team-1.jpg');
-          background-repeat: no-repeat;
-          background-size: cover;
-        }
-        &.two {
-          background-image: url('../../../assets/img/team-2.jpg');
-          background-repeat: no-repeat;
-          background-size: cover;
-        }
-        &.three {
-          background-image: url('../../../assets/img/team-3.jpg');
-          background-repeat: no-repeat;
-          background-size: cover;
-        }
-        &.four {
-          background-image: url('../../../assets/img/team-4.jpg');
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: center;
-        }
+      flex-direction: column;
+      .text {
+        margin-top: 0.8em;
       }
     }
-    .bio {
-      z-index: 10;
-      position: absolute;
-      overflow-y: auto;
-      height: 60%;
-      top: 0.5em;
-      border-radius: 5px;
-      background-color: white;
-      margin: 1em;
-      padding: 0.5em;
-      text-align: justify;
-      opacity: 0.9;
-      font-size: 0.7em;
-      .profile {
-        display: flex;
-        flex-direction: column;
-        .header {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: flex-end;
-          .name {
-            font-size: 2em;
-          }
-          .picture {
-            height: 5em;
-            border-radius: 5px;
-          }
-        }
-        .text {
-          margin-top: 1em;
-        }
+    .header {
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: space-between;
+      align-items: flex-start;
+      .name {
+        font-size: 2em;
+        margin-top: 0.2em;
+      }
+      .picture {
+        border-radius: 5px;
       }
     }
   }

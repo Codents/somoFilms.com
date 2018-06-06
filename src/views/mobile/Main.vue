@@ -4,19 +4,19 @@
              v-if="!isLandscape"
              v-touch:swipe.left="moveRight"
              v-touch:swipe.right="moveLeft">
-      <Menu :isLandscape="false"
-            ref="menu"
+      <Menu ref="menu"
             @goOptionMenu="goOptionMenu" />
       <div class="track"
            ref="track">
-        <Home :isLandscape="false"
-              id="home-section" />
-        <Team :isLandscape="false"
-              id="team-section" />
+        <Home id="home-section" />
+        <Team id="team-section" />
       </div>
     </section>
-    <div class="no-landscape"
-         v-else></div>
+    <div class="landscape"
+         v-else>
+      <img src="@/assets/img/orientation-locked.png"
+           alt="Landscape no supported" />
+    </div>
   </div>
 </template>
 
@@ -100,17 +100,24 @@ export default {
   height: 100%;
   font-size: 16px;
   font-size: 6.2vw;
-  .no-landscape {
-    background-image: url('../../assets/img/orientation-locked.png');
+  .landscape {
+    background-image: url(/static/img/background-landscape-mobile.2b82022.jpg);
     width: 100%;
     height: 100%;
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    img {
+      margin-left: 3rem;
+      width: 8rem;
+      opacity: 0.2;
+    }
   }
   .portrait {
-    height: 100%;
-  }
-  .landscape {
     height: 100%;
   }
   .track {

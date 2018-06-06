@@ -2,6 +2,18 @@ languaje: node_js
 node_js:
     - "8"
 install:
+    - node -v
+    - npm -v
     - npm install
 script:
     - npm run build
+deploy:
+    provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    project_name: web
+    local_dir: dist
+    name: travisCI
+    on:
+        branch: feature-breakpoint-mobile
+        repo: Codents/somoFilms.com
