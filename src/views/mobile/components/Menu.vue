@@ -62,6 +62,12 @@ export default {
 
 <style lang="postcss" scoped>
 @import 'animate.css/animate.min.css';
+@font-face {
+  font-family: '28 Days Later';
+  font-style: normal;
+  font-weight: normal;
+  src: local('28 Days Later'), url('../../../assets/fonts/28_Days_Later.woff') format('woff');
+}
 .container-menu {
   height: fit-content !important;
   .icon-launcher {
@@ -76,17 +82,18 @@ export default {
   }
   .menu {
     z-index: 9;
-    color: #7b656d;
+    color: #4e4045;
     display: flex;
     flex-direction: column;
     position: absolute;
     justify-content: center;
     align-items: center;
     background-color: white;
-    opacity: 0.95;
+    opacity: 0.75;
     min-height: 100%;
     min-width: 100%;
     font-size: 2em;
+    font-family:'28 Days Later';
   }
   .item {
     margin-bottom: 0.2em;
