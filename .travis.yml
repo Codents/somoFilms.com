@@ -1,19 +1,17 @@
 languaje: node_js
 node_js:
-    - "8"
-install:
-    - node -v
-    - npm -v
-    - npm install
+    - "8.10.0"
+branches:
+  only:
+    - feature-breakpoint-mobile
+before_script:
+  - npm install -g firebase-tools
+  - npm install
 script:
     - npm run build
-deploy:
-    provider: firebase
-    token: $FIREBASE_TOKEN
-    project: somoFilms.com
-    skip_cleanup: true
-    local_dir: dist
-    name: travisCI
-    on:
-        branch: feature-breakpoint-mobile
-        repo: Codents/somoFilms.com
+after_success:
+  - firebase deploy --token $FIREBASE_TOKEN --non-interactive
+notifications:
+  email:
+    on_failure: change
+    on_success: change
