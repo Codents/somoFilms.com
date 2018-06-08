@@ -1,5 +1,5 @@
 <template>
-  <div class="mobile">
+  <div class="small">
     <section class="portrait"
              v-if="!isLandscape"
              v-touch:swipe.left="moveRight"
@@ -96,7 +96,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.mobile {
+.small {
   height: 100%;
   font-size: 16px;
   font-size: 6.2vw;

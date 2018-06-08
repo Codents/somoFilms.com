@@ -1,7 +1,7 @@
 <template>
   <div class="container-menu">
     <i class="material-icons icon-launcher" @click="show = !show">menu</i>
-    <transition enter-active-class="animated zoomInLeft"
+    <transition enter-active-class="animated zoomIn"
                 leave-active-class="animated zoomOutLeft">
       <nav class="menu"
            v-show="show">
@@ -39,14 +39,24 @@ export default {
           text: 'menu.works'
         },
         {
+          id: 'about',
+          active: true,
+          text: 'menu.about'
+        },
+        {
+          id: 'clients',
+          active: true,
+          text: 'menu.clients'
+        },
+        {
           id: 'contacts',
           active: true,
           text: 'menu.contacts'
         },
         {
-          id: 'development',
+          id: 'inprogress',
           active: true,
-          text: 'menu.development'
+          text: 'menu.inprogress'
         }
       ]
     };
@@ -73,12 +83,11 @@ export default {
   .icon-launcher {
     position: absolute;
     z-index: 18;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 5px;
-    padding: 0.2em;
-    top: 0.5em;
-    left: 0.5em;
-    opacity: 0.8;
+    padding: 0.2rem;
+    top: 0.5rem;
+    left: 0.5rem;
   }
   .menu {
     z-index: 9;
@@ -92,11 +101,11 @@ export default {
     opacity: 0.75;
     min-height: 100%;
     min-width: 100%;
-    font-size: 2em;
+    font-size: 3rem;
     font-family:'28 Days Later';
   }
   .item {
-    margin-bottom: 0.2em;
+    margin-bottom: 0.2rem;
     &.selected {
       color: #2196f3;
     }

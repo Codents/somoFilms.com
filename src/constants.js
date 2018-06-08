@@ -1,13 +1,13 @@
-export const MOBILE = 'MOBILE';
-export const TABLET = 'TABLET';
-export const DESKTOP = 'DESKTOP';
-export const UHD = 'UHD';
+export const SMALL = 'SMALL';
+export const MEDIUM = 'MEDIUM';
+export const LARGE = 'LARGE';
+export const XXL = 'XXL';
 export const LANDSCAPE = 'LANDSCAPE';
 export const PORTRAIT = 'PORTRAIT';
 
 export const BREAKPOINTS = {
-  [MOBILE]: 500,
-  [TABLET]: 1024,
-  [DESKTOP]: 1920,
-  [UHD]: 4096
+  [SMALL]: 500,
+  [MEDIUM]: 768,
+  [LARGE]: 1920,
+  [XXL]: 4096
 };

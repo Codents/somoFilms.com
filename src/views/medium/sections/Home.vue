@@ -6,12 +6,19 @@
   </section>
 </template>
 
+<script>
+export default {
+  props: ['isLandscape']
+};
+</script>
+
 <style lang="postcss" scoped>
 @font-face {
   font-family: '28 Days Later';
   font-style: normal;
   font-weight: normal;
-  src: local('28 Days Later'), url('../../../assets/fonts/28_Days_Later.woff') format('woff');
+  src: local('28 Days Later'),
+    url('../../../assets/fonts/28_Days_Later.woff') format('woff');
 }
 .home-container {
   width: 100%;
@@ -27,14 +34,13 @@
     width: 100%;
     background-color: white;
     opacity: 0.8;
-    height: 5rem;
-    font-family:'28 Days Later';
+    font-family: '28 Days Later';
     .text {
-      font-size: 2em;
+      font-size: 4rem;
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
-      padding-right: 0.2em;
+      padding-right: 0.5rem;
       height: 100%;
       align-items: flex-end;
     }

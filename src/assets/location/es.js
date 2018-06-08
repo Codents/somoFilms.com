@@ -5,11 +5,13 @@ const es = {
     }
   },
   menu: {
-    home: 'Inicio',
-    team: 'Equipo',
-    works: 'Proyectos',
-    contacts: 'Contactos',
-    development: 'En Desarrollo'
+    home: 'inicio',
+    team: 'equipo',
+    works: 'proyectos',
+    contacts: 'contacto',
+    about: 'quien somos',
+    clients: 'clientes',
+    inprogress: 'en progreso'
   }
 };
 

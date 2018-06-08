@@ -84,28 +84,28 @@ export default {
     position: absolute;
     overflow-y: auto;
     height: 70%;
-    top: 4em;
+    top: 4rem;
     border-radius: 5px;
     background-color: white;
-    margin: 1em;
-    padding: 0.5em;
+    margin: 1rem;
+    padding: 0.5rem;
     text-align: justify;
     opacity: 0.9;
     .profile {
       display: flex;
       flex-direction: column;
       .text {
-        margin-top: 0.8em;
+        margin-top: 0.8rem;
       }
     }
     .header {
       display: flex;
       flex-direction: column-reverse;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       .name {
-        font-size: 2em;
-        margin-top: 0.2em;
+        font-size: 2rem;
+        margin-top: 0.2rem;
       }
       .picture {
         border-radius: 5px;

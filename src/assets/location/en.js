@@ -5,11 +5,13 @@ const en = {
     }
   },
   menu: {
-    home: 'Home',
-    team: 'Team',
-    works: 'Works',
-    contacts: 'Contacts',
-    development: 'In Development'
+    home: 'home',
+    team: 'team',
+    works: 'works',
+    contacts: 'contacts',
+    about: 'about',
+    clients: 'clients',
+    inprogress: 'in progress'
   }
 };
 

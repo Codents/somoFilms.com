@@ -1,16 +1,16 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import { responsive } from '@/utils';
-import { MOBILE, TABLET, DESKTOP, UHD } from '@/constants';
+import { SMALL, MEDIUM, LARGE, XXL } from '@/constants';
 
 const MainMobile = () =>
-  import(/* webpackChunkName: "HomeMobile" */ '@/views/mobile/Main.vue');
-const HomeDesktop = () =>
-  import(/* webpackChunkName: "HomeMobile" */ '@/views/desktop/Main.vue');
-const HomeTablet = () =>
-  import(/* webpackChunkName: "HomeMobile" */ '@/views/tablet/Main.vue');
-const HomeUHD = () =>
-  import(/* webpackChunkName: "HomeMobile" */ '@/views/uhd/Main.vue');
+  import(/* webpackChunkName: "smallHome" */ '@/views/small/Main.vue');
+const mediumHome = () =>
+  import(/* webpackChunkName: "mediumHome" */ '@/views/medium/Main.vue');
+const largeHome = () =>
+  import(/* webpackChunkName: "largeHome" */ '@/views/large/Main.vue');
+const xxlHome = () =>
+  import(/* webpackChunkName: "xxlHome" */ '@/views/xxl/Main.vue');
 
 Vue.use(Router);
 
@@ -25,14 +25,14 @@ export default new Router({
         container: () => {
           const display = responsive();
           switch (display) {
-            case MOBILE:
+            case SMALL:
               return MainMobile();
-            case TABLET:
-              return HomeTablet();
-            case DESKTOP:
-              return HomeDesktop();
-            case UHD:
-              return HomeUHD();
+            case MEDIUM:
+              return mediumHome();
+            case LARGE:
+              return largeHome();
+            case XXL:
+              return xxlHome();
             default:
               return null;
           }

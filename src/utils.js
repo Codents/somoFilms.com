@@ -1,4 +1,4 @@
-import { BREAKPOINTS, LANDSCAPE, PORTRAIT, MOBILE, DESKTOP } from '@/constants';
+import { BREAKPOINTS, LANDSCAPE, PORTRAIT, SMALL, MEDIUM, LARGE } from '@/constants';
 
 export const getOrientation = () => {
   if (window.innerWidth > window.innerHeight) {
@@ -11,12 +11,21 @@ export const responsive = () => {
   if ('screen' in window) {
     const orientation = getOrientation();
     if (
-      (orientation === LANDSCAPE && window.innerHeight < BREAKPOINTS.MOBILE) ||
-      (orientation === PORTRAIT && window.innerWidth < BREAKPOINTS.MOBILE)
+      (orientation === LANDSCAPE && window.innerHeight <= BREAKPOINTS.SMALL) ||
+      (orientation === PORTRAIT && window.innerWidth <= BREAKPOINTS.SMALL)
     ) {
-      return MOBILE;
+      return SMALL;
+    } else if (
+      (orientation === LANDSCAPE &&
+        window.innerHeight > BREAKPOINTS.SMALL &&
+        window.innerHeight <= BREAKPOINTS.MEDIUM) ||
+      (orientation === PORTRAIT &&
+        window.innerWidth > BREAKPOINTS.SMALL &&
+        window.innerWidth <= BREAKPOINTS.MEDIUM)
+    ) {
+      return MEDIUM;
     }
-    return DESKTOP;
+    return LARGE;
   }
 
   throw new Error('windows.screen is not compatible in this browser');
