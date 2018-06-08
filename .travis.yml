@@ -8,12 +8,6 @@ install:
 script:
     - npm run build
 deploy:
-    provider: pages
-    skip_cleanup: true
-    github_token: $GITHUB_TOKEN
-    project_name: somoFilms.com
-    local_dir: dist
-    name: travisCI
-    on:
-        branch: feature-breakpoint-mobile
-        repo: Codents/somoFilms.com
+    provider: firebase
+    token: $FIREBASE_TOKEN
+    project: somoFilms.com
