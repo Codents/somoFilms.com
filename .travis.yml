@@ -11,3 +11,9 @@ deploy:
     provider: firebase
     token: $FIREBASE_TOKEN
     project: somoFilms.com
+    skip_cleanup: true
+    local_dir: dist
+    name: travisCI
+    on:
+        branch: feature-breakpoint-mobile
+        repo: Codents/somoFilms.com
