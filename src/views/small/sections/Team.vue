@@ -2,7 +2,11 @@
   <section class="team-container">
     <div class="row">
       <div class="cell one"
-           @click="showBio =! showBio"></div>
+           @click="handleClick"
+           id="cellOne"
+           ref="cellOne"
+           data-name="team.bio.kike.name"
+           data-bio-text="team.bio.kike.text"></div>
       <div class="cell two"></div>
     </div>
     <div class="row">
@@ -11,30 +15,32 @@
     </div>
     <transition enter-active-class="animated zoomIn"
                 leave-active-class="animated hinge">
-      <div class="bio"
+      <Bio :name="name"
+           :bioText="bioText"
            v-show="showBio"
-           @click="showBio=false">
-        <div class="profile">
-          <div class="header">
-            <span class="name">Kike Palacio</span>
-            <img class="picture"
-                 src="../../../assets/img/team-4.jpg" />
-          </div>
-          <div class="text">
-            {{ $t('team.bio.kike') }}
-          </div>
-        </div>
-      </div>
+           @click="showBio=false" />
     </transition>
   </section>
 </template>
 
 <script>
+import Bio from '../components//Bio';
+
 export default {
+  components: { Bio },
   data: function() {
     return {
-      showBio: false
+      showBio: false,
+      bioText: '',
+      name: ''
     };
+  },
+  methods: {
+    handleClick(ev) {
+      this.name = this.$refs[ev.currentTarget.id].dataset.name;
+      this.bioText = this.$refs[ev.currentTarget.id].dataset.bioText;
+      this.showBio = !this.showBio;
+    }
   }
 };
 </script>
@@ -77,38 +83,6 @@ export default {
         background-repeat: no-repeat;
         background-size: cover;
         background-position: bottom;
-      }
-    }
-  }
-  .bio {
-    position: absolute;
-    overflow-y: auto;
-    height: 70%;
-    top: 4rem;
-    border-radius: 5px;
-    background-color: white;
-    margin: 1rem;
-    padding: 0.5rem;
-    text-align: justify;
-    opacity: 0.9;
-    .profile {
-      display: flex;
-      flex-direction: column;
-      .text {
-        margin-top: 0.8rem;
-      }
-    }
-    .header {
-      display: flex;
-      flex-direction: column-reverse;
-      justify-content: space-between;
-      align-items: center;
-      .name {
-        font-size: 2rem;
-        margin-top: 0.2rem;
-      }
-      .picture {
-        border-radius: 5px;
       }
     }
   }

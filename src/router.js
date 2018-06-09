@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import { responsive } from '@/utils';
-import { SMALL, MEDIUM, LARGE, XXL } from '@/constants';
+import { SMALL, MEDIUM, LARGE, BIG } from '@/constants';
 
 const MainMobile = () =>
   import(/* webpackChunkName: "smallHome" */ '@/views/small/Main.vue');
@@ -9,8 +9,8 @@ const mediumHome = () =>
   import(/* webpackChunkName: "mediumHome" */ '@/views/medium/Main.vue');
 const largeHome = () =>
   import(/* webpackChunkName: "largeHome" */ '@/views/large/Main.vue');
-const xxlHome = () =>
-  import(/* webpackChunkName: "xxlHome" */ '@/views/xxl/Main.vue');
+const bigHome = () =>
+  import(/* webpackChunkName: "xxlHome" */ '@/views/big/Main.vue');
 
 Vue.use(Router);
 
@@ -31,8 +31,8 @@ export default new Router({
               return mediumHome();
             case LARGE:
               return largeHome();
-            case XXL:
-              return xxlHome();
+            case BIG:
+              return bigHome();
             default:
               return null;
           }

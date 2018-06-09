@@ -25,8 +25,7 @@
   background-size: 100% 100%;
   .title {
     width: 100%;
-    background-color: white;
-    opacity: 0.8;
+    background-color: rgba(255, 255, 255, 0.8);
     font-family:'28 Days Later';
     .text {
       font-size: 3rem;

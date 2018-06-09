@@ -21,14 +21,15 @@
 </template>
 
 <script>
-import { TweenLite, Power2 } from 'gsap/all';
 import { getOrientation } from '@/utils';
 import { LANDSCAPE } from '@/constants';
+import menuMotion from '@/mixins/menuMotion';
 import Home from './sections/Home';
 import Menu from './components/Menu';
 import Team from './sections/Team';
 
 export default {
+  mixins: [menuMotion],
   components: { Home, Menu, Team },
   computed: {
     isLandscape: function() {
@@ -45,52 +46,6 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.handleOrientationChange);
-  },
-  methods: {
-    handleOrientationChange() {
-      this.orientation = getOrientation();
-    },
-    goOptionMenu(ev) {
-      const activeMenu = this.$refs.menu.$el.querySelector('.selected');
-      activeMenu.classList.remove('selected');
-      ev.currentTarget.classList.add('selected');
-      TweenLite.to(this.$refs.track, 1, {
-        scrollTo: `#${ev.currentTarget.id}-section`,
-        ease: Power2.easeOut
-      });
-    },
-    moveRight() {
-      const activeMenu = this.$refs.menu.$el.querySelector('.selected');
-      const index = Number(activeMenu.getAttribute('data-index'));
-      const newActiveMenu = this.$refs.menu.$el.querySelector(
-        `[data-index="${index + 1}"]`
-      );
-      if (newActiveMenu) {
-        activeMenu.classList.remove('selected');
-        newActiveMenu.classList.add('selected');
-        TweenLite.to(this.$refs.track, 1, {
-          scrollTo: `#${newActiveMenu.id}-section`,
-          ease: Power2.easeOut
-        });
-      }
-    },
-    moveLeft() {
-      const activeMenu = this.$refs.menu.$el.querySelector('.selected');
-      const index = Number(activeMenu.getAttribute('data-index'));
-      if (index > 0) {
-        activeMenu.classList.remove('selected');
-        const newActiveMenu = this.$refs.menu.$el.querySelector(
-          `[data-index="${index - 1}"]`
-        );
-        if (newActiveMenu) {
-          newActiveMenu.classList.add('selected');
-          TweenLite.to(this.$refs.track, 1, {
-            scrollTo: `#${newActiveMenu.id}-section`,
-            ease: Power2.easeOut
-          });
-        }
-      }
-    }
   }
 };
 </script>

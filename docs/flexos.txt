@@ -1,3 +1,0 @@
-- Usar la fuente "28 days later" completa para poder poner el asterisco al final
-- Meter el cambio de idioma
-- Cambiar el icono de menu a un aspa con animacion

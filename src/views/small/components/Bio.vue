@@ -1,0 +1,59 @@
+<template>
+  <div class="bio"
+       @click="$emit('click')">
+    <div class="profile">
+      <div class="picture">
+      </div>
+      <div class="text-container">
+        <span class="name">{{ $t(name) }}</span>
+        <div class="text">
+          {{ $t(bioText) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['name', 'bioText']
+};
+</script>
+
+<style lang="postcss" scoped>
+.bio {
+  position: absolute;
+  overflow-y: auto;
+  height: 70%;
+  top: 4rem;
+  border-radius: 5px;
+  background-color: white;
+  margin: 1rem;
+  padding: 0.5rem;
+  text-align: justify;
+  opacity: 0.9;
+  .profile {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .picture {
+      height: 50%;
+      background-image: url('../../../assets/img/team_portrait_kike_palacios.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      border-radius: 5px;
+    }
+    .text-container {
+      height: 50%;
+      .name {
+        font-size: 2rem;
+        margin-top: 0.2rem;
+      }
+      .text {
+        margin-top: 0.8rem;
+      }
+    }
+  }
+}
+</style>

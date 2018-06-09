@@ -3,6 +3,14 @@
     <div class="title">
       <span :class="['text', isLandscape ? 'landscape' : 'portrait']">somoFilms</span>
     </div>
+    <video id="background"
+           class="video-bg"
+           autoplay
+           mutedl
+           loop>
+      <source src="../../../assets/video/bg_large_1280x720.mp4"
+              type="video/mp4" />
+    </video>
   </section>
 </template>
 
@@ -27,22 +35,30 @@ export default {
   flex-direction: column;
   flex-shrink: 0;
   justify-content: flex-start;
-  background-image: url('../../../assets/img/background-portrait-mobile.jpg');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: -100;
+    background-size: cover;
+  }
   .title {
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
     font-family: '28 Days Later';
     .text {
       display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        padding-right: 0.5rem;
-        height: 100%;
-        align-items: flex-end;
+      flex-direction: row;
+      justify-content: flex-end;
+      padding-right: 2rem;
+      height: 100%;
+      align-items: flex-end;
       &.landscape {
-        font-size: 4rem;
+        font-size: 7rem;
       }
       &.portrait {
         font-size: 7rem;

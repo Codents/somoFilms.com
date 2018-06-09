@@ -89,10 +89,10 @@ export default {
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 5px;
     padding: 0.2rem;
-    top: 0.8rem;
-    left: 0.8rem;
+    top: 2rem;
+    left: 2rem;
     &.landscape {
-      font-size: 2.5rem;
+      font-size: 3rem;
     }
     &.portrait {
       font-size: 3.5rem;
@@ -109,7 +109,7 @@ export default {
     background-color: rgba(255, 255, 255, 0.75);
     min-height: 100%;
     min-width: 100%;
-    font-size: 3.5rem;
+    font-size: 4.5rem;
     font-family: '28 Days Later';
   }
   .item {

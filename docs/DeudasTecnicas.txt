@@ -1,0 +1,8 @@
+- Usar la fuente "28 days later" completa para poder poner el asterisco al final
+- Meter el cambio de idioma
+- Cambiar el icono de menu a un aspa con animacion
+- Bloquear zoom en moviles
+- Revisar click para cerrar bio en tablet landscape
+- Cuando de cambia de orientacion en mitad del track no se posiciona bien
+- Iconos en local
+- Considerar hacer PWA

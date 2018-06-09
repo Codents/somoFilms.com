@@ -97,8 +97,7 @@ export default {
     position: absolute;
     justify-content: center;
     align-items: center;
-    background-color: white;
-    opacity: 0.75;
+    background-color: rgba(255, 255, 255, 0.75);
     min-height: 100%;
     min-width: 100%;
     font-size: 3rem;
