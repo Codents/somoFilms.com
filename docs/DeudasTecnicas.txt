@@ -6,3 +6,6 @@
 - Cuando de cambia de orientacion en mitad del track no se posiciona bien
 - Iconos en local
 - Considerar hacer PWA
+- Cambiar el puntero a un dedo cuando este encima del icono de menu
+- En modo LARGE > Team revisar la posicion de la flecha que indica que podemos ir abajo
+- Mini icono de barra de url

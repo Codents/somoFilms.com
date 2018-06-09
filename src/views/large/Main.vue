@@ -26,6 +26,8 @@
            ref="track">
         <Home id="home-section"
               :isLandscape="isLandscape" />
+        <Team id="team-section"
+              :isLandscape="isLandscape" />
       </div>
     </section>
   </div>
