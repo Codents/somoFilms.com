@@ -6,7 +6,7 @@
     <video id="background"
            class="video-bg"
            autoplay
-           mutedl
+           muted
            loop>
       <source src="../../../assets/video/bg_large_1280x720.mp4"
               type="video/mp4" />
@@ -40,7 +40,7 @@ export default {
     min-height: 100%;
     width: auto;
     height: auto;
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);

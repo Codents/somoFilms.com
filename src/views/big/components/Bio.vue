@@ -1,14 +1,9 @@
 <template>
-  <div :class="['bio', isLandscape ? 'landscape' : 'portrait']" @click="$emit('click')">
-    <div class="profile">
-      <div class="picture">
-      </div>
-      <div class="text-container">
-        <span class="name">{{ $t(name) }}</span>
-        <div class="text">
-          {{ $t(bioText) }}
-        </div>
-      </div>
+  <div :class="['bio', isLandscape ? 'landscape' : 'portrait']"
+       @click="$emit('click')">
+    <span class="name">{{ $t(name) }}</span>
+    <div class="text">
+      {{ $t(bioText) }}
     </div>
   </div>
 </template>
@@ -22,41 +17,24 @@ export default {
 <style lang="postcss" scoped>
 .bio {
   &.landscape {
-    position: absolute;
-    height: 70%;
-    top: 4rem;
-    border-radius: 5px;
+    width: 40%;
     background-color: rgba(255, 255, 255, 0.9);
-    margin: 1rem;
-    padding: 0.5rem;
-    text-align: justify;
-    .profile {
-      display: flex;
-      flex-direction: row;
-      height: 100%;
-      .text-container {
-        overflow-y: auto;
-        width: 60%;
-        .name {
-          font-size: 2.5rem;
-          margin-top: 0.2rem;
-          padding-left: 0.5rem;
-          font-weight: bold;
-        }
-        .text {
-          font-size: 2rem;
-          padding: 0.5rem;
-        }
-      }
-      .picture {
-        height: 100%;
-        width: 40%;
-        background-image: url('../../../assets/img/team_portrait_kike_palacios.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: bottom;
-        border-radius: 5px;
-      }
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    .name {
+      height: 20%;
+      font-size: 2.5rem;
+      margin-top: 0.2rem;
+      padding-left: 0.5rem;
+      font-weight: bold;
+    }
+    .text {
+      height: 80%;
+      text-align: justify;
+      font-size: 2rem;
+      padding: 0.5rem;
     }
   }
   &.portrait {

@@ -9,7 +9,6 @@ export const PORTRAIT = 'PORTRAIT';
 export const BREAKPOINTS = {
   [SMALL]: 500,
   [MEDIUM]: 1024,
-  [LARGE]: 1366,
-  [BIG]: 1600,
-  [HUGE]: 3656
+  [LARGE]: 2880,
+  [BIG]: 3656
 };

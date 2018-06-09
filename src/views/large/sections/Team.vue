@@ -12,7 +12,7 @@
       <div :class="['cell', 'bio', isLandscape ? 'landscape' : 'portrait']">
         <div class="name"
              v-t="name"></div>
-        <div class="text">{{ $t(bioText) }}{{ $t(bioText) }}</div>
+        <div class="text">{{ $t(bioText) }}{{ $t(bioText) }}{{ $t(bioText) }}{{ $t(bioText) }}</div>
       </div>
     </div>
     <div class="row reverse">
