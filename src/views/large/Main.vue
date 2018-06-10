@@ -81,6 +81,7 @@ export default {
     display: flex;
     flex-direction: row;
     overflow-x: hidden;
+    scroll-behavior: smooth;
   }
 }
 </style>

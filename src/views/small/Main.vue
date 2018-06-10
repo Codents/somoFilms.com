@@ -10,6 +10,7 @@
            ref="track">
         <Home id="home-section" />
         <Team id="team-section" />
+        <Works id="works-section" />
       </div>
     </section>
     <div class="landscape"
@@ -27,10 +28,11 @@ import menuMotion from '@/mixins/menuMotion';
 import Home from './sections/Home';
 import Menu from './components/Menu';
 import Team from './sections/Team';
+import Works from './sections/Works';
 
 export default {
   mixins: [menuMotion],
-  components: { Home, Menu, Team },
+  components: { Home, Menu, Team, Works },
   computed: {
     isLandscape: function() {
       return this.orientation === LANDSCAPE;

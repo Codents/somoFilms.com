@@ -9,3 +9,7 @@
 - Cambiar el puntero a un dedo cuando este encima del icono de menu
 - En modo LARGE > Team revisar la posicion de la flecha que indica que podemos ir abajo
 - Mini icono de barra de url
+- Mirar si se puede parar el video cuando se cambie de seccion
+- GPSA-Scroll no rula bien en LARGE con safari y firefox. Mirar lo siguiente para sustituirlo:
+https://github.com/zengabor/zenscroll#license
+https://github.com/cferdinandi/smooth-scroll
