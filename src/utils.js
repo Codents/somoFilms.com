@@ -57,3 +57,5 @@ export const responsive = () => {
 
   throw new Error('windows.screen is not compatible in this browser');
 };
+
+export const rgxNumber = text => Number(/[\d\.]+/.exec(text)[0]);

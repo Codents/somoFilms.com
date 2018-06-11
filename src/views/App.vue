@@ -17,7 +17,7 @@ html {
 body,
 input,
 textarea {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Poiret One', cursive;
 }
 
 .main {

@@ -1,6 +1,8 @@
 <template>
   <div class="container-menu">
-    <i class="material-icons icon-launcher" @click="show = !show">menu</i>
+    <i class="material-icons icon-launcher"
+       ref="menuIcon"
+       @click="show = !show">menu</i>
     <transition enter-active-class="animated zoomIn"
                 leave-active-class="animated zoomOutLeft">
       <nav class="menu"
@@ -18,6 +20,8 @@
 </template>
 
 <script>
+import { rgxNumber } from '@/utils';
+
 export default {
   data: function() {
     return {
@@ -61,6 +65,17 @@ export default {
       ]
     };
   },
+  mounted() {
+    const headerHeight = document.querySelector('.header').offsetHeight;
+    const menuIconHeight = document.querySelector('.icon-launcher')
+      .offsetHeight;
+    const height = (headerHeight - menuIconHeight) / 2;
+    const fontSize = rgxNumber(
+      window.getComputedStyle(this.$el, null).getPropertyValue('font-size')
+    );
+    this.$refs.menuIcon.style.top = `${height / fontSize}rem`;
+    this.$refs.menuIcon.style.left = `${height / fontSize}rem`;
+  },
   methods: {
     handleClick(ev) {
       this.show = false;
@@ -76,9 +91,11 @@ export default {
   font-family: '28 Days Later';
   font-style: normal;
   font-weight: normal;
-  src: local('28 Days Later'), url('../../../assets/fonts/28_Days_Later.woff') format('woff');
+  src: local('28 Days Later'),
+    url('../../../assets/fonts/28_Days_Later.woff') format('woff');
 }
 .container-menu {
+  font-size: 16px;
   height: fit-content !important;
   .icon-launcher {
     position: absolute;
@@ -101,7 +118,7 @@ export default {
     min-height: 100%;
     min-width: 100%;
     font-size: 3rem;
-    font-family:'28 Days Later';
+    font-family: '28 Days Later';
   }
   .item {
     margin-bottom: 0.2rem;

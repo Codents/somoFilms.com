@@ -1,92 +1,117 @@
 <template>
   <section class="works-container">
-    <div class="picture-header">
+    <div class="header">
       <span class="title-header">Works</span>
     </div>
-    <section class="photos">
-      <span class="title"
-            @click="imagesCollection=null">Photos</span>
-      <Carrusel :items="imagesCollections"
-                :noIndex="true"
-                :noControls="true"
-                class="carrusel">
-        <template slot-scope="slot">
-          <div class="square"
-               @click="selectedImageCollection(slot.item)">
-            <span class="child">{{ slot.item }}</span>
-          </div>
-        </template>
-      </Carrusel>
-      <div class="collection-detail"
-           v-if="imagesCollection">
-        <Carrusel :items="imagesCollection"
+    <div class="works-body">
+      <section class="collection-container">
+        <div class="collection-title"
+             @click="toggleExpand({ collectionName: 'photos'})">
+          <span class="title">Photos</span>
+          <i class="material-icons icon-launcher"
+             ref="menuIcon">{{ iconExpand.photos ? 'expand_less' : 'expand_more' }}</i>
+        </div>
+        <Carrusel :items="imagesCollections"
                   :noIndex="true"
                   :noControls="true"
                   class="carrusel">
           <template slot-scope="slot">
-            <div class="square">
-              <span class="first-child"
-                    v-if="slot.item[2]==='0'">Descripcion de Coleccion {{ slot.item[0] }}</span>
-              <span class="child"
-                    v-else>{{ slot.item }}</span>
+            <div class="square"
+                 @click="expandByIndex({ collectionName: 'photos', collectionIndex: slot.item })">
+              <span class="child">{{ slot.item }}</span>
             </div>
           </template>
         </Carrusel>
-      </div>
-    </section>
-    <section class="photos">
-      <span class="title"
-            @click="videoCollection=null">Videos</span>
-      <Carrusel :items="videoCollections"
-                :noIndex="true"
-                :noControls="true"
-                class="carrusel">
-        <template slot-scope="slot">
-          <div class="square"
-               @click="selectedVideoCollection(slot.item)">
-            <span class="child">{{ slot.item }}</span>
-          </div>
-        </template>
-      </Carrusel>
-      <div class="collection-detail"
-           v-if="videoCollection">
-        <Carrusel :items="videoCollection"
+        <div class="collection-detail"
+             v-if="iconExpand.photos">
+          <Carrusel :items="imagesCollection"
+                    :noIndex="true"
+                    :noControls="true"
+                    class="carrusel">
+            <template slot-scope="slot">
+              <div class="square">
+                <span class="first-child"
+                      v-if="slot.item[2]==='0'">Descripcion de Coleccion {{ slot.item[0] }}</span>
+                <span class="child"
+                      v-else>{{ slot.item }}</span>
+              </div>
+            </template>
+          </Carrusel>
+        </div>
+      </section>
+      <section class="collection-container">
+        <div class="collection-title"
+             @click="toggleExpand({ collectionName: 'films'})">
+          <span class="title">Films</span>
+          <i class="material-icons icon-launcher"
+             ref="menuIcon">{{ iconExpand.photos ? 'expand_less' : 'expand_more' }}</i>
+        </div>
+        <Carrusel :items="videoCollections"
                   :noIndex="true"
                   :noControls="true"
                   class="carrusel">
           <template slot-scope="slot">
-            <div class="square">
-              <span class="first-child"
-                    v-if="slot.item[2]==='0'">Descripcion de Coleccion {{ slot.item[0] }}</span>
-              <span class="child"
-                    v-else>{{ slot.item }}</span>
+            <div class="square"
+                 @click="expandByIndex({ collectionName: 'films', collectionIndex: slot.item })">
+              <span class="child">{{ slot.item }}</span>
             </div>
           </template>
         </Carrusel>
-      </div>
-    </section>
+        <div class="collection-detail"
+             v-if="iconExpand.films">
+          <Carrusel :items="videoCollection"
+                    :noIndex="true"
+                    :noControls="true"
+                    class="carrusel">
+            <template slot-scope="slot">
+              <div class="square">
+                <span class="first-child"
+                      v-if="slot.item[2]==='0'">Descripcion de Coleccion {{ slot.item[0] }}</span>
+                <span class="child"
+                      v-else>{{ slot.item }}</span>
+              </div>
+            </template>
+          </Carrusel>
+        </div>
+      </section>
+    </div>
   </section>
 </template>
 
 <script>
 import Carrusel from '@/components/Carrusel';
 
+const PHOTOS = 'photos';
+const FILMS = 'films';
+
 export default {
   components: { Carrusel },
   data: function() {
     return {
+      iconExpand: { [PHOTOS]: false, [FILMS]: false },
       imagesCollections: Array.from({ length: 8 }, (k, i) => i),
-      imagesCollection: [],
+      imagesCollection: Array.from({ length: 9 }, (k, i) => `0.${i}`),
       videoCollections: Array.from({ length: 8 }, (k, i) => i),
-      videoCollection: []
+      videoCollection: Array.from({ length: 9 }, (k, i) => `0.${i}`)
     };
   },
   methods: {
+    toggleExpand({ collectionName }) {
+      this.iconExpand[collectionName] = !this.iconExpand[collectionName];
+    },
+    expandByIndex({ collectionName, collectionIndex = 0 }) {
+      this.iconExpand[collectionName] = true;
+      if (collectionName === PHOTOS) {
+        this.imagesCollection = this.selectedImageCollection(collectionIndex);
+      } else {
+        this.videoCollection = this.selectedVideoCollection(collectionIndex);
+      }
+    },
     selectedImageCollection(item) {
-      this.imagesCollection = Array.from({ length: 9 }, (k, i) => `${item}.${i}`);
+      return Array.from({ length: 9 }, (k, i) => `${item}.${i}`);
     },
     selectedVideoCollection(item) {
-      this.videoCollection = Array.from({ length: 9 }, (k, i) => `${item}.${i}`);
+      return Array.from({ length: 9 }, (k, i) => `${item}.${i}`);
     }
   }
 };
@@ -94,7 +119,7 @@ export default {
 
 <style lang="postcss" scoped>
 .photos {
-      margin-top: 0.5rem;
+  margin-top: 0.5rem;
 }
 .works-container {
   position: relative;
@@ -103,32 +128,48 @@ export default {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  .picture-header {
+  .header {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    background-image: url('../../../assets/img/works_header_bg.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: bottom;
+    background-color: #d6e6f3;
+    height: 3.5rem;
     .title-header {
-      font-size: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 2rem;
       padding-right: 0.5rem;
+      font-weight: bold;
     }
   }
-  .title {
-    margin-top: 1rem;
-    margin-left: 0.5rem;
-    font-size: 2rem;
-  }
-  .carrusel {
+  .works-body {
     display: flex;
-    justify-content: center;
-    margin: 0.5rem 0.5rem 0 0.5rem;
-    .image {
+    flex-direction: column;
+    overflow-y: auto;
+    .collection-container {
+      margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+      .collection-title {
+        display: flex;
+        flex-direction: row;
+        margin-top: 1rem;
+        margin-left: 0.5rem;
+        align-items: flex-end;
+      }
+      .title {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      .carrusel {
+        display: flex;
+        justify-content: center;
+        margin: 0.5rem 0.5rem 0 0.5rem;
+        .image {
+        }
+      }
+      .collection-detail {
+      }
     }
-  }
-  .collection-detail {
   }
 }
 .square {

@@ -13,3 +13,4 @@
 - GPSA-Scroll no rula bien en LARGE con safari y firefox. Mirar lo siguiente para sustituirlo:
 https://github.com/zengabor/zenscroll#license
 https://github.com/cferdinandi/smooth-scroll
+- Plantearse poner una cabecera en team y en todas las seccion para unificar el aspecto

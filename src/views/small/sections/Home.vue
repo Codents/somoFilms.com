@@ -1,6 +1,6 @@
 <template>
   <section class="home-container">
-    <div class="title">
+    <div class="header">
       <span class="text">somoFilms</span>
     </div>
   </section>
@@ -23,10 +23,11 @@
   background-image: url('../../../assets/img/background-portrait-mobile.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  .title {
+  .header {
     width: 100%;
     background-color: rgba(255, 255, 255, 0.8);
     font-family:'28 Days Later';
+    height: 3.5rem;
     .text {
       font-size: 3rem;
       display: flex;
