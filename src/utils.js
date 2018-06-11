@@ -59,3 +59,4 @@ export const responsive = () => {
 };
 
 export const rgxNumber = text => Number(/[\d\.]+/.exec(text)[0]);
+export const importAll = r => r.keys().map(r);

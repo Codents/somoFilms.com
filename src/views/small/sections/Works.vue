@@ -17,8 +17,12 @@
                   class="carrusel">
           <template slot-scope="slot">
             <div class="square"
-                 @click="expandByIndex({ collectionName: 'photos', collectionIndex: slot.item })">
-              <span class="child">{{ slot.item }}</span>
+                 @click="expandByIndex({ section: 'photos', item: slot.item })">
+              <img class="child"
+                   ref="collectionPhotos"
+                   :alt="slot.item.name"
+                   :src="slot.item.src"
+                   :id="slot.item.id" />
             </div>
           </template>
         </Carrusel>
@@ -31,9 +35,14 @@
             <template slot-scope="slot">
               <div class="square">
                 <span class="first-child"
-                      v-if="slot.item[2]==='0'">Descripcion de Coleccion {{ slot.item[0] }}</span>
-                <span class="child"
-                      v-else>{{ slot.item }}</span>
+                      v-if="slot.index === 0">{{ slot.item.description }}</span>
+                <img class="child"
+                     ref="collectionPhotos"
+                     :alt="slot.item.description"
+                     :src="slot.item.src"
+                     :id="slot.item.id"
+                     @click="showImageFullScreen"
+                     v-else />
               </div>
             </template>
           </Carrusel>
@@ -75,11 +84,15 @@
         </div>
       </section>
     </div>
+    <div class="full-screen" v-show="showFullScreen">
+      <img class="image-full" ref="imageFull" />
+    </div>
   </section>
 </template>
 
 <script>
 import Carrusel from '@/components/Carrusel';
+import { importAll } from '@/utils';
 
 const PHOTOS = 'photos';
 const FILMS = 'films';
@@ -88,23 +101,76 @@ export default {
   components: { Carrusel },
   data: function() {
     return {
+      showFullScreen: false,
       iconExpand: { [PHOTOS]: false, [FILMS]: false },
-      imagesCollections: Array.from({ length: 8 }, (k, i) => i),
-      imagesCollection: Array.from({ length: 9 }, (k, i) => `0.${i}`),
+      imagesCollections: [],
+      imagesCollection: [],
+      collectionFiles: [],
       videoCollections: Array.from({ length: 8 }, (k, i) => i),
       videoCollection: Array.from({ length: 9 }, (k, i) => `0.${i}`)
     };
   },
+  mounted() {
+    this.collectionFiles = this.loadAllCollections();
+    this.imagesCollections = this.collectionFiles.map((k, i) => ({
+      name: k.name,
+      id: `${k.name}-${i}`,
+      src: k.files[0]
+    }));
+    this.loadImageCollection(this.collectionFiles[0]);
+  },
   methods: {
+    showImageFullScreen(ev) {
+      this.showFullScreen = true;
+      this.$refs.imageFull.src = 'http://kikepalacio.com/wp-content/uploads/2017/10/4.jpg';
+    },
+    loadAllCollections() {
+      return [
+        {
+          name: 'hdedon',
+          files: importAll(
+            require.context(
+              '../../../assets/img/works/hdedon/',
+              false,
+              /\.jpg$/
+            )
+          ),
+          description: 'Hotel DEDON, Philippines'
+        },
+        {
+          name: 'akelarre',
+          files: importAll(
+            require.context(
+              '../../../assets/img/works/akelarre',
+              false,
+              /\.jpg$/
+            )
+          ),
+          description: 'Hotel Akelarre, San Sebastián'
+        }
+      ];
+    },
+    loadImageCollection({ name, files, description }) {
+      this.imagesCollection = files.map((img, i) => ({
+        id: `${name}-${i}`,
+        src: img
+      }));
+
+      this.imagesCollection.unshift({
+        id: -1,
+        description
+      });
+    },
     toggleExpand({ collectionName }) {
       this.iconExpand[collectionName] = !this.iconExpand[collectionName];
     },
-    expandByIndex({ collectionName, collectionIndex = 0 }) {
-      this.iconExpand[collectionName] = true;
-      if (collectionName === PHOTOS) {
-        this.imagesCollection = this.selectedImageCollection(collectionIndex);
+    expandByIndex({ section, item }) {
+      this.iconExpand[section] = true;
+      if (section === PHOTOS) {
+        const collection = this.collectionFiles.find(i => i.name === item.name);
+        this.loadImageCollection(collection);
       } else {
-        this.videoCollection = this.selectedVideoCollection(collectionIndex);
+        // this.videoCollection = this.selectedVideoCollection(collection);
       }
     },
     selectedImageCollection(item) {
@@ -172,6 +238,16 @@ export default {
     }
   }
 }
+.full-screen {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 20;
+    .image-full {
+      height: 100%;
+      width: 100%;
+    }
+  }
 .square {
   width: 200px;
   height: 150px;
@@ -193,6 +269,7 @@ export default {
     justify-content: center;
     align-items: center;
     height: 100%;
+    width: 100%;
   }
 }
 </style>
