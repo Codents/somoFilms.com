@@ -59,4 +59,9 @@ export const responsive = () => {
 };
 
 export const rgxNumber = text => Number(/[\d\.]+/.exec(text)[0]);
-export const importAll = r => r.keys().map(r);
+export const importAll = requireContext =>
+  requireContext.keys().map(k => ({
+    name: k.replace(/^.*[\\\/]/, '').split('.')[0],
+    relativePath: k,
+    src: requireContext(k)
+  }));

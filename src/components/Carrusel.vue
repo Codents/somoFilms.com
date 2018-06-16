@@ -70,7 +70,8 @@ export default {
       trackWidth: 0,
       componentWasInit: false,
       currentPage: 0,
-      disableMovement: false
+      disableMovement: false,
+      lastPosition: 0
     };
   },
   computed: {
@@ -110,6 +111,10 @@ export default {
   },
   methods: {
     scrollFinishHandler: debounce(function() {
+      if (!this.$root.$data.showFullScreen) {
+        this.lastPosition = this.$refs.track.scrollLeft;
+      }
+      console.log(`Last position ${this.lastPosition}`);
       this.currentPage = this.calcCurrentPageIndex();
       this.$emit('scroll-finish');
       this.updateDOMVisivility();

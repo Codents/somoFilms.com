@@ -11,43 +11,44 @@
           <i class="material-icons icon-launcher"
              ref="menuIcon">{{ iconExpand.photos ? 'expand_less' : 'expand_more' }}</i>
         </div>
-        <Carrusel :items="imagesCollections"
-                  :noIndex="true"
-                  :noControls="true"
-                  class="carrusel">
-          <template slot-scope="slot">
+        <div class="carrusel"
+             ref="collectionContainer">
+          <div class="track"
+               ref="collectionTrack">
             <div class="square"
-                 @click="expandByIndex({ section: 'photos', item: slot.item })">
+                 v-for="item in imagesCollections"
+                 :key="item.name"
+                 @click="expandByIndex({ section: 'photos', item: item })">
               <img class="child"
-                   ref="collectionPhotos"
-                   :alt="slot.item.name"
-                   :src="slot.item.src"
-                   :id="slot.item.id" />
+                   :alt="item.thumbnail.description"
+                   :src="item.thumbnail.src"
+                   :id="item.thumbnail.name" />
             </div>
-          </template>
-        </Carrusel>
+          </div>
+        </div>
         <div class="collection-detail"
-             v-if="iconExpand.photos">
-          <Carrusel :items="imagesCollection"
-                    :noIndex="true"
-                    :noControls="true"
-                    class="carrusel">
-            <template slot-scope="slot">
-              <div class="square">
+             v-show="iconExpand.photos">
+          <div class="carrusel"
+               ref="collectionDetailContainer">
+            <div class="track"
+                 ref="collectionDetailTrack">
+              <div class="square"
+                   v-for="(item, index) in imagesCollection"
+                   :key="item.id">
                 <span class="first-child"
-                      v-if="slot.index === 0">{{ slot.item.description }}</span>
+                      v-if="index === 0">{{ item.description }}</span>
                 <img class="child"
-                     ref="collectionPhotos"
-                     :alt="slot.item.description"
-                     :src="slot.item.src"
-                     :id="slot.item.id"
-                     @click="showImageFullScreen"
+                     :alt="item.name"
+                     :src="item.src"
+                     :id="item.name"
+                     @click="showImageFullScreen(item)"
                      v-else />
               </div>
-            </template>
-          </Carrusel>
+            </div>
+          </div>
         </div>
       </section>
+      <!--
       <section class="collection-container">
         <div class="collection-title"
              @click="toggleExpand({ collectionName: 'films'})">
@@ -58,6 +59,8 @@
         <Carrusel :items="videoCollections"
                   :noIndex="true"
                   :noControls="true"
+                  :allowResize="false"
+                  :keepLastPosition="true"
                   class="carrusel">
           <template slot-scope="slot">
             <div class="square"
@@ -67,10 +70,12 @@
           </template>
         </Carrusel>
         <div class="collection-detail"
-             v-if="iconExpand.films">
+             v-show="iconExpand.films">
           <Carrusel :items="videoCollection"
                     :noIndex="true"
                     :noControls="true"
+                    :allowResize="false"
+                    :keepLastPosition="true"
                     class="carrusel">
             <template slot-scope="slot">
               <div class="square">
@@ -83,25 +88,23 @@
           </Carrusel>
         </div>
       </section>
-    </div>
-    <div class="full-screen" v-show="showFullScreen">
-      <img class="image-full" ref="imageFull" />
+      -->
     </div>
   </section>
 </template>
 
 <script>
-import Carrusel from '@/components/Carrusel';
-import { importAll } from '@/utils';
+import { TweenLite, Power2 } from 'gsap/all';
+import images from '@/mixins/images';
 
 const PHOTOS = 'photos';
 const FILMS = 'films';
 
 export default {
-  components: { Carrusel },
+  mixins: [images],
   data: function() {
     return {
-      showFullScreen: false,
+      tt: '@/assets/img/works/hdedon/',
       iconExpand: { [PHOTOS]: false, [FILMS]: false },
       imagesCollections: [],
       imagesCollection: [],
@@ -111,49 +114,58 @@ export default {
     };
   },
   mounted() {
-    this.collectionFiles = this.loadAllCollections();
+    this.collectionFiles = this.loadAllImagesCollections();
     this.imagesCollections = this.collectionFiles.map((k, i) => ({
       name: k.name,
       id: `${k.name}-${i}`,
-      src: k.files[0]
+      thumbnail: k.thumbnails[0],
+      description: k.description,
+      urlsPhotos: k.urlsPhotos
     }));
     this.loadImageCollection(this.collectionFiles[0]);
   },
+  updated: function() {
+    this.$nextTick(function() {
+      const lockWidth = this.$refs.collectionContainer.offsetWidth;
+      this.$refs.collectionContainer.style.width = `${lockWidth}px`;
+      this.$refs.collectionDetailContainer.style.width = `${lockWidth}px`;
+    });
+  },
   methods: {
-    showImageFullScreen(ev) {
-      this.showFullScreen = true;
-      this.$refs.imageFull.src = 'http://kikepalacio.com/wp-content/uploads/2017/10/4.jpg';
+    moveToTag(id) {
+      TweenLite.to(this.$refs.imageTrack, 1, {
+        scrollTo: `#${id}`,
+        ease: Power2.easeOut
+      });
     },
-    loadAllCollections() {
-      return [
-        {
-          name: 'hdedon',
-          files: importAll(
-            require.context(
-              '../../../assets/img/works/hdedon/',
-              false,
-              /\.jpg$/
-            )
-          ),
-          description: 'Hotel DEDON, Philippines'
-        },
-        {
-          name: 'akelarre',
-          files: importAll(
-            require.context(
-              '../../../assets/img/works/akelarre',
-              false,
-              /\.jpg$/
-            )
-          ),
-          description: 'Hotel Akelarre, San Sebastián'
-        }
-      ];
+    moveToPosX(track, x) {
+      TweenLite.to(track, 1, {
+        scrollTo: { x },
+        ease: Power2.easeOut
+      });
     },
-    loadImageCollection({ name, files, description }) {
-      this.imagesCollection = files.map((img, i) => ({
-        id: `${name}-${i}`,
-        src: img
+    closeFullScreen() {
+      this.showFullScreen = !this.showFullScreen;
+    },
+    showImageFullScreen(image) {
+      this.$root.$data.showFullScreen = true;
+      const img = new Image();
+      const $fullImg = document.querySelector('.full-screen .image-full');
+      const collection = this.imagesCollections.find(
+        k => k.name === image.collectionName
+      );
+      const fullImgSrc = collection.urlsPhotos[image.id];
+      $fullImg.src = image.src;
+      img.addEventListener('load', () => {
+        $fullImg.src = fullImgSrc;
+      });
+      img.src = fullImgSrc;
+    },
+    loadImageCollection({ thumbnails, description, name }) {
+      this.imagesCollection = thumbnails.map(img => ({
+        id: img.name,
+        src: img.src,
+        collectionName: name
       }));
 
       this.imagesCollection.unshift({
@@ -169,6 +181,9 @@ export default {
       if (section === PHOTOS) {
         const collection = this.collectionFiles.find(i => i.name === item.name);
         this.loadImageCollection(collection);
+        this.$nextTick(() => {
+          this.moveToPosX(this.$refs.collectionDetailTrack, 0);
+        });
       } else {
         // this.videoCollection = this.selectedVideoCollection(collection);
       }
@@ -230,46 +245,39 @@ export default {
         display: flex;
         justify-content: center;
         margin: 0.5rem 0.5rem 0 0.5rem;
-        .image {
+        .track {
+          overflow-y: auto;
+          display: flex;
+          flex-direction: row;
+          .square {
+            width: 200px;
+            height: 150px;
+            background-color: #6c757d;
+            flex-shrink: 0;
+            margin-right: 0.2rem;
+            .first-child {
+              background-color: white;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+              height: 100%;
+            }
+            .child {
+              font-size: 0.6rem;
+              color: white;
+              font-weight: bold;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100%;
+              width: 100%;
+            }
+          }
         }
       }
-      .collection-detail {
-      }
     }
-  }
-}
-.full-screen {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    z-index: 20;
-    .image-full {
-      height: 100%;
-      width: 100%;
-    }
-  }
-.square {
-  width: 200px;
-  height: 150px;
-  background-color: #6c757d;
-  .first-child {
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100%;
-  }
-  .child {
-    font-size: 5em;
-    color: white;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
   }
 }
 </style>

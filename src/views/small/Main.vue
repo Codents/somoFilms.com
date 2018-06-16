@@ -1,7 +1,6 @@
 <template>
   <div class="small">
     <section class="portrait"
-             v-if="!isLandscape"
              v-touch:swipe.left="moveRight"
              v-touch:swipe.right="moveLeft">
       <Menu ref="menu"
@@ -14,9 +13,14 @@
       </div>
     </section>
     <div class="landscape"
-         v-else>
+         v-show="isLandscape">
       <img src="@/assets/img/orientation-locked.png"
            alt="Landscape no supported" />
+    </div>
+    <div class="full-screen"
+         v-show="$root.$data.showFullScreen"
+         @click="$root.$data.showFullScreen = !$root.$data.showFullScreen">
+      <img class="image-full" />
     </div>
   </div>
 </template>
@@ -57,10 +61,26 @@ export default {
   height: 100%;
   font-size: 16px;
   font-size: 6.2vw;
-  .landscape {
-    background-image: url(/static/img/background-landscape-mobile.2b82022.jpg);
+  .portrait {
+    height: 100%;
+  }
+  .track {
+    position: relative;
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow-x: hidden;
+  }
+  .landscape {
+    top: 0;
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    z-index: 18;
+    width: 100%;
+    height: 100%;
+    background-color: white;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -74,16 +94,27 @@ export default {
       opacity: 0.2;
     }
   }
-  .portrait {
-    height: 100%;
-  }
-  .track {
-    position: relative;
-    width: 100%;
-    height: 100%;
+  .full-screen {
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    z-index: 20;
+    top: 0;
+    background-color: white;
     display: flex;
-    flex-direction: row;
-    overflow-x: hidden;
+    justify-content: center;
+    flex-direction: column;
+    .image-full {
+      width: 100%;
+      height: 100%;
+    }
+    .close-icon {
+      position: absolute;
+      z-index: 999999;
+      bottom: 2rem;
+      right: 2rem;
+      font-size: 2rem;
+    }
   }
 }
 </style>
