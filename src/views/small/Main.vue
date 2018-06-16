@@ -1,8 +1,6 @@
 <template>
   <div class="small">
-    <section class="portrait"
-             v-touch:swipe.left="moveRight"
-             v-touch:swipe.right="moveLeft">
+    <section class="portrait">
       <Menu ref="menu"
             @goOptionMenu="goOptionMenu" />
       <div class="track"
