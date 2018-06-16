@@ -1,5 +1,5 @@
 <template>
-  <section class="works-container">
+  <section class="works-container" ref="worksContainer">
     <div class="header">
       <span class="title-header">Works</span>
     </div>
@@ -126,9 +126,11 @@ export default {
   },
   updated: function() {
     this.$nextTick(function() {
-      const lockWidth = this.$refs.collectionContainer.offsetWidth;
-      this.$refs.collectionContainer.style.width = `${lockWidth}px`;
-      this.$refs.collectionDetailContainer.style.width = `${lockWidth}px`;
+      const lockContainerWidth = this.$refs.worksContainer.offsetWidth;
+      this.$refs.worksContainer.style.width = `${lockContainerWidth}px`;
+      const lockTrackWidth = this.$refs.collectionContainer.offsetWidth;
+      this.$refs.collectionContainer.style.width = `${lockTrackWidth}px`;
+      this.$refs.collectionDetailContainer.style.width = `${lockTrackWidth}px`;
     });
   },
   methods: {
