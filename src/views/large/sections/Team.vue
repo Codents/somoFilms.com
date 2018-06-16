@@ -61,7 +61,8 @@
 </template>
 
 <script>
-import { TweenLite, Power2 } from 'gsap/all';
+import { TweenLite, Power2 } from 'gsap/umd/TweenLite';
+import 'gsap/umd/ScrollToPlugin';
 import Bio from '../components/Bio';
 
 export default {
