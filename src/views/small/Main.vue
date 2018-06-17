@@ -94,8 +94,8 @@ export default {
   }
   .full-screen {
     position: absolute;
-    min-height: 100%;
-    min-width: 100%;
+    height: 100%;
+    width: 100%;
     z-index: 20;
     top: 0;
     background-color: white;
@@ -104,6 +104,7 @@ export default {
     flex-direction: column;
     .image-full {
       width: 100%;
+      max-height: 100%;
     }
     .close-icon {
       position: absolute;
