@@ -12,9 +12,11 @@ Vue.use(Vue2TouchEvents);
 
 const i18n = new VueI18n(location);
 const store = {
-  showFullScreen: false
+  showImageFullScreen: false,
+  showVideoFullScreen: false
 };
 
+// console.log(process.env);
 const app = new Vue({
   data: store,
   i18n,

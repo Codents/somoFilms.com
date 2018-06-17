@@ -1,0 +1,9 @@
+https://developer.vimeo.com/api/start#getting-started-step3
+https://developer.vimeo.com/api/authentication
+https://developer.vimeo.com/api/reference/authenticationextras#DELETE/tokens
+https://developer.vimeo.com/api/reference/videos
+
+https://stackoverflow.com/questions/33613796/how-to-generate-vimeo-unauthenticated-access-token
+
+curl -X POST -v -H "Authorization: basic base64(client_id + ":" + client_secret)" -d "grant_type=client_credentials&scope=public%20private" https://api.vimeo.com/oauth/authorize/client
+curl -X GET https://api.vimeo.com/videos/97311692\?access_token=[TOKEN_DE_LA_ANTERIOR_REQUEST]

@@ -36,7 +36,7 @@
           <div class="carrusel"
                ref="collectionDetailContainer">
             <div class="track"
-                 ref="collectionDetailTrack">
+                 ref="collectionImageDetailTrack">
               <div class="square"
                    v-for="(item, index) in imagesCollection"
                    :key="item.id">
@@ -53,47 +53,55 @@
           </div>
         </div>
       </section>
-      <!--
+      <!-- FILMS -->
       <section class="collection-container">
         <div class="collection-title"
              @click="toggleExpand({ collectionName: 'films'})">
           <span class="title">Films</span>
-          <i class="material-icons icon-launcher"
-             ref="menuIcon">{{ iconExpand.photos ? 'expand_less' : 'expand_more' }}</i>
+          <i class="icon-launcher icon-small-expand-less"
+             ref="menuIcon"
+             v-if="iconExpand.films" />
+          <i class="icon-launcher icon-small-expand-more"
+             ref="menuIcon"
+             v-else/>
         </div>
-        <Carrusel :items="videoCollections"
-                  :noIndex="true"
-                  :noControls="true"
-                  :allowResize="false"
-                  :keepLastPosition="true"
-                  class="carrusel">
-          <template slot-scope="slot">
+        <div class="carrusel"
+             ref="collectionContainer">
+          <div class="track"
+               ref="collectionTrack">
             <div class="square"
-                 @click="expandByIndex({ collectionName: 'films', collectionIndex: slot.item })">
-              <span class="child">{{ slot.item }}</span>
+                 v-for="item in videoCollections"
+                 :key="item.name"
+                 @click="expandByIndex({ section: 'films', item: item })">
+              <img class="child"
+                   :alt="item.description"
+                   :src="item.thumbnail"
+                   :id="item.name" />
             </div>
-          </template>
-        </Carrusel>
+          </div>
+        </div>
         <div class="collection-detail"
              v-show="iconExpand.films">
-          <Carrusel :items="videoCollection"
-                    :noIndex="true"
-                    :noControls="true"
-                    :allowResize="false"
-                    :keepLastPosition="true"
-                    class="carrusel">
-            <template slot-scope="slot">
-              <div class="square">
+          <div class="carrusel"
+               ref="collectionDetailContainer">
+            <div class="track"
+                 ref="collectionVideoDetailTrack">
+              <div class="square"
+                   v-for="(item, index) in videoCollection"
+                   :key="item.id">
                 <span class="first-child"
-                      v-if="slot.item[2]==='0'">Descripcion de Coleccion {{ slot.item[0] }}</span>
-                <span class="child"
-                      v-else>{{ slot.item }}</span>
+                      v-if="index === 0">{{ item.description }}</span>
+                <img class="child"
+                     :alt="item.name"
+                     :src="getBySize(200, item.pictures.sizes)"
+                     :id="item.resource_key"
+                     @click="showVideoFullScreen(item)"
+                     v-else />
               </div>
-            </template>
-          </Carrusel>
+            </div>
+          </div>
         </div>
       </section>
-      -->
     </div>
   </section>
 </template>
@@ -101,13 +109,13 @@
 <script>
 import { TweenLite, Power2 } from 'gsap/umd/TweenLite';
 import 'gsap/umd/ScrollToPlugin';
-import images from '@/mixins/images';
+import workResources from '@/mixins/workResources';
 
 const PHOTOS = 'photos';
 const FILMS = 'films';
 
 export default {
-  mixins: [images],
+  mixins: [workResources],
   data: function() {
     return {
       tt: '@/assets/img/works/hdedon/',
@@ -115,12 +123,13 @@ export default {
       imagesCollections: [],
       imagesCollection: [],
       collectionFiles: [],
-      videoCollections: Array.from({ length: 8 }, (k, i) => i),
-      videoCollection: Array.from({ length: 9 }, (k, i) => `0.${i}`)
+      videoCollections: [],
+      videoCollection: []
     };
   },
-  mounted() {
+  async mounted() {
     this.collectionFiles = this.loadAllImagesCollections();
+    this.videoCollections = await this.loadAllVideoCollections();
     this.imagesCollections = this.collectionFiles.map((k, i) => ({
       name: k.name,
       id: `${k.name}-${i}`,
@@ -152,11 +161,8 @@ export default {
         ease: Power2.easeOut
       });
     },
-    closeFullScreen() {
-      this.showFullScreen = !this.showFullScreen;
-    },
     showImageFullScreen(image) {
-      this.$root.$data.showFullScreen = true;
+      this.$root.$data.showImageFullScreen = true;
       const img = new Image();
       const $fullImg = document.querySelector('.full-screen .image-full');
       const collection = this.imagesCollections.find(
@@ -168,6 +174,12 @@ export default {
         $fullImg.src = fullImgSrc;
       });
       img.src = fullImgSrc;
+    },
+    showVideoFullScreen(video) {
+      this.$root.$data.showVideoFullScreen = true;
+      const $iframe = document.querySelector('.full-screen-video .embed-container iframe');
+      const id = video.uri.substr(video.uri.lastIndexOf('/') + 1);
+      $iframe.src = `https://player.vimeo.com/video/${id}`;
     },
     loadImageCollection({ thumbnails, description, name }) {
       this.imagesCollection = thumbnails.map(img => ({
@@ -190,11 +202,23 @@ export default {
         const collection = this.collectionFiles.find(i => i.name === item.name);
         this.loadImageCollection(collection);
         this.$nextTick(() => {
-          this.moveToPosX(this.$refs.collectionDetailTrack, 0);
+          this.moveToPosX(this.$refs.collectionImageDetailTrack, 0);
         });
       } else {
-        // this.videoCollection = this.selectedVideoCollection(collection);
+        this.videoCollection = this.videoCollections.find(
+          i => i.name === item.name
+        ).videosInfo.map(k => k);
+        this.videoCollection.unshift({
+          id: -1,
+          description: item.description
+        });
+        this.$nextTick(() => {
+          this.moveToPosX(this.$refs.collectionVideoDetailTrack, 0);
+        });
       }
+    },
+    getBySize(width, sizes) {
+      return sizes.find(k => k.width === width).link_with_play_button;
     },
     selectedImageCollection(item) {
       return Array.from({ length: 9 }, (k, i) => `${item}.${i}`);
