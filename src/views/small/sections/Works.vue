@@ -1,5 +1,6 @@
 <template>
-  <section class="works-container" ref="worksContainer">
+  <section class="works-container"
+           ref="worksContainer">
     <div class="header">
       <span class="title-header">Works</span>
     </div>
@@ -252,6 +253,12 @@ export default {
           overflow-y: auto;
           display: flex;
           flex-direction: row;
+          -webkit-overflow-scrolling: touch;
+          -ms-overflow-style: none;
+          overflow: -moz-scrollbars-none;
+          &::-webkit-scrollbar {
+            display: none;
+          }
           .square {
             width: 200px;
             height: 150px;

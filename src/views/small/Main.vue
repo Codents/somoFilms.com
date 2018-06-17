@@ -104,7 +104,6 @@ export default {
     flex-direction: column;
     .image-full {
       width: 100%;
-      height: 100%;
     }
     .close-icon {
       position: absolute;

@@ -7,6 +7,15 @@ export default {
   methods: {
     handleOrientationChange() {
       this.orientation = getOrientation();
+      const id = document.querySelector('.menu .item.selected').id;
+      if (id) {
+        TweenLite.to(this.$refs.track, 1, {
+          scrollTo: `#${id}-section`,
+          ease: Power2.easeOut
+        });
+      } else {
+        console.error(`Section doesnt exist : #${id}-section`);
+      }
     },
     goOptionMenu(ev) {
       const activeMenu = this.$refs.menu.$el.querySelector('.selected');
