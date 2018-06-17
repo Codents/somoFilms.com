@@ -9,8 +9,12 @@
         <div class="collection-title"
              @click="toggleExpand({ collectionName: 'photos'})">
           <span class="title">Photos</span>
-          <i class="material-icons icon-launcher"
-             ref="menuIcon">{{ iconExpand.photos ? 'expand_less' : 'expand_more' }}</i>
+          <i class="icon-launcher icon-small-expand-less"
+             ref="menuIcon"
+             v-if="iconExpand.photos" />
+          <i class="icon-launcher icon-small-expand-more"
+             ref="menuIcon"
+             v-else/>
         </div>
         <div class="carrusel"
              ref="collectionContainer">
@@ -203,6 +207,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+@import '../../../base.scss';
 .photos {
   margin-top: 0.5rem;
 }

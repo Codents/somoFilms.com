@@ -8,8 +8,9 @@ export default {
     handleOrientationChange() {
       this.orientation = getOrientation();
       const id = document.querySelector('.menu .item.selected').id;
+      const $track = document.querySelector('.track');
       if (id) {
-        TweenLite.to(this.$refs.track, 1, {
+        TweenLite.to($track, 1, {
           scrollTo: `#${id}-section`,
           ease: Power2.easeOut
         });

@@ -1,8 +1,8 @@
 <template>
   <div class="container-menu">
-    <i class="material-icons icon-launcher"
+    <i class="icon-launcher icon-small-menu"
        ref="menuIcon"
-       @click="show = !show">menu</i>
+       @click="show = !show" />
     <transition enter-active-class="animated zoomIn"
                 leave-active-class="animated zoomOutLeft">
       <nav class="menu"
@@ -87,13 +87,8 @@ export default {
 
 <style lang="postcss" scoped>
 @import 'animate.css/animate.min.css';
-@font-face {
-  font-family: '28 Days Later';
-  font-style: normal;
-  font-weight: normal;
-  src: local('28 Days Later'),
-    url('../../../assets/fonts/28_Days_Later.woff') format('woff');
-}
+@import '../../../base.scss';
+
 .container-menu {
   font-size: 16px;
   height: fit-content !important;
