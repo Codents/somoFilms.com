@@ -164,7 +164,7 @@ export default {
     showImageFullScreen(image) {
       this.$root.$data.showImageFullScreen = true;
       const img = new Image();
-      const $fullImg = document.querySelector('.full-screen .image-full');
+      const $fullImg = document.querySelector('.full-screen-image .image-full');
       const collection = this.imagesCollections.find(
         k => k.name === image.collectionName
       );
