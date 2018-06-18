@@ -260,7 +260,9 @@ export default {
   .works-body {
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
     .collection-container {
       margin: 0.5rem 0.5rem 0.5rem 0.5rem;
       .collection-title {
@@ -280,6 +282,7 @@ export default {
         margin: 0.5rem 0.5rem 0 0.5rem;
         .track {
           overflow-x: auto;
+          overflow-y: hidden;
           display: flex;
           flex-direction: row;
           .square {
