@@ -15,22 +15,28 @@
       <img src="@/assets/img/orientation-locked.png"
            alt="Landscape no supported" />
     </div>
-    <div class="full-screen-image"
-         v-show="$root.$data.showImageFullScreen"
-         @click="$root.$data.showImageFullScreen = !$root.$data.showImageFullScreen">
-      <img class="image-full" />
-    </div>
-    <div class="full-screen-video"
-         v-show="$root.$data.showVideoFullScreen"
-         @click="$root.$data.showVideoFullScreen = !$root.$data.showVideoFullScreen">
-      <div class="embed-container">
-        <iframe src=""
-                frameborder="0"
-                webkitAllowFullScreen
-                mozallowfullscreen
-                allowFullScreen></iframe>
+    <transition enter-active-class="animated zoomIn"
+                leave-active-class="animated zoomOut">
+      <div class="full-screen-image"
+           v-show="$root.$data.showImageFullScreen"
+           @click="$root.$data.showImageFullScreen = !$root.$data.showImageFullScreen">
+        <img class="image-full" />
       </div>
-    </div>
+    </transition>
+    <transition enter-active-class="animated zoomIn"
+                leave-active-class="animated zoomOut">
+      <div class="full-screen-video"
+           v-show="$root.$data.showVideoFullScreen"
+           @click="$root.$data.showVideoFullScreen = !$root.$data.showVideoFullScreen">
+        <div class="embed-container">
+          <iframe src=""
+                  frameborder="0"
+                  webkitAllowFullScreen
+                  mozallowfullscreen
+                  allowFullScreen></iframe>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -66,6 +72,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+@import 'animate.css/animate.min.css';
 .small {
   height: 100%;
   font-size: 16px;

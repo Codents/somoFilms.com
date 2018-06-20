@@ -46,13 +46,13 @@ export default {
         {
           name: 'commercials',
           thumbnail: await import('@/assets/img/works/commercials/commercial_small_1.jpeg'),
-          videosInfo: await this.loadVideoThumbs(['97311692', '69953653', '56424750']),
+          videosInfo: await this.loadVideoThumbs(['97311692', '69953653']),
           description: 'Commercials'
         },
         {
           name: 'films_and_tv',
           thumbnail: await import('@/assets/img/works/films_and_tv/films_and_tv_small_1.jpeg'),
-          videosInfo: await this.loadVideoThumbs(['159331129']),
+          videosInfo: await this.loadVideoThumbs(['159331129', '56424750']),
           description: 'Film+Tv'
         }
       ];

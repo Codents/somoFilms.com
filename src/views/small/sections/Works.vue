@@ -7,7 +7,7 @@
     <div class="works-body">
       <section class="collection-container">
         <div class="collection-title"
-             @click="toggleExpand({ collectionName: 'photos'})">
+             @click="toggleExpand({ collectionName: 'collectionImageDetailContainer', section: 'photos'})">
           <span class="title">Photos</span>
           <i class="icon-launcher icon-small-expand-less"
              ref="menuIcon"
@@ -23,7 +23,7 @@
             <div class="square"
                  v-for="item in imagesCollections"
                  :key="item.name"
-                 @click="expandByIndex({ section: 'photos', item: item })">
+                 @click="expandByIndex({ collectionName: 'collectionImageDetailContainer', section: 'photos', item: item })">
               <img class="child"
                    :alt="item.thumbnail.description"
                    :src="item.thumbnail.src"
@@ -31,10 +31,9 @@
             </div>
           </div>
         </div>
-        <div class="collection-detail"
-             v-show="iconExpand.photos">
-          <div class="carrusel"
-               ref="collectionDetailContainer">
+        <div class="collection-detail">
+          <div class="carrusel closed"
+               ref="collectionImageDetailContainer">
             <div class="track"
                  ref="collectionImageDetailTrack">
               <div class="square"
@@ -56,7 +55,7 @@
       <!-- FILMS -->
       <section class="collection-container">
         <div class="collection-title"
-             @click="toggleExpand({ collectionName: 'films'})">
+             @click="toggleExpand({ collectionName: 'collectionVideoDetailContainer', section: 'films'})">
           <span class="title">Films</span>
           <i class="icon-launcher icon-small-expand-less"
              ref="menuIcon"
@@ -72,7 +71,7 @@
             <div class="square"
                  v-for="item in videoCollections"
                  :key="item.name"
-                 @click="expandByIndex({ section: 'films', item: item })">
+                 @click="expandByIndex({ collectionName: 'collectionVideoDetailContainer', section: 'films', item: item })">
               <img class="child"
                    :alt="item.description"
                    :src="item.thumbnail"
@@ -80,10 +79,9 @@
             </div>
           </div>
         </div>
-        <div class="collection-detail"
-             v-show="iconExpand.films">
-          <div class="carrusel"
-               ref="collectionDetailContainer">
+        <div class="collection-detail">
+          <div class="carrusel closed"
+               ref="collectionVideoDetailContainer">
             <div class="track"
                  ref="collectionVideoDetailTrack">
               <div class="square"
@@ -108,6 +106,7 @@
 
 <script>
 import { TweenLite, Power2 } from 'gsap/umd/TweenLite';
+import TweenMax from 'gsap/umd/TweenMax';
 import 'gsap/umd/ScrollToPlugin';
 import workResources from '@/mixins/workResources';
 
@@ -138,14 +137,15 @@ export default {
       urlsPhotos: k.urlsPhotos
     }));
     this.loadImageCollection(this.collectionFiles[0]);
+    this.loadVideoCollection(this.videoCollections[0]);
   },
   updated: function() {
     this.$nextTick(function() {
       const lockContainerWidth = this.$refs.worksContainer.offsetWidth;
       this.$refs.worksContainer.style.width = `${lockContainerWidth}px`;
       const lockTrackWidth = this.$refs.collectionContainer.offsetWidth;
-      this.$refs.collectionContainer.style.width = `${lockTrackWidth}px`;
-      this.$refs.collectionDetailContainer.style.width = `${lockTrackWidth}px`;
+      this.$refs.collectionImageDetailContainer.style.width = `${lockTrackWidth}px`;
+      this.$refs.collectionVideoDetailContainer.style.width = `${lockTrackWidth}px`;
     });
   },
   methods: {
@@ -176,10 +176,14 @@ export default {
       img.src = fullImgSrc;
     },
     showVideoFullScreen(video) {
-      this.$root.$data.showVideoFullScreen = true;
-      const $iframe = document.querySelector('.full-screen-video .embed-container iframe');
+      const $iframe = document.querySelector(
+        '.full-screen-video .embed-container iframe'
+      );
       const id = video.uri.substr(video.uri.lastIndexOf('/') + 1);
       $iframe.src = `https://player.vimeo.com/video/${id}`;
+      setTimeout(() => {
+        this.$root.$data.showVideoFullScreen = true;
+      }, 175);
     },
     loadImageCollection({ thumbnails, description, name }) {
       this.imagesCollection = thumbnails.map(img => ({
@@ -193,11 +197,40 @@ export default {
         description
       });
     },
-    toggleExpand({ collectionName }) {
-      this.iconExpand[collectionName] = !this.iconExpand[collectionName];
+    toggleExpand({ collectionName, section }) {
+      const $container = this.$refs[collectionName];
+      if ($container.classList.contains('closed')) {
+        this.expandCollection({ $container, collectionName, section });
+      } else {
+        this.collapseCollection({ $container, collectionName, section });
+      }
     },
-    expandByIndex({ section, item }) {
+    expandCollection({ $container, section }) {
+      if ($container.classList.contains('closed')) {
+        this.iconExpand[section] = true;
+        $container.classList.remove('closed');
+        TweenMax.set($container, {
+          height: 'auto',
+          opacity: 1
+        });
+        TweenMax.from($container, 0.8, {
+          height: 0,
+          opacity: 0
+        });
+      }
+    },
+    collapseCollection({ $container, section }) {
+      this.iconExpand[section] = false;
+      $container.classList.add('closed');
+      TweenMax.to($container, 0.8, {
+        height: 0,
+        opacity: 0
+      });
+    },
+    expandByIndex({ collectionName, section, item }) {
       this.iconExpand[section] = true;
+      const $container = this.$refs[collectionName];
+      this.expandCollection({ $container, section });
       if (section === PHOTOS) {
         const collection = this.collectionFiles.find(i => i.name === item.name);
         this.loadImageCollection(collection);
@@ -205,17 +238,20 @@ export default {
           this.moveToPosX(this.$refs.collectionImageDetailTrack, 0);
         });
       } else {
-        this.videoCollection = this.videoCollections.find(
-          i => i.name === item.name
-        ).videosInfo.map(k => k);
-        this.videoCollection.unshift({
-          id: -1,
-          description: item.description
-        });
+        this.loadVideoCollection(item);
         this.$nextTick(() => {
           this.moveToPosX(this.$refs.collectionVideoDetailTrack, 0);
         });
       }
+    },
+    loadVideoCollection(collection) {
+      this.videoCollection = this.videoCollections
+        .find(i => i.name === collection.name)
+        .videosInfo.map(k => k);
+      this.videoCollection.unshift({
+        id: -1,
+        description: collection.description
+      });
     },
     getBySize(width, sizes) {
       return sizes.find(k => k.width === width).link_with_play_button;
@@ -248,6 +284,7 @@ export default {
     justify-content: flex-end;
     background-color: #d6e6f3;
     height: 3.5rem;
+    flex-shrink: 0;
     .title-header {
       display: flex;
       flex-direction: column;
@@ -265,12 +302,16 @@ export default {
     -webkit-overflow-scrolling: touch;
     .collection-container {
       margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+      flex-shrink: 0;
       .collection-title {
         display: flex;
         flex-direction: row;
         margin-top: 1rem;
         margin-left: 0.5rem;
         align-items: flex-end;
+      }
+      .collection-detail {
+        margin-bottom: 0.5rem;
       }
       .title {
         font-size: 1.5rem;
@@ -280,6 +321,9 @@ export default {
         display: flex;
         justify-content: center;
         margin: 0.5rem 0.5rem 0 0.5rem;
+        &.closed {
+          height: 0;
+        }
         .track {
           overflow-x: auto;
           overflow-y: hidden;
