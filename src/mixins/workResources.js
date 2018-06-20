@@ -46,7 +46,7 @@ export default {
         {
           name: 'commercials',
           thumbnail: await import('@/assets/img/works/commercials/commercial_small_1.jpeg'),
-          videosInfo: await this.loadVideoThumbs(['97311692', '69953653']),
+          videosInfo: await this.loadVideoThumbs(['97311692', '97913211']),
           description: 'Commercials'
         },
         {
