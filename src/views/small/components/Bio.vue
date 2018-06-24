@@ -2,7 +2,7 @@
   <div class="bio"
        @click="$emit('click')">
     <div class="profile">
-      <div class="picture">
+      <div :class="member">
       </div>
       <div class="text-container">
         <span class="name">{{ $t(name) }}</span>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  props: ['name', 'bioText']
+  props: ['name', 'bioText', 'member']
 };
 </script>
 
@@ -36,7 +36,31 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100%;
-    .picture {
+    .one {
+      height: 50%;
+      background-image: url('../../../assets/img/team_landscape_david_palacios.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      border-radius: 5px;
+    }
+    .two {
+      height: 50%;
+      background-image: url('../../../assets/img/team_landscape_salome_garcia.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      border-radius: 5px;
+    }
+    .three {
+      height: 50%;
+      background-image: url('../../../assets/img/team_landscape_kike_palacios.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      border-radius: 5px;
+    }
+    .four {
       height: 50%;
       background-image: url('../../../assets/img/team_portrait_kike_palacios.jpg');
       background-repeat: no-repeat;

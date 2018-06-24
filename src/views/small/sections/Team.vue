@@ -3,20 +3,36 @@
     <div class="row">
       <div class="cell one"
            @click="handleClick"
-           id="cellOne"
-           ref="cellOne"
+           id="one"
+           ref="one"
            data-name="team.bio.kike.name"
            data-bio-text="team.bio.kike.text"></div>
-      <div class="cell two"></div>
+      <div class="cell two"
+           @click="handleClick"
+           id="two"
+           ref="two"
+           data-name="team.bio.salome.name"
+           data-bio-text="team.bio.salome.text"></div>
     </div>
     <div class="row">
-      <div class="cell three"></div>
-      <div class="cell four"></div>
+      <div class="cell three"
+           @click="handleClick"
+           id="three"
+           ref="three"
+           data-name="team.bio.kike.name"
+           data-bio-text="team.bio.kike.text"></div>
+      <div class="cell four"
+           @click="handleClick"
+           id="four"
+           ref="four"
+           data-name="team.bio.kike.name"
+           data-bio-text="team.bio.kike.text"></div>
     </div>
     <transition enter-active-class="animated zoomIn"
                 leave-active-class="animated hinge">
       <Bio :name="name"
            :bioText="bioText"
+           :member="member"
            v-show="showBio"
            @click="showBio=false" />
     </transition>
@@ -32,7 +48,8 @@ export default {
     return {
       showBio: false,
       bioText: '',
-      name: ''
+      name: '',
+      member: 'one'
     };
   },
   methods: {
@@ -40,6 +57,7 @@ export default {
       this.name = this.$refs[ev.currentTarget.id].dataset.name;
       this.bioText = this.$refs[ev.currentTarget.id].dataset.bioText;
       this.showBio = !this.showBio;
+      this.member = ev.currentTarget.id;
     }
   }
 };
@@ -73,7 +91,7 @@ export default {
         background-position: bottom;
       }
       &.two {
-        background-image: url('../../../assets/img/team-3.jpg');
+        background-image: url('../../../assets/img/team_portrait_salome_garcia.jpg');
         background-repeat: no-repeat;
         background-size: cover;
         background-position: bottom;
