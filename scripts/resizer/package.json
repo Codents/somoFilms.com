@@ -1,0 +1,15 @@
+{
+  "name": "resizer",
+  "version": "0.0.1",
+  "description": "Batch image resizer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sharp": "^0.20.4",
+    "yargs": "^11.0.0"
+  }
+}

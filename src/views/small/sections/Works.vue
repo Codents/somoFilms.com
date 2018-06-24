@@ -24,10 +24,10 @@
                  v-for="item in imagesCollections"
                  :key="item.name"
                  @click="expandByIndex({ collectionName: 'collectionImageDetailContainer', section: 'photos', item: item })">
-              <img class="child"
-                   :alt="item.thumbnail.description"
-                   :src="item.thumbnail.src"
-                   :id="item.thumbnail.name" />
+              <div class="back-img"
+                   :id="item.thumbnail.name"
+                   :data-alt="item.thumbnail.description"
+                   :style="{ backgroundImage: `url('${item.thumbnail.src}')` }"></div>
             </div>
           </div>
         </div>
@@ -41,12 +41,11 @@
                    :key="item.id">
                 <span class="first-child"
                       v-if="index === 0">{{ item.description }}</span>
-                <img class="child"
-                     :alt="item.name"
-                     :src="item.src"
+                <div class="back-img"
                      :id="item.name"
-                     @click="showImageFullScreen(item)"
-                     v-else />
+                     :style="{ backgroundImage: `url('${item.src}')` }"
+                     v-else
+                     @click="showImageFullScreen(item)"></div>
               </div>
             </div>
           </div>
@@ -72,10 +71,10 @@
                  v-for="item in videoCollections"
                  :key="item.name"
                  @click="expandByIndex({ collectionName: 'collectionVideoDetailContainer', section: 'films', item: item })">
-              <img class="child"
-                   :alt="item.description"
-                   :src="item.thumbnail"
-                   :id="item.name" />
+              <div class="back-img"
+                   :id="item.name"
+                   :data-alt="item.description"
+                   :style="{ backgroundImage: `url('${item.thumbnail}')` }"></div>
             </div>
           </div>
         </div>
@@ -89,12 +88,18 @@
                    :key="item.id">
                 <span class="first-child"
                       v-if="index === 0">{{ item.description }}</span>
-                <img class="child"
+                <!--<img class="child"
                      :alt="item.name"
                      :src="getBySize(200, item.pictures.sizes)"
                      :id="item.resource_key"
                      @click="showVideoFullScreen(item)"
-                     v-else />
+                     v-else />-->
+                <div class="back-img"
+                    :data-alt="item.name"
+                     :id="item.resource_key"
+                     :style="{ backgroundImage: `url('${getBySize(200, item.pictures.sizes)}')` }"
+                     v-else
+                     @click="showVideoFullScreen(item)"></div>
               </div>
             </div>
           </div>
@@ -255,12 +260,6 @@ export default {
     },
     getBySize(width, sizes) {
       return sizes.find(k => k.width === width).link_with_play_button;
-    },
-    selectedImageCollection(item) {
-      return Array.from({ length: 9 }, (k, i) => `${item}.${i}`);
-    },
-    selectedVideoCollection(item) {
-      return Array.from({ length: 9 }, (k, i) => `${item}.${i}`);
     }
   }
 };
@@ -330,11 +329,17 @@ export default {
           display: flex;
           flex-direction: row;
           .square {
-            width: 200px;
-            height: 150px;
+            width: $small-width-pic;
+            height: $small-height-pic;
             background-color: #6c757d;
             flex-shrink: 0;
             margin-right: 0.2rem;
+            .back-img {
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center;
+              height: 100%;
+            }
             .first-child {
               background-color: white;
               display: flex;
