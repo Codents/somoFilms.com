@@ -6,6 +6,7 @@
       </div>
       <div class="text-container">
         <span class="name">{{ $t(name) }}</span>
+        <span class="role">{{ $t(role) }}</span>
         <div class="text">
           {{ $t(bioText) }}
         </div>
@@ -16,7 +17,7 @@
 
 <script>
 export default {
-  props: ['name', 'bioText', 'member']
+  props: ['name', 'bioText', 'member', 'role']
 };
 </script>
 
@@ -62,7 +63,7 @@ export default {
     }
     .four {
       height: 50%;
-      background-image: url('../../../assets/img/team_portrait_kike_palacios.jpg');
+      background-image: url('../../../assets/img/team_landscape_pedro_r_soto.jpg');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -70,6 +71,12 @@ export default {
     }
     .text-container {
       height: 50%;
+      display: flex;
+      flex-direction: column;
+      .role {
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
       .name {
         font-size: 2rem;
         margin-top: 0.2rem;
