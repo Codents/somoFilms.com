@@ -4,7 +4,7 @@ const en = {
       kike: {
         name: 'Kike Palacio',
         role: 'Director',
-        text: 'Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).'
+        text: 'Director y fotógrafo, con su cámara ha recorrido el mundo en busca de sonrisas, de lugares paradisiácos, de lugares irreales, de celebrities, de personajes anónimos, atrapando lo intenso...su ojo siempre en busca de la emoción. Habitual colaborador de destacadas revistas de moda nacional e internacional, además de campañas publicitarias.'
       },
       salome: {
         name: 'Salome Garcia',
@@ -14,12 +14,12 @@ const en = {
       pedro: {
         name: 'Pedro R. Soto',
         role: 'Sound Director',
-        text: 'Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).'
+        text: 'Cuenta con una dilatada trayectoria tanto en cine como en publicidad. Su rigor hace que el sonido sea un personaje más.'
       },
       david: {
         name: 'David Palacios',
         role: 'Photography Director',
-        text: 'Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).'
+        text: 'Es un todoterreno de la luz, se atreve con todo y en cualquier lugar. Su dilatada experiencia asegura los mejores planos, incluso en las peores situaciones.'
       }
     }
   },

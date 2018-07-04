@@ -8,6 +8,7 @@
         <Home id="home-section" />
         <Team id="team-section" />
         <Works id="works-section" />
+        <Clients id="clients-section" />
       </div>
     </section>
     <div class="landscape"
@@ -48,10 +49,11 @@ import Home from './sections/Home';
 import Menu from './components/Menu';
 import Team from './sections/Team';
 import Works from './sections/Works';
+import Clients from './sections/Clients';
 
 export default {
   mixins: [menuMotion],
-  components: { Home, Menu, Team, Works },
+  components: { Home, Menu, Team, Works, Clients },
   computed: {
     isLandscape: function() {
       return this.orientation === LANDSCAPE;
