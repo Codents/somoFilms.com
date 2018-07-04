@@ -48,7 +48,9 @@ export default {
         options: {
           width: window.innerWidth,
           height: window.innerHeight,
-          showAngleIndicator: true
+          background: 'transparent',
+          wireframes: false,
+          showAngleIndicator: false
         }
       });
       runner = Runner.create();
@@ -82,20 +84,10 @@ export default {
       const wallsWidth = 10;
       return [
         // walls : Se calcula por su centro
-        Bodies.rectangle(
-          width / 2,
-          0,
-          width,
-          wallsWidth,
-          { isStatic: true }
-        ), // Top
-        Bodies.rectangle(
-          width / 2,
-          height,
-          width,
-          wallsWidth,
-          { isStatic: true }
-        ), // Bottom
+        Bodies.rectangle(width / 2, 0, width, wallsWidth, { isStatic: true }), // Top
+        Bodies.rectangle(width / 2, height, width, wallsWidth, {
+          isStatic: true
+        }), // Bottom
         Bodies.rectangle(width, height / 2, wallsWidth, height, {
           isStatic: true
         }), // Right
