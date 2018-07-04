@@ -82,16 +82,21 @@ export default {
       const height = window.innerHeight;
       const width = window.innerWidth;
       const wallsWidth = 10;
+      const render = {
+        fillStyle: 'rgba(0,0,0,0)'
+      };
       return [
         // walls : Se calcula por su centro
-        Bodies.rectangle(width / 2, 0, width, wallsWidth, { isStatic: true }), // Top
+        Bodies.rectangle(width / 2, 0, width, wallsWidth, { isStatic: true, render }), // Top
         Bodies.rectangle(width / 2, height, width, wallsWidth, {
-          isStatic: true
+          isStatic: true,
+          render
         }), // Bottom
         Bodies.rectangle(width, height / 2, wallsWidth, height, {
-          isStatic: true
+          isStatic: true,
+          render
         }), // Right
-        Bodies.rectangle(0, height / 2, wallsWidth, height, { isStatic: true }) // Left
+        Bodies.rectangle(0, height / 2, wallsWidth, height, { isStatic: true, render }) // Left
       ];
     },
     createMouseConstrant() {
