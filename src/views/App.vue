@@ -2,8 +2,11 @@
   <main id="main"
         class="main">
     <Menu />
-    <router-view name="container"
-                 class="child-view"></router-view>
+    <transition enter-active-class="animated fadeIn"
+                leave-active-class="animated fadeOut">
+      <router-view name="container"
+                   class="child-view"></router-view>
+    </transition>
     <footer>
       <transition enter-active-class="animated zoomIn"
                   leave-active-class="animated zoomOut">
