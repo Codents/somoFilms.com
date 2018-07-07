@@ -23,11 +23,9 @@
             <div class="square"
                  v-for="item in imagesCollections"
                  :key="item.name"
-                 @click="expandByIndex({ collectionName: 'collectionImageDetailContainer', section: 'photos', item: item })">
+                 @click="expandByIndex({ collectionName: 'collectionImageDetailContainer', section: 'photos', collection: item })">
               <div class="back-img"
-                   :id="item.thumbnail.name"
-                   :data-alt="item.thumbnail.description"
-                   :style="{ backgroundImage: `url('${item.thumbnail.src}')` }"></div>
+                   :style="{ backgroundImage: `url('${item.pictures[0].thumb}')` }"></div>
             </div>
           </div>
         </div>
@@ -38,12 +36,13 @@
                  ref="collectionImageDetailTrack">
               <div class="square"
                    v-for="(item, index) in imagesCollection"
-                   :key="item.id">
+                   :key="index">
                 <span class="first-child"
+                      :id="item.id"
                       v-if="index === 0">{{ item.description }}</span>
                 <div class="back-img"
-                     :id="item.name"
-                     :style="{ backgroundImage: `url('${item.src}')` }"
+                     :id="`${item.name}-${index}`"
+                     :style="{ backgroundImage: `url('${item.thumb}')` }"
                      v-else
                      @click="showImageFullScreen(item)"></div>
               </div>
@@ -70,7 +69,7 @@
             <div class="square"
                  v-for="item in videoCollections"
                  :key="item.name"
-                 @click="expandByIndex({ collectionName: 'collectionVideoDetailContainer', section: 'films', item: item })">
+                 @click="expandByIndex({ collectionName: 'collectionVideoDetailContainer', section: 'films', collection: item })">
               <div class="back-img"
                    :id="item.name"
                    :data-alt="item.description"
@@ -85,21 +84,18 @@
                  ref="collectionVideoDetailTrack">
               <div class="square"
                    v-for="(item, index) in videoCollection"
-                   :key="item.id">
+                   :key="index">
                 <span class="first-child"
                       v-if="index === 0">{{ item.description }}</span>
-                <!--<img class="child"
-                     :alt="item.name"
-                     :src="getBySize(200, item.pictures.sizes)"
-                     :id="item.resource_key"
-                     @click="showVideoFullScreen(item)"
-                     v-else />-->
                 <div class="back-img"
-                    :data-alt="item.name"
+                     :data-alt="item.name"
                      :id="item.resource_key"
                      :style="{ backgroundImage: `url('${getBySize(200, item.pictures.sizes)}')` }"
-                     v-else
+                     v-else-if="item.resource_key"
                      @click="showVideoFullScreen(item)"></div>
+                <div class="spinner"
+                     v-else><img :src="spinnerIcon"
+                       alt="Loadig...." /></div>
               </div>
             </div>
           </div>
@@ -114,6 +110,7 @@ import { TweenLite, Power2 } from 'gsap/umd/TweenLite';
 import TweenMax from 'gsap/umd/TweenMax';
 import 'gsap/umd/ScrollToPlugin';
 import workResources from '@/mixins/workResources';
+import spinner from '@/assets/img/spinner.gif';
 
 const PHOTOS = 'photos';
 const FILMS = 'films';
@@ -122,6 +119,7 @@ export default {
   mixins: [workResources],
   data: function() {
     return {
+      spinnerIcon: spinner,
       tt: '@/assets/img/works/hdedon/',
       iconExpand: { [PHOTOS]: false, [FILMS]: false },
       imagesCollections: [],
@@ -132,16 +130,9 @@ export default {
     };
   },
   async mounted() {
-    this.collectionFiles = this.loadAllImagesCollections();
-    this.videoCollections = await this.loadAllVideoCollections();
-    this.imagesCollections = this.collectionFiles.map((k, i) => ({
-      name: k.name,
-      id: `${k.name}-${i}`,
-      thumbnail: k.thumbnails[0],
-      description: k.description,
-      urlsPhotos: k.urlsPhotos
-    }));
-    this.loadImageCollection(this.collectionFiles[0]);
+    this.imagesCollections = this.loadAllImagesCollections();
+    this.videoCollections = this.loadAllVideoCollections();
+    this.loadImageCollection(this.imagesCollections[0]);
     this.loadVideoCollection(this.videoCollections[0]);
   },
   updated: function() {
@@ -168,17 +159,13 @@ export default {
     },
     showImageFullScreen(image) {
       this.$root.$data.showImageFullScreen = true;
-      const img = new Image();
+      const lazyImage = new Image();
       const $fullImg = document.querySelector('.full-screen-image .image-full');
-      const collection = this.imagesCollections.find(
-        k => k.name === image.collectionName
-      );
-      const fullImgSrc = collection.urlsPhotos[image.id];
-      $fullImg.src = image.src;
-      img.addEventListener('load', () => {
-        $fullImg.src = fullImgSrc;
+      $fullImg.src = image.thumb;
+      lazyImage.addEventListener('load', () => {
+        $fullImg.src = image.full;
       });
-      img.src = fullImgSrc;
+      lazyImage.src = image.full;
     },
     showVideoFullScreen(video) {
       const $iframe = document.querySelector(
@@ -190,16 +177,14 @@ export default {
         this.$root.$data.showVideoFullScreen = true;
       }, 175);
     },
-    loadImageCollection({ thumbnails, description, name }) {
-      this.imagesCollection = thumbnails.map(img => ({
-        id: img.name,
-        src: img.src,
-        collectionName: name
+    loadImageCollection(collection) {
+      this.imagesCollection = collection.pictures.map(k => ({
+        ...k,
+        name: collection.name
       }));
-
       this.imagesCollection.unshift({
         id: -1,
-        description
+        description: collection.description
       });
     },
     toggleExpand({ collectionName, section }) {
@@ -232,31 +217,46 @@ export default {
         opacity: 0
       });
     },
-    expandByIndex({ collectionName, section, item }) {
+    expandByIndex({ collectionName, section, collection }) {
       this.iconExpand[section] = true;
       const $container = this.$refs[collectionName];
       this.expandCollection({ $container, section });
       if (section === PHOTOS) {
-        const collection = this.collectionFiles.find(i => i.name === item.name);
         this.loadImageCollection(collection);
         this.$nextTick(() => {
           this.moveToPosX(this.$refs.collectionImageDetailTrack, 0);
         });
       } else {
-        this.loadVideoCollection(item);
+        this.loadVideoCollection(collection);
         this.$nextTick(() => {
           this.moveToPosX(this.$refs.collectionVideoDetailTrack, 0);
         });
       }
     },
     loadVideoCollection(collection) {
-      this.videoCollection = this.videoCollections
-        .find(i => i.name === collection.name)
-        .videosInfo.map(k => k);
-      this.videoCollection.unshift({
-        id: -1,
-        description: collection.description
-      });
+      const current = this.videoCollections.find(
+        k => k.name === collection.name
+      );
+      if (!current.cache) {
+        this.videoCollection = Array.from(
+          { length: collection.videoIds.length },
+          k => ({ name: k })
+        );
+        this.videoCollection.unshift({
+          id: -1,
+          description: collection.description
+        });
+        this.loadVideoThumbs(collection.videoIds).then(videos => {
+          current.cache = videos;
+          this.videoCollection = videos;
+          this.videoCollection.unshift({
+            id: -1,
+            description: collection.description
+          });
+        });
+      } else {
+        this.videoCollection = current.cache;
+      }
     },
     getBySize(width, sizes) {
       return sizes.find(k => k.width === width).link_with_play_button;
@@ -269,6 +269,15 @@ export default {
 @import '../../../base.scss';
 .photos {
   margin-top: 0.5rem;
+}
+.spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
 }
 .works-container {
   position: relative;

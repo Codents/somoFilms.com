@@ -11,6 +11,7 @@
 
 <script>
 import Matter from 'matter-js';
+import vogue from '@/assets/img/vogue-logo.jpg';
 
 const Engine = Matter.Engine;
 const Render = Matter.Render;
@@ -87,7 +88,10 @@ export default {
       };
       return [
         // walls : Se calcula por su centro
-        Bodies.rectangle(width / 2, 0, width, wallsWidth, { isStatic: true, render }), // Top
+        Bodies.rectangle(width / 2, 0, width, wallsWidth, {
+          isStatic: true,
+          render
+        }), // Top
         Bodies.rectangle(width / 2, height, width, wallsWidth, {
           isStatic: true,
           render
@@ -96,7 +100,10 @@ export default {
           isStatic: true,
           render
         }), // Right
-        Bodies.rectangle(0, height / 2, wallsWidth, height, { isStatic: true, render }) // Left
+        Bodies.rectangle(0, height / 2, wallsWidth, height, {
+          isStatic: true,
+          render
+        }) // Left
       ];
     },
     createMouseConstrant() {
@@ -112,6 +119,19 @@ export default {
       });
     },
     clientBuilder() {
+      const render = {
+        sprite: {
+          texture: vogue
+        }
+      };
+      const chamfer = {
+        radius: 10
+      };
+      return Composites.stack(20, 20, 2, 2, 0, 0, function(x, y) {
+        return Bodies.rectangle(x, y, 150, 34, { chamfer, render });
+      });
+    },
+    clientBuilder2() {
       return Composites.stack(20, 20, 10, 5, 0, 0, function(x, y) {
         let sides = Math.round(Common.random(1, 8));
 
@@ -126,6 +146,12 @@ export default {
           };
         }
 
+        const render = {
+          sprite: {
+            texture: vogue
+          }
+        };
+
         switch (Math.round(Common.random(0, 1))) {
           case 0:
             if (Common.random() < 0.8) {
@@ -134,7 +160,7 @@ export default {
                 y,
                 Common.random(25, 50),
                 Common.random(25, 50),
-                { chamfer: chamfer }
+                { chamfer: chamfer, render }
               );
             } else {
               return Bodies.rectangle(
@@ -142,7 +168,7 @@ export default {
                 y,
                 Common.random(80, 120),
                 Common.random(25, 30),
-                { chamfer: chamfer }
+                { chamfer: chamfer, render }
               );
             }
           case 1:

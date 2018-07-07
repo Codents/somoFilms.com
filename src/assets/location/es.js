@@ -1,4 +1,5 @@
 const es = {
+  app: 'somoFilms',
   team: {
     bio: {
       kike: {

@@ -7,21 +7,23 @@
                 leave-active-class="animated zoomOutLeft">
       <nav class="menu"
            v-show="show">
-        <span v-for="(menu, index) in menus"
-              :key="index"
-              :id="menu.id"
-              :data-index="index"
-              v-if="menu.active"
-              :class="['item', index === 0 ? 'selected' : '']"
-              @click="handleClick">{{ $t(menu.text) }}</span>
+        <router-link v-for="(menu, index) in menus"
+                     :key="index"
+                     v-if="menu.active"
+                     class="link"
+                     :to="menu.route">
+          <span :id="menu.id"
+                :data-index="index"
+                ref="link"
+                :class="{ 'selected' : menu.selected }"
+                @click="handleNav(menu)">{{ $t(menu.text) }}</span>
+        </router-link>
       </nav>
     </transition>
   </div>
 </template>
 
 <script>
-import { rgxNumber } from '@/utils';
-
 export default {
   data: function() {
     return {
@@ -30,56 +32,59 @@ export default {
         {
           id: 'home',
           active: true,
+          selected: true,
+          route: '/',
           text: 'menu.home'
         },
         {
           id: 'team',
           active: true,
+          selected: false,
+          route: '/team',
           text: 'menu.team'
         },
         {
           id: 'works',
           active: true,
+          selected: false,
+          route: '/works',
           text: 'menu.works'
         },
         {
           id: 'about',
           active: true,
+          selected: false,
+          route: '/about',
           text: 'menu.about'
         },
         {
           id: 'clients',
           active: true,
+          selected: false,
+          route: '/clients',
           text: 'menu.clients'
         },
         {
           id: 'contacts',
           active: true,
+          selected: false,
+          route: '/contacts',
           text: 'menu.contacts'
         },
         {
           id: 'inprogress',
           active: true,
+          selected: false,
+          route: '/inprogress',
           text: 'menu.inprogress'
         }
       ]
     };
   },
-  mounted() {
-    const headerHeight = document.querySelector('.header').offsetHeight;
-    const menuIconHeight = document.querySelector('.icon-launcher')
-      .offsetHeight;
-    const height = (headerHeight - menuIconHeight) / 2;
-    const fontSize = rgxNumber(
-      window.getComputedStyle(this.$el, null).getPropertyValue('font-size')
-    );
-    this.$refs.menuIcon.style.top = `${height / fontSize}rem`;
-    this.$refs.menuIcon.style.left = `${height / fontSize}rem`;
-  },
   methods: {
-    handleClick(ev) {
-      this.show = false;
-      this.$emit('goOptionMenu', ev);
+    handleNav(menu) {
+      this.show = !this.show;
+      this.menus = this.menus.map(k => ({ ...k, selected: k.id === menu.id }));
     }
   }
 };
@@ -115,11 +120,12 @@ export default {
     font-size: 3rem;
     font-family: '28 Days Later';
   }
-  .item {
-    margin-bottom: 0.2rem;
-    &.selected {
-      color: #2196f3;
-    }
+  .link {
+    text-decoration: none;
+    color: black;
+  }
+  .selected {
+    color: #2196f3;
   }
 }
 </style>

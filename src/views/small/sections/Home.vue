@@ -1,7 +1,7 @@
 <template>
   <section class="home-container">
     <div class="header">
-      <span class="text">somoFilms</span>
+      <span class="text">{{ $t('app') }}</span>
     </div>
   </section>
 </template>
@@ -11,7 +11,8 @@
   font-family: '28 Days Later';
   font-style: normal;
   font-weight: normal;
-  src: local('28 Days Later'), url('../../../assets/fonts/28_Days_Later.woff') format('woff');
+  src: local('28 Days Later'),
+    url('../../../assets/fonts/28_Days_Later.woff') format('woff');
 }
 .home-container {
   width: 100%;
@@ -26,7 +27,7 @@
   .header {
     width: 100%;
     background-color: rgba(255, 255, 255, 0.8);
-    font-family:'28 Days Later';
+    font-family: '28 Days Later';
     height: 3.5rem;
     .text {
       font-size: 3rem;
