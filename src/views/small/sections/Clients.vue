@@ -3,8 +3,10 @@
     <button class="bt-start"
             v-show="gameStoped"
             @click="handle">START</button>
-    <span class="gameover"
-          v-show="gameOver">Game Over</span>
+    <div class="w-gameover"
+         v-show="gameOver">
+      <span class="gameover">Game Over</span>
+    </div>
     <span class="score">{{ score }}</span>
     <div class="world"
          ref="world">
@@ -33,12 +35,14 @@ let render = null;
 let world = null;
 let mouseConstrant = null;
 
+const INTERVAL = 2500;
+
 export default {
   mixins: [clientResources],
   data: function() {
     return {
       intervalPtr: null,
-      interval: 3000,
+      interval: INTERVAL,
       time: 0,
       score: 0,
       gameStoped: true,
@@ -49,6 +53,15 @@ export default {
     };
   },
   mounted() {
+    this.destroyWorld();
+    this.initWorld();
+    this.compoundWorld();
+  },
+  beforeDestroy() {
+    clearInterval(this.intervalPtr);
+    this.interval = INTERVAL;
+    this.gameOver = false;
+    this.gameStoped = true;
     this.destroyWorld();
     this.initWorld();
     this.compoundWorld();
@@ -64,6 +77,7 @@ export default {
     },
     handle() {
       this.gameStoped = false;
+      this.score = 0;
       this.clientBuilder();
       this.intervalPtr = setInterval(this.updateLoop.bind(this), this.interval);
     },
@@ -104,6 +118,7 @@ export default {
       World.add(world, this.contentBuilder());
       mouseConstrant = this.createMouseConstrant();
       Events.on(mouseConstrant, 'mousedown', this.handleMouseClick.bind(this));
+      Events.on(engine, 'collisionActive', this.handleCollision.bind(this));
       World.add(world, mouseConstrant);
       Render.run(render);
       Runner.run(runner, engine);
@@ -118,6 +133,21 @@ export default {
       }
       if (world) Matter.World.clear(world);
       if (engine) Matter.Engine.clear(engine);
+    },
+    handleCollision() {
+      if (Composite.allBodies(world).length > 30) {
+        this.gameOver = true;
+        clearInterval(this.intervalPtr);
+        this.time = 0;
+        this.interval = INTERVAL;
+        setTimeout(() => {
+          this.gameOver = false;
+          this.gameStoped = true;
+          this.destroyWorld();
+          this.initWorld();
+          this.compoundWorld();
+        }, 3000);
+      }
     },
     handleMouseClick(ev) {
       const body = Composite.allBodies(world).filter(
@@ -224,24 +254,34 @@ export default {
     opacity: 0;
   }
 }
-.gameover {
+.w-gameover {
+  z-index: 20;
   position: absolute;
-  z-index: 18;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: solid 1px;
-  border-radius: 5px;
-  padding: 0.3rem 0.5rem 0.3rem 0.5rem;
-  font-size: 2.2rem;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(241, 25, 25, 0.97);
+  color: white;
+  .gameover {
+    border: solid 1px;
+    border-radius: 5px;
+    padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+    font-size: 2.2rem;
+    text-align: center;
+    flex-grow: 0;
+  }
 }
 .score {
   position: absolute;
-  z-index: 18;
-  padding: 0.5rem;
+  z-index: 32;
+  padding: 1rem;
   right: 0.5rem;
-  font-size: 2rem;
-  color: #607d8b;
+  font-weight: bold;
+  font-size: 3rem;
+  color: #312f2f;
 }
 </style>
 
