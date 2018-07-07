@@ -14,57 +14,68 @@ const textures = [
   {
     src: vogue,
     w: 150,
-    h: 67
+    h: 67,
+    points: 2
   },
   {
     src: akerare,
     w: 150,
-    h: 152
+    h: 152,
+    points: 3
   },
   {
     src: arima,
     w: 150,
-    h: 27
+    h: 27,
+    points: 4
   },
   {
     src: chic,
     w: 150,
-    h: 72
+    h: 72,
+    points: 1
   },
   {
     src: city,
     w: 150,
-    h: 142
+    h: 142,
+    points: 5
   },
   {
     src: dedon,
     w: 150,
-    h: 150
+    h: 150,
+    points: 2
   },
   {
     src: delta,
     w: 150,
-    h: 23
+    h: 23,
+    points: 4
   },
   {
     src: dolce,
     w: 150,
-    h: 137
+    h: 137,
+    points: 1
   },
   {
     src: pais,
     w: 150,
-    h: 33
+    h: 33,
+    points: 4
   },
   {
     src: elle_korea,
     w: 150,
-    h: 150
+    h: 150,
+    points: 4
   },
   {
     src: elle,
     w: 150,
-    h: 61
+    h: 61,
+    points: 1
   }
 ];
 

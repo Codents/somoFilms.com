@@ -1,7 +1,11 @@
 <template>
   <section class="clients-container">
-    <i class="icon-add icon-small-add"
-       @click="handle" />
+    <button class="bt-start"
+            v-show="gameStoped"
+            @click="handle">START</button>
+    <span class="gameover"
+          v-show="gameOver">Game Over</span>
+    <span class="score">{{ score }}</span>
     <div class="world"
          ref="world">
     </div>
@@ -15,26 +19,36 @@ import clientResources from '@/mixins/clientsResources';
 const Engine = Matter.Engine;
 const Render = Matter.Render;
 const Runner = Matter.Runner;
+const Events = Matter.Events;
 const MouseConstraint = Matter.MouseConstraint;
+const Composite = Matter.Composite;
 const Mouse = Matter.Mouse;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
+const Bounds = Matter.Bounds;
 
 let runner = null;
 let engine = null;
 let render = null;
 let world = null;
+let mouseConstrant = null;
 
 export default {
   mixins: [clientResources],
   data: function() {
     return {
+      intervalPtr: null,
+      interval: 3000,
+      time: 0,
+      score: 0,
+      gameStoped: true,
+      gameOver: false,
       index: 0,
-      textures: this.loadTextures()
+      textures: this.loadTextures(),
+      worldHeight: window.innerHeight
     };
   },
   mounted() {
-    console.log('Init animation');
     this.destroyWorld();
     this.initWorld();
     this.compoundWorld();
@@ -49,6 +63,21 @@ export default {
       return this.textures[this.index];
     },
     handle() {
+      this.gameStoped = false;
+      this.clientBuilder();
+      this.intervalPtr = setInterval(this.updateLoop.bind(this), this.interval);
+    },
+    updateLoop() {
+      this.time += this.interval;
+      if (this.time >= this.interval * 4) {
+        this.time = 0;
+        if (this.interval > 300) this.interval -= 200;
+        clearInterval(this.intervalPtr);
+        this.intervalPtr = setInterval(
+          this.updateLoop.bind(this),
+          this.interval
+        );
+      }
       this.clientBuilder();
     },
     initWorld() {
@@ -59,7 +88,7 @@ export default {
         engine: engine,
         options: {
           width: window.innerWidth,
-          height: window.innerHeight,
+          height: this.worldHeight,
           background: 'transparent',
           wireframes: false,
           showAngleIndicator: false
@@ -68,12 +97,14 @@ export default {
       runner = Runner.create();
       Render.lookAt(render, {
         min: { x: 0, y: 0 },
-        max: { x: window.innerWidth, y: window.innerHeight }
+        max: { x: window.innerWidth, y: this.worldHeight }
       });
     },
     compoundWorld() {
       World.add(world, this.contentBuilder());
-      World.add(world, this.createMouseConstrant());
+      mouseConstrant = this.createMouseConstrant();
+      Events.on(mouseConstrant, 'mousedown', this.handleMouseClick.bind(this));
+      World.add(world, mouseConstrant);
       Render.run(render);
       Runner.run(runner, engine);
     },
@@ -88,8 +119,19 @@ export default {
       if (world) Matter.World.clear(world);
       if (engine) Matter.Engine.clear(engine);
     },
+    handleMouseClick(ev) {
+      const body = Composite.allBodies(world).filter(
+        k =>
+          k.label !== 'CONTAINER' &&
+          Bounds.contains(k.bounds, ev.mouse.position)
+      );
+      if (body.length) {
+        this.score += Number(body[0].points);
+        World.remove(world, body);
+      }
+    },
     contentBuilder() {
-      const height = window.innerHeight;
+      const height = this.worldHeight;
       const width = window.innerWidth;
       const wallsWidth = 10;
       const render = {
@@ -99,19 +141,23 @@ export default {
         // walls : Se calcula por su centro
         Bodies.rectangle(width / 2, 0, width, wallsWidth, {
           isStatic: true,
-          render
+          render,
+          label: 'CONTAINER'
         }), // Top
         Bodies.rectangle(width / 2, height, width, wallsWidth, {
           isStatic: true,
-          render
+          render,
+          label: 'CONTAINER'
         }), // Bottom
         Bodies.rectangle(width, height / 2, wallsWidth, height, {
           isStatic: true,
-          render
+          render,
+          label: 'CONTAINER'
         }), // Right
         Bodies.rectangle(0, height / 2, wallsWidth, height, {
           isStatic: true,
-          render
+          render,
+          label: 'CONTAINER'
         }) // Left
       ];
     },
@@ -138,7 +184,8 @@ export default {
           sprite: {
             texture: texture.src
           }
-        }
+        },
+        points: texture.points
       });
       World.addBody(world, body);
     }
@@ -156,23 +203,45 @@ export default {
   flex-direction: column;
   flex-shrink: 0;
   overflow-y: auto;
-  .t-bottom {
-    position: absolute;
-    height: 20px;
-    flex-shrink: 0;
-    width: 100px;
-    border: solid 1px blueviolet;
-    border-radius: 5px;
-  }
 }
-.icon-add {
+.bt-start {
   position: absolute;
   z-index: 18;
-  background-color: rgba(255, 255, 255, 0.8);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: solid 1px;
   border-radius: 5px;
-  padding: 0.2rem;
-  top: 0.5rem;
+  padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+  font-size: 2.2rem;
+  background-color: white;
+  font-family: 'Poiret One', serif;
+  outline: none;
+  animation: blinker 2s linear infinite;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+.gameover {
+  position: absolute;
+  z-index: 18;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: solid 1px;
+  border-radius: 5px;
+  padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+  font-size: 2.2rem;
+}
+.score {
+  position: absolute;
+  z-index: 18;
+  padding: 0.5rem;
   right: 0.5rem;
+  font-size: 2rem;
+  color: #607d8b;
 }
 </style>
 
