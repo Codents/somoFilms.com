@@ -1,23 +1,20 @@
 <template>
   <section class="clients-container">
-    <button class="t-bottom"
-            @click="handle">Init</button>
+    <i class="icon-add icon-small-add"
+       @click="handle" />
     <div class="world"
          ref="world">
-
     </div>
   </section>
 </template>
 
 <script>
 import Matter from 'matter-js';
-import vogue from '@/assets/img/vogue-logo.jpg';
+import clientResources from '@/mixins/clientsResources';
 
 const Engine = Matter.Engine;
 const Render = Matter.Render;
 const Runner = Matter.Runner;
-const Composites = Matter.Composites;
-const Common = Matter.Common;
 const MouseConstraint = Matter.MouseConstraint;
 const Mouse = Matter.Mouse;
 const World = Matter.World;
@@ -27,18 +24,32 @@ let runner = null;
 let engine = null;
 let render = null;
 let world = null;
-let stack = null;
 
 export default {
+  mixins: [clientResources],
+  data: function() {
+    return {
+      index: 0,
+      textures: this.loadTextures()
+    };
+  },
   mounted() {
-    console.log('CLIENTS MOUNTED');
+    console.log('Init animation');
+    this.destroyWorld();
+    this.initWorld();
+    this.compoundWorld();
   },
   methods: {
+    getTexture() {
+      if (this.index >= this.textures.length - 1) {
+        this.index = 0;
+      } else {
+        this.index += 1;
+      }
+      return this.textures[this.index];
+    },
     handle() {
-      console.log('Init animation');
-      this.destroyWorld();
-      this.initWorld();
-      this.compoundWorld();
+      this.clientBuilder();
     },
     initWorld() {
       engine = Engine.create();
@@ -61,8 +72,6 @@ export default {
       });
     },
     compoundWorld() {
-      if (!stack) stack = this.clientBuilder();
-      World.add(world, stack);
       World.add(world, this.contentBuilder());
       World.add(world, this.createMouseConstrant());
       Render.run(render);
@@ -119,70 +128,26 @@ export default {
       });
     },
     clientBuilder() {
-      const render = {
-        sprite: {
-          texture: vogue
-        }
-      };
       const chamfer = {
         radius: 10
       };
-      return Composites.stack(20, 20, 2, 2, 0, 0, function(x, y) {
-        return Bodies.rectangle(x, y, 150, 34, { chamfer, render });
-      });
-    },
-    clientBuilder2() {
-      return Composites.stack(20, 20, 10, 5, 0, 0, function(x, y) {
-        let sides = Math.round(Common.random(1, 8));
-
-        // triangles can be a little unstable, so avoid until fixed
-        sides = sides === 3 ? 4 : sides;
-
-        // round the edges of some bodies
-        let chamfer = null;
-        if (sides > 2 && Common.random() > 0.7) {
-          chamfer = {
-            radius: 10
-          };
-        }
-
-        const render = {
+      const texture = this.getTexture();
+      const body = Bodies.rectangle(40, 40, texture.w, texture.h, {
+        chamfer,
+        render: {
           sprite: {
-            texture: vogue
+            texture: texture.src
           }
-        };
-
-        switch (Math.round(Common.random(0, 1))) {
-          case 0:
-            if (Common.random() < 0.8) {
-              return Bodies.rectangle(
-                x,
-                y,
-                Common.random(25, 50),
-                Common.random(25, 50),
-                { chamfer: chamfer, render }
-              );
-            } else {
-              return Bodies.rectangle(
-                x,
-                y,
-                Common.random(80, 120),
-                Common.random(25, 30),
-                { chamfer: chamfer, render }
-              );
-            }
-          case 1:
-            return Bodies.polygon(x, y, sides, Common.random(25, 50), {
-              chamfer: chamfer
-            });
         }
       });
+      World.addBody(world, body);
     }
   }
 };
 </script>
 
 <style lang="postcss" scoped>
+@import '../../../base.scss';
 .clients-container {
   position: relative;
   width: 100%;
@@ -199,8 +164,15 @@ export default {
     border: solid 1px blueviolet;
     border-radius: 5px;
   }
-  .world {
-  }
+}
+.icon-add {
+  position: absolute;
+  z-index: 18;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  padding: 0.2rem;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 </style>
 
