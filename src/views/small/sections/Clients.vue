@@ -309,6 +309,7 @@ export default {
     .cli-carrousel {
       position: relative;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       width: 100%;
       height: 75%;
       .controls {
