@@ -1,5 +1,11 @@
 const es = {
   app: 'somoFilms',
+  actions: {
+    close: 'Cerrar'
+  },
+  clients: {
+    title: 'Clients'
+  },
   team: {
     bio: {
       kike: {
@@ -28,7 +34,7 @@ const es = {
     home: 'home',
     team: 'team',
     works: 'works',
-    contacts: 'contacts',
+    contacts: 'contact',
     about: 'about',
     clients: 'clients',
     inprogress: 'in progress'

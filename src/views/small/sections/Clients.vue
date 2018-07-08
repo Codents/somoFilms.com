@@ -3,9 +3,30 @@
     <button class="bt-start"
             v-show="gameStoped"
             @click="handle">START</button>
-    <div class="w-gameover"
+    <div class="gameover"
          v-show="gameOver">
-      <span class="gameover">Game Over</span>
+      <i class="icon-close icon-small-close"
+         @click="gameOver = !gameOver" />
+      <div class="header">
+        <span class="title">{{ $t('clients.title') }}</span>
+      </div>
+      <div class="body">
+        <div class="cli-carrousel">
+          <div class="controls"></div>
+          <div class="track">
+            <div v-for="(logo, index) in textures"
+                 :key="index">
+              <div class="item">
+                <div class="w-logo">
+                  <img alt="logo"
+                       :src="logo.src" />
+                </div>
+                <span class="title">{{ logo.name || 'Some name' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <span class="score">{{ score }}</span>
     <div class="world"
@@ -35,7 +56,7 @@ let render = null;
 let world = null;
 let mouseConstrant = null;
 
-const INTERVAL = 2500;
+const INTERVAL = 1000;
 
 export default {
   mixins: [clientResources],
@@ -140,13 +161,10 @@ export default {
         clearInterval(this.intervalPtr);
         this.time = 0;
         this.interval = INTERVAL;
-        setTimeout(() => {
-          this.gameOver = false;
-          this.gameStoped = true;
-          this.destroyWorld();
-          this.initWorld();
-          this.compoundWorld();
-        }, 3000);
+        this.gameStoped = true;
+        this.destroyWorld();
+        this.initWorld();
+        this.compoundWorld();
       }
     },
     handleMouseClick(ev) {
@@ -254,29 +272,81 @@ export default {
     opacity: 0;
   }
 }
-.w-gameover {
+.gameover {
+  .icon-close {
+    z-index: 40;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
   z-index: 20;
   position: absolute;
   height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  background-color: rgba(241, 25, 25, 0.97);
-  color: white;
-  .gameover {
-    border: solid 1px;
-    border-radius: 5px;
-    padding: 0.3rem 0.5rem 0.3rem 0.5rem;
-    font-size: 2.2rem;
-    text-align: center;
-    flex-grow: 0;
+  background-color: white;
+  .header {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .title {
+      padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+      font-size: 2.2rem;
+      text-align: center;
+    }
+  }
+  .body {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .cli-carrousel {
+      position: relative;
+      overflow-y: auto;
+      width: 100%;
+      height: 75%;
+      .controls {
+        position: absolute;
+      }
+      .track {
+        display: flex;
+        flex-direction: row;
+        .item {
+          height: 100%;
+          flex-shrink: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          border: solid 1px #eae6e6;
+          margin: 0.5rem;
+          padding: 0.5rem;
+          .w-logo {
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .logo {
+              width: 150px;
+            }
+          }
+          .title {
+            width: 100%;
+            text-align: center;
+          }
+        }
+      }
+    }
   }
 }
 .score {
   position: absolute;
-  z-index: 32;
+  z-index: 19;
   padding: 1rem;
   right: 0.5rem;
   font-weight: bold;

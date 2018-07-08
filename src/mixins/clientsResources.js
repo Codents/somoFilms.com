@@ -36,31 +36,36 @@ const textures = [
     src: vogue,
     w: 150,
     h: 67,
-    points: 2
+    points: 2,
+    name: 'Vogue'
   },
   {
     src: akerare,
     w: 150,
     h: 152,
-    points: 3
+    points: 3,
+    name: 'Hotel Akelare'
   },
   {
     src: arima,
     w: 150,
     h: 27,
-    points: 4
+    points: 4,
+    name: 'Hotel Arima'
   },
   {
     src: chic,
     w: 150,
     h: 72,
-    points: 1
+    points: 1,
+    name: 'Chic'
   },
   {
     src: city,
     w: 150,
     h: 142,
-    points: 5
+    points: 5,
+    name: 'City'
   },
   {
     src: dedon,

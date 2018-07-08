@@ -15,7 +15,7 @@
           <span :id="menu.id"
                 :data-index="index"
                 ref="link"
-                :class="{ 'selected' : menu.selected }"
+                :class="{ 'selected' : menu.route === $route.path }"
                 @click="handleNav(menu)">{{ $t(menu.text) }}</span>
         </router-link>
       </nav>
@@ -98,6 +98,7 @@ export default {
   font-size: 16px;
   height: fit-content !important;
   .icon-launcher {
+    z-index: 99 !important;
     position: absolute;
     z-index: 18;
     background-color: rgba(255, 255, 255, 0.8);
@@ -107,7 +108,7 @@ export default {
     left: 0.5rem;
   }
   .menu {
-    z-index: 9;
+    z-index: 97;
     color: #4e4045;
     display: flex;
     flex-direction: column;

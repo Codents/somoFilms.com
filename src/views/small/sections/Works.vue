@@ -290,7 +290,6 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    background-color: #d6e6f3;
     height: 3.5rem;
     flex-shrink: 0;
     .title-header {
