@@ -6,6 +6,9 @@ const en = {
   contact: {
     title: 'Conact Us'
   },
+  inprogress: {
+    title: 'In Progress'
+  },
   clients: {
     title: 'Clients'
   },

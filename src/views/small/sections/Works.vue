@@ -157,16 +157,6 @@ export default {
         ease: Power2.easeOut
       });
     },
-    showImageFullScreen(image) {
-      this.$root.$data.showImageFullScreen = true;
-      const lazyImage = new Image();
-      const $fullImg = document.querySelector('.full-screen-image .image-full');
-      $fullImg.src = image.thumb;
-      lazyImage.addEventListener('load', () => {
-        $fullImg.src = image.full;
-      });
-      lazyImage.src = image.full;
-    },
     showVideoFullScreen(video) {
       const $iframe = document.querySelector(
         '.full-screen-video .embed-container iframe'

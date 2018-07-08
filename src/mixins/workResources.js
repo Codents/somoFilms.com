@@ -1,16 +1,39 @@
-import { importAll } from '@/utils';
-
 export default {
   methods: {
-    /*
-     * SIZES:
-     * small: w => 200px
-     * El nombres de los ficheros de thumbnais deben coincidir con las
-     * propiedades de urlPhotos, ej:
-     *  >> fichero: @/assets/img/works/photo/hdedon/hdedon_small_01.jpg
-     *  thumbnails[0].name = 'hdedon_small_01'
-     *  urlPhotos.hdedon_small_01 = 'http://kikepalacio.com/wp-content/uploads/2017/10/4.jpg'
-     */
+    showImageFullScreen(image) {
+      this.$root.$data.showImageFullScreen = true;
+      const lazyImage = new Image();
+      const $fullImg = document.querySelector('.full-screen-image .image-full');
+      $fullImg.src = image.thumb;
+      lazyImage.addEventListener('load', () => {
+        $fullImg.src = image.full;
+      });
+      lazyImage.src = image.full;
+    },
+    loadAllImagesFromInProgress() {
+      return [
+        {
+          name: 'inprogress-1',
+          description: 'Creacion ( a proposito del Arte )',
+          pictures: [
+            {
+              thumb: '/static/inprogress/in-progress-1-small.jpg',
+              full: '/static/inprogress/in-progress-1-big.jpg'
+            }
+          ]
+        },
+        {
+          name: 'inprogress-2',
+          description: 'Creacion ( a proposito del Arte )',
+          pictures: [
+            {
+              thumb: '/static/inprogress/in-progress-2-small.jpg',
+              full: '/static/inprogress/in-progress-2-big.jpg'
+            }
+          ]
+        }
+      ];
+    },
     loadAllImagesCollections() {
       return [
         {
@@ -601,16 +624,13 @@ export default {
         {
           name: 'commercials',
           thumbnail: '/static/works/video/commercials/commercial_small_1.jpeg',
-          videoIds: [
-            '97311692',
-            '97913211',
-            '98528450'
-          ],
+          videoIds: ['97311692', '97913211', '98528450'],
           description: 'Commercials'
         },
         {
           name: 'films_and_tv',
-          thumbnail: '/static/works/video/films_and_tv/films_and_tv_small_1.jpeg',
+          thumbnail:
+            '/static/works/video/films_and_tv/films_and_tv_small_1.jpeg',
           videoIds: ['159331129', '56424750'],
           description: 'Film+Tv'
         }

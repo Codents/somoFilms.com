@@ -11,9 +11,12 @@ const WorksSmall = () =>
   import(/* webpackChunkName: "smallWotks" */ '@/views/small/sections/Works.vue');
 const ClientsSmall = () =>
   import(/* webpackChunkName: "smallClients" */ '@/views/small/sections/Clients.vue');
-
 const AboutSmall = () =>
   import(/* webpackChunkName: "smallClients" */ '@/views/small/sections/About.vue');
+const ContactSmall = () =>
+  import(/* webpackChunkName: "smallClients" */ '@/views/small/sections/Contact.vue');
+const InProgressSmall = () =>
+  import(/* webpackChunkName: "smallClients" */ '@/views/small/sections/InProgress.vue');
 
 Vue.use(Router);
 
@@ -90,6 +93,36 @@ export default new Router({
           switch (display) {
             case SMALL:
               return AboutSmall();
+            default:
+              return null;
+          }
+        }
+      }
+    },
+    {
+      name: 'inprogress',
+      path: '/inprogress',
+      components: {
+        container: () => {
+          const display = responsive();
+          switch (display) {
+            case SMALL:
+              return InProgressSmall();
+            default:
+              return null;
+          }
+        }
+      }
+    },
+    {
+      name: 'contact',
+      path: '/contact',
+      components: {
+        container: () => {
+          const display = responsive();
+          switch (display) {
+            case SMALL:
+              return ContactSmall();
             default:
               return null;
           }
