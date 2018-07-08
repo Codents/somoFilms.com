@@ -12,6 +12,9 @@ const WorksSmall = () =>
 const ClientsSmall = () =>
   import(/* webpackChunkName: "smallClients" */ '@/views/small/sections/Clients.vue');
 
+const AboutSmall = () =>
+  import(/* webpackChunkName: "smallClients" */ '@/views/small/sections/About.vue');
+
 Vue.use(Router);
 
 export default new Router({
@@ -72,6 +75,21 @@ export default new Router({
           switch (display) {
             case SMALL:
               return ClientsSmall();
+            default:
+              return null;
+          }
+        }
+      }
+    },
+    {
+      name: 'about',
+      path: '/about',
+      components: {
+        container: () => {
+          const display = responsive();
+          switch (display) {
+            case SMALL:
+              return AboutSmall();
             default:
               return null;
           }

@@ -1,36 +1,57 @@
 <template>
-  <section class="team-container">
-    <div class="row">
-      <div class="cell one"
-           @click="handleClick"
-           id="one"
-           ref="one"
-           data-name="team.bio.david.name"
-           data-role="team.bio.david.role"
-           data-bio-text="team.bio.david.text"></div>
-      <div class="cell two"
-           @click="handleClick"
-           id="two"
-           ref="two"
-           data-name="team.bio.salome.name"
-           data-role="team.bio.salome.role"
-           data-bio-text="team.bio.salome.text"></div>
+  <section class="team-container f f-column f-justify-start f-align-items-center">
+    <div class="header f f-column f-justify-center f-align-items-center f-shrink-0">
+      <span class="title">{{ $t('team.title') }}</span>
     </div>
-    <div class="row">
-      <div class="cell three"
-           @click="handleClick"
-           id="three"
-           ref="three"
-           data-name="team.bio.kike.name"
-           data-role="team.bio.kike.role"
-           data-bio-text="team.bio.kike.text"></div>
-      <div class="cell four"
-           @click="handleClick"
-           id="four"
-           ref="four"
-           data-name="team.bio.pedro.name"
-           data-role="team.bio.pedro.role"
-           data-bio-text="team.bio.pedro.text"></div>
+    <div class="body f f-column f-justify-center f-align-items-center">
+      <div class="row f f-row f-justify-center f-align-items-center">
+        <div class="img-wrapper f f-row f-justify-center f-align-items-center"
+             @click="handleClick"
+             id="one"
+             ref="one"
+             data-name="team.bio.david.name"
+             data-role="team.bio.david.role"
+             data-bio-text="team.bio.david.text">
+          <img alt="team.bio.david.name"
+               class="img"
+               src="/static/team/team_portrait_david_palacios.jpg" />
+        </div>
+        <div class="img-wrapper f f-row f-justify-center f-align-items-center"
+             @click="handleClick"
+             id="two"
+             ref="two"
+             data-name="team.bio.salome.name"
+             data-role="team.bio.salome.role"
+             data-bio-text="team.bio.salome.text">
+          <img alt="team.bio.david.name"
+               class="img"
+               src="/static/team/team_portrait_salome_garcia.jpg" />
+        </div>
+      </div>
+      <div class="row f f-row f-justify-center f-align-items-center">
+        <div class="img-wrapper f f-row f-justify-center f-align-items-center"
+             @click="handleClick"
+             id="three"
+             ref="three"
+             data-name="team.bio.kike.name"
+             data-role="team.bio.kike.role"
+             data-bio-text="team.bio.kike.text">
+          <img alt="team.bio.david.name"
+               class="img"
+               src="/static/team/team_portrait_kike_palacios.jpg" />
+        </div>
+        <div class="img-wrapper f f-row f-justify-center f-align-items-center"
+             @click="handleClick"
+             id="four"
+             ref="four"
+             data-name="team.bio.pedro.name"
+             data-role="team.bio.pedro.role"
+             data-bio-text="team.bio.pedro.text">
+          <img alt="team.bio.david.name"
+               class="img"
+               src="/static/team/team_portrait_pedro_r_soto.jpg" />
+        </div>
+      </div>
     </div>
     <transition enter-active-class="animated zoomIn"
                 leave-active-class="animated hinge">
@@ -71,43 +92,36 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+@import '../../../flex.scss';
 @import 'animate.css/animate.min.css';
 .team-container {
   position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  .row {
-    height: 50%;
-    display: flex;
-    .cell {
-      width: 50%;
-      display: flex;
-      &.one {
-        background-image: url('../../../assets/img/team_portrait_david_palacios.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: bottom;
-      }
-      &.three {
-        background-image: url('../../../assets/img/team_portrait_kike_palacios.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: bottom;
-      }
-      &.two {
-        background-image: url('../../../assets/img/team_portrait_salome_garcia.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: bottom;
-      }
-      &.four {
-        background-image: url('../../../assets/img/team_portrait_pedro_r_soto.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: bottom;
+  .header {
+    height: 20%;
+    .title {
+      padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+      font-size: 2.2rem;
+      text-align: center;
+    }
+  }
+  .body {
+    height: 80%;
+    width: 100%;
+    .row {
+      width: 100%;
+      height: 50%;
+      margin: .2rem;
+      .img-wrapper {
+        border-radius: 5px;
+        height: 100%;
+        overflow: hidden;
+        max-width: 240px;
+        margin: .2rem;
+        .img {
+          max-width: 240px;
+        }
       }
     }
   }

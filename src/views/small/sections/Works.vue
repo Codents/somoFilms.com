@@ -1,12 +1,12 @@
 <template>
-  <section class="works-container"
+  <section class="works-container f f-column"
            ref="worksContainer">
-    <div class="header">
+    <div class="header f f-column f-justify-center f-align-items-center f-shrink-0">
       <span class="title-header">Works</span>
     </div>
-    <div class="works-body">
-      <section class="collection-container">
-        <div class="collection-title"
+    <div class="works-body f f-column">
+      <section class="collection-container f-shrink-0">
+        <div class="collection-title f f-row"
              @click="toggleExpand({ collectionName: 'collectionImageDetailContainer', section: 'photos'})">
           <span class="title">Photos</span>
           <i class="icon-launcher icon-small-expand-less"
@@ -16,11 +16,11 @@
              ref="menuIcon"
              v-else/>
         </div>
-        <div class="carrusel"
+        <div class="carrusel f f-justify-center"
              ref="collectionContainer">
-          <div class="track"
+          <div class="track f f-row"
                ref="collectionTrack">
-            <div class="square"
+            <div class="square f-shrink-0"
                  v-for="item in imagesCollections"
                  :key="item.name"
                  @click="expandByIndex({ collectionName: 'collectionImageDetailContainer', section: 'photos', collection: item })">
@@ -30,14 +30,14 @@
           </div>
         </div>
         <div class="collection-detail">
-          <div class="carrusel closed"
+          <div class="carrusel f f-justify-center closed"
                ref="collectionImageDetailContainer">
-            <div class="track"
+            <div class="track f f-row"
                  ref="collectionImageDetailTrack">
-              <div class="square"
+              <div class="square f-shrink-0"
                    v-for="(item, index) in imagesCollection"
                    :key="index">
-                <span class="first-child"
+                <span class="first-child f f-column f-justify-center f-align-items-center"
                       :id="item.id"
                       v-if="index === 0">{{ item.description }}</span>
                 <div class="back-img"
@@ -52,7 +52,7 @@
       </section>
       <!-- FILMS -->
       <section class="collection-container">
-        <div class="collection-title"
+        <div class="collection-title f f-row"
              @click="toggleExpand({ collectionName: 'collectionVideoDetailContainer', section: 'films'})">
           <span class="title">Films</span>
           <i class="icon-launcher icon-small-expand-less"
@@ -62,11 +62,11 @@
              ref="menuIcon"
              v-else/>
         </div>
-        <div class="carrusel"
+        <div class="carrusel f f-justify-center"
              ref="collectionContainer">
-          <div class="track"
+          <div class="track f f-row"
                ref="collectionTrack">
-            <div class="square"
+            <div class="square f-shrink-0"
                  v-for="item in videoCollections"
                  :key="item.name"
                  @click="expandByIndex({ collectionName: 'collectionVideoDetailContainer', section: 'films', collection: item })">
@@ -78,14 +78,14 @@
           </div>
         </div>
         <div class="collection-detail">
-          <div class="carrusel closed"
+          <div class="carrusel f f-justify-center closed"
                ref="collectionVideoDetailContainer">
-            <div class="track"
+            <div class="track f f-row"
                  ref="collectionVideoDetailTrack">
-              <div class="square"
+              <div class="square f-shrink-0"
                    v-for="(item, index) in videoCollection"
                    :key="index">
-                <span class="first-child"
+                <span class="first-child f f-column f-justify-center f-align-items-center"
                       v-if="index === 0">{{ item.description }}</span>
                 <div class="back-img"
                      :data-alt="item.name"
@@ -93,7 +93,7 @@
                      :style="{ backgroundImage: `url('${getBySize(200, item.pictures.sizes)}')` }"
                      v-else-if="item.resource_key"
                      @click="showVideoFullScreen(item)"></div>
-                <div class="spinner"
+                <div class="spinner f f-column f-justify-center f-align-items-center"
                      v-else><img :src="spinnerIcon"
                        alt="Loadig...." /></div>
               </div>
@@ -266,15 +266,12 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+@import '../../../flex.scss';
 @import '../../../base.scss';
 .photos {
   margin-top: 0.5rem;
 }
 .spinner {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
   background-color: white;
@@ -283,36 +280,21 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
   .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    height: 3.5rem;
-    flex-shrink: 0;
+    height: 20%;
     .title-header {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      font-size: 2rem;
-      padding-right: 0.5rem;
-      font-weight: bold;
+      padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+      font-size: 2.2rem;
+      text-align: center;
     }
   }
   .works-body {
-    display: flex;
-    flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     .collection-container {
       margin: 0.5rem 0.5rem 0.5rem 0.5rem;
-      flex-shrink: 0;
       .collection-title {
-        display: flex;
-        flex-direction: row;
         margin-top: 1rem;
         margin-left: 0.5rem;
         align-items: flex-end;
@@ -325,8 +307,6 @@ export default {
         font-weight: bold;
       }
       .carrusel {
-        display: flex;
-        justify-content: center;
         margin: 0.5rem 0.5rem 0 0.5rem;
         &.closed {
           height: 0;
@@ -334,13 +314,10 @@ export default {
         .track {
           overflow-x: auto;
           overflow-y: hidden;
-          display: flex;
-          flex-direction: row;
           .square {
             width: $small-width-pic;
             height: $small-height-pic;
             background-color: #6c757d;
-            flex-shrink: 0;
             margin-right: 0.2rem;
             .back-img {
               background-repeat: no-repeat;
@@ -350,22 +327,8 @@ export default {
             }
             .first-child {
               background-color: white;
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
               text-align: center;
               height: 100%;
-            }
-            .child {
-              font-size: 0.6rem;
-              color: white;
-              font-weight: bold;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              height: 100%;
-              width: 100%;
             }
           }
         }
