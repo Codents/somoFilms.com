@@ -75,10 +75,10 @@ export default {
           text: 'menu.clients'
         },
         {
-          id: 'contacts',
+          id: 'contact',
           active: true,
           selected: false,
-          route: '/contacts',
+          route: '/contact',
           text: 'menu.contacts'
         },
         {

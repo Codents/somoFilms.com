@@ -4,7 +4,9 @@ const en = {
     close: 'Close'
   },
   contact: {
-    title: 'Conact Us'
+    title: 'Contact Us',
+    subject: 'Asunto',
+    email: 'Correo Electronico'
   },
   inprogress: {
     title: 'In Progress'
