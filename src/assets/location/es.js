@@ -3,8 +3,11 @@ const es = {
   actions: {
     close: 'Cerrar'
   },
+  contact: {
+    title: 'Conact Us'
+  },
   about: {
-    title: 'About',
+    title: 'About Us',
     text: 'SomoFilms es una joven productora formada por profesionales con más de veinte años de experiencia en cine, televisión y publicidad. Nos juntamos para desarrollar producciones más artesanales, una boutique que enfoque cada proyecto a medida, tanto fotografía como audiovisual. Creemos en nuestra profesión y nuestra recompensa, ya no es facturar miles de millones sino hacer un trabajo del que sentirnos orgullosos. Nos gustan los retos. Nos gustan las buenas ideas. Nos gusta el trabajo bien hecho.'
   },
   clients: {

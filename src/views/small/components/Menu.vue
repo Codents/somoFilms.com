@@ -1,8 +1,18 @@
 <template>
   <div class="container-menu">
-    <i class="icon-launcher icon-small-menu"
-       ref="menuIcon"
-       @click="show = !show" />
+    <transition enter-active-class="animated rotateIn"
+                leave-active-class="animated rotateOut">
+      <i class="icon-launcher icon-small-menu"
+         ref="menuIcon"
+         v-if="!show"
+         key="closed"
+         @click="show = !show" />
+      <i class="icon-launcher icon-small-close"
+         ref="menuIcon"
+         v-else
+         key="opened"
+         @click="show = !show" />
+    </transition>
     <transition enter-active-class="animated zoomIn"
                 leave-active-class="animated zoomOutLeft">
       <nav class="menu"
