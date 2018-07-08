@@ -6,7 +6,8 @@ const es = {
   contact: {
     title: 'Contact Us',
     subject: 'Asunto',
-    email: 'Correo Electronico'
+    email: 'Correo Electronico',
+    description: 'Descripcion'
   },
   inprogress: {
     title: 'In Progress'
