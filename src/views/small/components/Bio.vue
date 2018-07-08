@@ -39,7 +39,7 @@ export default {
     height: 100%;
     .one {
       height: 50%;
-      background-image: url('../../../assets/img/team_landscape_david_palacios.jpg');
+      background-image: url('/static/team/team_landscape_david_palacios.jpg');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -47,7 +47,7 @@ export default {
     }
     .two {
       height: 50%;
-      background-image: url('../../../assets/img/team_landscape_salome_garcia.jpg');
+      background-image: url('/static/team/team_landscape_salome_garcia.jpg');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -55,7 +55,7 @@ export default {
     }
     .three {
       height: 50%;
-      background-image: url('../../../assets/img/team_landscape_kike_palacios.jpg');
+      background-image: url('/static/team/team_landscape_kike_palacios.jpg');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -63,7 +63,7 @@ export default {
     }
     .four {
       height: 50%;
-      background-image: url('../../../assets/img/team_landscape_pedro_r_soto.jpg');
+      background-image: url('/static/team/team_landscape_pedro_r_soto.jpg');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
