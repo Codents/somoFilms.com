@@ -10,7 +10,7 @@
 </template>
 
 <style lang="postcss" scoped>
-@import '../../../flex.scss';
+@import "../../../styles/flex.scss";
 .about {
   height: 100%;
   width: 100%;
@@ -26,9 +26,9 @@
     height: 80%;
     overflow-y: auto;
     .text {
-    font-size: 1.5rem;
-    text-align: justify;
-    padding: 1rem;
+      font-size: 1.5rem;
+      text-align: justify;
+      padding: 1rem;
     }
   }
 }

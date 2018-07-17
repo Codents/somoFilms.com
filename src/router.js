@@ -1,22 +1,20 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import { responsive } from '@/utils';
-import { SMALL } from '@/constants';
 
-const HomeSmall = () =>
-  import(/* webpackChunkName: "smallHome" */ '@/views/small/sections/Home.vue');
-const TeamSmall = () =>
-  import(/* webpackChunkName: "smallTeam" */ '@/views/small/sections/Team.vue');
-const WorksSmall = () =>
-  import(/* webpackChunkName: "smallWotks" */ '@/views/small/sections/Works.vue');
-const ClientsSmall = () =>
-  import(/* webpackChunkName: "smallClients" */ '@/views/small/sections/Clients.vue');
-const AboutSmall = () =>
-  import(/* webpackChunkName: "smallClients" */ '@/views/small/sections/About.vue');
-const ContactSmall = () =>
-  import(/* webpackChunkName: "smallClients" */ '@/views/small/sections/Contact.vue');
-const InProgressSmall = () =>
-  import(/* webpackChunkName: "smallClients" */ '@/views/small/sections/InProgress.vue');
+const Home = () =>
+  import(/* webpackChunkName: "HomeHub" */ '@/views/sections/home/Home.vue');
+const Team = () =>
+  import(/* webpackChunkName: "TeamHub" */ '@/views/sections/team/Team.vue');
+const Works = () =>
+  import(/* webpackChunkName: "WorksHub" */ '@/views/sections/works/Works.vue');
+const Clients = () =>
+  import(/* webpackChunkName: "Clientshub" */ '@/views/sections/clients/Clients.vue');
+const About = () =>
+  import(/* webpackChunkName: "AboutHub" */ '@/views/sections/about/About.vue');
+const Contact = () =>
+  import(/* webpackChunkName: "ContactHub" */ '@/views/sections/contact/Contact.vue');
+const InProgress = () =>
+  import(/* webpackChunkName: "InProgressHub" */ '@/views/sections/inprogress/InProgress.vue');
 
 Vue.use(Router);
 
@@ -27,107 +25,37 @@ export default new Router({
     {
       name: 'home',
       path: '/',
-      components: {
-        container: () => {
-          const display = responsive();
-          switch (display) {
-            case SMALL:
-              return HomeSmall();
-            default:
-              return null;
-          }
-        }
-      }
+      components: { container: Home }
     },
     {
       name: 'team',
       path: '/team',
-      components: {
-        container: () => {
-          const display = responsive();
-          switch (display) {
-            case SMALL:
-              return TeamSmall();
-            default:
-              return null;
-          }
-        }
-      }
+      components: { container: Team }
     },
     {
       name: 'works',
       path: '/works',
-      components: {
-        container: () => {
-          const display = responsive();
-          switch (display) {
-            case SMALL:
-              return WorksSmall();
-            default:
-              return null;
-          }
-        }
-      }
+      components: { container: Works }
     },
     {
       name: 'clients',
       path: '/clients',
-      components: {
-        container: () => {
-          const display = responsive();
-          switch (display) {
-            case SMALL:
-              return ClientsSmall();
-            default:
-              return null;
-          }
-        }
-      }
+      components: { container: Clients }
     },
     {
       name: 'about',
       path: '/about',
-      components: {
-        container: () => {
-          const display = responsive();
-          switch (display) {
-            case SMALL:
-              return AboutSmall();
-            default:
-              return null;
-          }
-        }
-      }
-    },
-    {
-      name: 'inprogress',
-      path: '/inprogress',
-      components: {
-        container: () => {
-          const display = responsive();
-          switch (display) {
-            case SMALL:
-              return InProgressSmall();
-            default:
-              return null;
-          }
-        }
-      }
+      components: { container: About }
     },
     {
       name: 'contact',
       path: '/contact',
-      components: {
-        container: () => {
-          const display = responsive();
-          switch (display) {
-            case SMALL:
-              return ContactSmall();
-            default:
-              return null;
-          }
-        }
-      }
+      components: { container: Contact }
+    },
+    {
+      name: 'inprogress',
+      path: '/inprogress',
+      components: { container: InProgress }
     }
   ]
 });

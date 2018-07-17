@@ -2,12 +2,12 @@
   <div class="container-menu">
     <transition enter-active-class="animated rotateIn"
                 leave-active-class="animated rotateOut">
-      <i class="icon-launcher icon-small-menu"
+      <i class="icon-launcher p-absolute border-r icon-small-menu"
          ref="menuIcon"
          v-if="!show"
          key="closed"
          @click="show = !show" />
-      <i class="icon-launcher icon-small-close"
+      <i class="icon-launcher p-absolute border-r icon-small-close"
          ref="menuIcon"
          v-else
          key="opened"
@@ -15,7 +15,7 @@
     </transition>
     <transition enter-active-class="animated zoomIn"
                 leave-active-class="animated zoomOutLeft">
-      <nav class="menu"
+      <nav class="menu p-absolute f f-column f-justify-center f-align-items-center min-h-100 min-w-100"
            v-show="show">
         <router-link v-for="(menu, index) in menus"
                      :key="index"
@@ -34,61 +34,13 @@
 </template>
 
 <script>
+import { menus } from '@/constants';
+
 export default {
   data: function() {
     return {
       show: false,
-      menus: [
-        {
-          id: 'home',
-          active: true,
-          selected: true,
-          route: '/',
-          text: 'menu.home'
-        },
-        {
-          id: 'team',
-          active: true,
-          selected: false,
-          route: '/team',
-          text: 'menu.team'
-        },
-        {
-          id: 'works',
-          active: true,
-          selected: false,
-          route: '/works',
-          text: 'menu.works'
-        },
-        {
-          id: 'about',
-          active: true,
-          selected: false,
-          route: '/about',
-          text: 'menu.about'
-        },
-        {
-          id: 'clients',
-          active: true,
-          selected: false,
-          route: '/clients',
-          text: 'menu.clients'
-        },
-        {
-          id: 'contact',
-          active: true,
-          selected: false,
-          route: '/contact',
-          text: 'menu.contacts'
-        },
-        {
-          id: 'inprogress',
-          active: true,
-          selected: false,
-          route: '/inprogress',
-          text: 'menu.inprogress'
-        }
-      ]
+      menus
     };
   },
   methods: {
@@ -102,17 +54,15 @@ export default {
 
 <style lang="postcss" scoped>
 @import 'animate.css/animate.min.css';
-@import '../../../base.scss';
+@import '../styles/base.scss';
+@import '../styles/flex.scss';
 
 .container-menu {
   font-size: 16px;
   height: fit-content !important;
   .icon-launcher {
     z-index: 99 !important;
-    position: absolute;
-    z-index: 18;
     background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 5px;
     padding: 0.2rem;
     top: 0.5rem;
     left: 0.5rem;
@@ -120,14 +70,7 @@ export default {
   .menu {
     z-index: 97;
     color: #4e4045;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    justify-content: center;
-    align-items: center;
     background-color: rgba(255, 255, 255, 0.75);
-    min-height: 100%;
-    min-width: 100%;
     font-size: 3rem;
     font-family: '28 Days Later';
   }
