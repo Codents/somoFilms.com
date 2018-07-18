@@ -1,0 +1,3 @@
+- Solucionar las copias de bbdd de mi tio
+- Solucionar flex safari 8
+- Cambiar el router a dinamico

@@ -26,7 +26,6 @@
   background-size: 100% 100%;
   .header {
     width: 100%;
-    // background-color: rgba(255, 255, 255, 0.8);
     font-family: '28 Days Later';
     height: 3.5rem;
     .text {

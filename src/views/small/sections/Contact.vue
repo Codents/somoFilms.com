@@ -30,7 +30,8 @@
                     class="field description"
                     cols="50" />
         </div>
-        <input type="submit" class="bt-start" />
+        <input type="submit"
+               class="bt-start" />
       </form>
     </div>
   </section>
@@ -63,31 +64,51 @@ export default {};
         width: 100%;
         margin-top: 1rem;
         .subject {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          -ms-sizing: border-box;
+          box-sizing: border-box;
+          font-family: 'Poiret One', serif;
           font-size: 1.4rem;
           border: solid 1px #e8e7e7;
           border-radius: 5px;
           background-color: white;
-          padding: 0.2rem;
+          height: 40px;
         }
         .email {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          -ms-sizing: border-box;
+          box-sizing: border-box;
+          font-family: 'Poiret One', serif;
           border-radius: 5px;
           border: solid 1px #e8e7e7;
           font-size: 1.4rem;
-          padding: 0.2rem;
+          height: 2rem;
         }
         .description {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
           border-radius: 5px;
           border: solid 1px #e8e7e7;
           font-size: 1.4rem;
-          padding: 0.2rem;
         }
         .field {
+          padding: 0.2rem;
           margin-top: 0.4rem;
           width: 100%;
           outline: none;
         }
       }
       .bt-start {
+        -webkit-appearance: none;
         margin-top: 1.4rem;
         border: solid 1px;
         border-radius: 5px;
@@ -98,5 +119,38 @@ export default {};
       }
     }
   }
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0.5em;
+  background: #efefef;
+  border: none;
+  border-radius: 3px;
+  padding: 1em 2em 1em 1em;
+  font-size: 1em;
+}
+.select-container {
+  position: relative;
+  display: inline;
+}
+.select-container:after {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.select-container:after {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  top: 0.3em;
+  right: 0.75em;
+  border-top: 8px solid black;
+  opacity: 0.5;
+}
+select::-ms-expand {
+  display: none;
 }
 </style>
