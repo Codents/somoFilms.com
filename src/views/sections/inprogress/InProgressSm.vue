@@ -40,8 +40,8 @@ export default {
 
 
 <style lang="postcss" scoped>
-@import '../../../flex.scss';
-@import '../../../base.scss';
+@import '../../../styles/flex.scss';
+@import '../../../styles/base.scss';
 .in-progress {
   position: relative;
   width: 100%;

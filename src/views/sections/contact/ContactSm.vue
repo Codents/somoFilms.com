@@ -42,7 +42,7 @@ export default {};
 </script>
 
 <style lang="postcss" scoped>
-@import '../../../flex.scss';
+@import '../../../styles/flex.scss';
 .contact {
   position: relative;
   width: 100%;

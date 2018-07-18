@@ -1,3 +1,4 @@
+/*
 import {
   BREAKPOINTS,
   LANDSCAPE,
@@ -57,11 +58,13 @@ export const responsive = () => {
 
   throw new Error('windows.screen is not compatible in this browser');
 };
-
+*/
 export const rgxNumber = text => Number(/[\d\.]+/.exec(text)[0]);
+/*
 export const importAll = requireContext =>
   requireContext.keys().map(k => ({
     name: k.replace(/^.*[\\\/]/, '').split('.')[0],
     relativePath: k,
     src: requireContext(k)
   }));
+*/

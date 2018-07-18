@@ -1,9 +1,9 @@
 <template>
-  <section class="team-container f f-column f-justify-start f-align-items-center">
+  <section class="team-container p-relative w-100 h-100 f f-column f-justify-start f-align-items-center">
     <div class="header f f-column f-justify-center f-align-items-center f-shrink-0">
       <span class="title">{{ $t('team.title') }}</span>
     </div>
-    <div class="body f f-column f-justify-center f-align-items-center">
+    <div class="body w-100 f f-column f-justify-center f-align-items-center">
       <div class="row f f-row f-justify-center f-align-items-center">
         <div class="img-wrapper f f-row f-justify-center f-align-items-center"
              @click="handleClick"
@@ -66,12 +66,14 @@
 </template>
 
 <script>
-import Bio from '../components//Bio';
+import Bio from '@/components//Bio';
+import team from '@/constants';
 
 export default {
   components: { Bio },
   data: function() {
     return {
+      team,
       showBio: false,
       bioText: '',
       name: '',
@@ -92,12 +94,9 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-@import '../../../flex.scss';
+@import '../../../styles/flex.scss';
 @import 'animate.css/animate.min.css';
 .team-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
   .header {
     height: 20%;
     .title {
@@ -108,7 +107,6 @@ export default {
   }
   .body {
     height: 80%;
-    width: 100%;
     .row {
       width: 100%;
       height: 50%;

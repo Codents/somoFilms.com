@@ -34,7 +34,7 @@
   </main>
 </template>
 <script>
-import Menu from '@/views/small/components/Menu';
+import Menu from '@/components/Menu';
 
 export default {
   components: { Menu }
@@ -44,7 +44,7 @@ export default {
 
 <style lang="postcss">
 @import 'animate.css/animate.min.css';
-@import '../base.scss';
+@import '../styles/base.scss';
 body,
 html {
   width: 100%;
