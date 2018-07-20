@@ -5,7 +5,7 @@
     </div>
     <div class="body f f-column f-justify-start f-align-items-center">
       <form class="contact-us f f-column f-justify-start f-align-items-center">
-        <div class="group-fields f f-column f-space-around f-align-items-center">
+        <div class="group-fields f f-column f-space-around f-align-items-center f-shrink-0">
           <label class="field"
                  for="subject">{{ $t('contact.subject') }}</label>
           <select class="field subject"
@@ -14,7 +14,7 @@
             <option value="general">General</option>
           </select>
         </div>
-        <div class="group-fields f f-column f-space-around f-align-items-center">
+        <div class="group-fields f f-column f-space-around f-align-items-center f-shrink-0">
           <label class="field"
                  for="email">{{ $t('contact.email') }}</label>
           <input class="field email"
@@ -22,7 +22,7 @@
                  type="email"
                  name="email" />
         </div>
-        <div class="group-fields f f-column f-space-around f-align-items-center">
+        <div class="group-fields f f-column f-space-around f-align-items-center f-shrink-0">
           <label class="field"
                  for="description">{{ $t('contact.description') }}</label>
           <textarea rows="4"
@@ -30,11 +30,13 @@
                     class="field description"
                     cols="50" />
         </div>
-        <button class="bt-start">{{ $t('contact.post') }}</button>
+        <button class="bt-start f-shrink-0">{{ $t('contact.post') }}</button>
+        <div class="surf">
+          <img class="w-100"
+               alt="animaterd-surf"
+               src="../../assets/img/contact_bg.gif" />
+        </div>
       </form>
-      <div class="surf p-absolute">
-        <img class="w-100" alt="animaterd-surf" src="../../assets/img/contact_bg.gif" />
-      </div>
     </div>
   </section>
 </template>
@@ -58,13 +60,13 @@ export default {};
     }
   }
   .surf {
-    bottom: 0;
-    left: 0;
-    opacity: .6;
+    margin-top: 2rem;
+    opacity: 0.6;
   }
   .body {
     height: 80%;
     width: 100%;
+    overflow-y: auto;
     .contact-us {
       margin: 1rem;
       .group-fields {
@@ -114,6 +116,7 @@ export default {};
         font-size: 2.2rem;
         background-color: white;
         outline: none;
+        z-index: 9;
       }
     }
   }

@@ -11,7 +11,8 @@ const en = {
     post: 'Send'
   },
   inprogress: {
-    title: 'In Progress'
+    title: 'Synopsis',
+    text: 'CREACIÓN (a propósito del Arte) es un proyecto documental donde se plantea un diálogo entre el autor y su obra. Una oportunidad única de descubrir al artista en su espacio. Con sus palabras nos abre su mundo, en el que él solo habita. Una colección de documentales monográficos que nos proporcionará una visión amplia del concepto de creación entre las diferentes miradas del panorama artístico. Un acercamiento poético, a través del proceso creativo de cada artista.'
   },
   clients: {
     title: 'Clients'

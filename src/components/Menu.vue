@@ -62,7 +62,7 @@ export default {
   height: fit-content !important;
   .icon-launcher {
     z-index: 99 !important;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.4);
     padding: 0.2rem;
     top: 0.5rem;
     left: 0.5rem;
@@ -70,12 +70,9 @@ export default {
   .menu {
     z-index: 97;
     color: #4e4045;
-    //background-color: rgba(255, 255, 255, 0.75);
+    background-image: radial-gradient(#ffffff, #eaf5fd);
     font-size: 3rem;
     font-family: '28 Days Later';
-      background-image: url('../assets/img/menu_bg.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
   }
   .link {
     text-decoration: none;
