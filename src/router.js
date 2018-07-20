@@ -2,19 +2,19 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 const Home = () =>
-  import(/* webpackChunkName: "HomeHub" */ '@/views/sections/home/Home.vue');
+  import(/* webpackChunkName: "HomeHub" */ '@/views/home/Home.vue');
 const Team = () =>
-  import(/* webpackChunkName: "TeamHub" */ '@/views/sections/team/Team.vue');
+  import(/* webpackChunkName: "TeamHub" */ '@/views/team/Team.vue');
 const Works = () =>
-  import(/* webpackChunkName: "WorksHub" */ '@/views/sections/works/Works.vue');
+  import(/* webpackChunkName: "WorksHub" */ '@/views/works/Works.vue');
 const Clients = () =>
-  import(/* webpackChunkName: "Clientshub" */ '@/views/sections/clients/Clients.vue');
+  import(/* webpackChunkName: "Clientshub" */ '@/views/clients/Clients.vue');
 const About = () =>
-  import(/* webpackChunkName: "AboutHub" */ '@/views/sections/about/About.vue');
+  import(/* webpackChunkName: "AboutHub" */ '@/views/about/About.vue');
 const Contact = () =>
-  import(/* webpackChunkName: "ContactHub" */ '@/views/sections/contact/Contact.vue');
+  import(/* webpackChunkName: "ContactHub" */ '@/views/contact/Contact.vue');
 const InProgress = () =>
-  import(/* webpackChunkName: "InProgressHub" */ '@/views/sections/inprogress/InProgress.vue');
+  import(/* webpackChunkName: "InProgressHub" */ '@/views/inprogress/InProgress.vue');
 
 Vue.use(Router);
 

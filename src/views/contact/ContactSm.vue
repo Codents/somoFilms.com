@@ -30,9 +30,11 @@
                     class="field description"
                     cols="50" />
         </div>
-        <input type="submit"
-               class="bt-start" />
+        <button class="bt-start">{{ $t('contact.post') }}</button>
       </form>
+      <div class="surf p-absolute">
+        <img class="w-100" alt="animaterd-surf" src="../../assets/img/contact_bg.gif" />
+      </div>
     </div>
   </section>
 </template>
@@ -42,7 +44,7 @@ export default {};
 </script>
 
 <style lang="postcss" scoped>
-@import '../../../styles/flex.scss';
+@import '../../styles/flex.scss';
 .contact {
   position: relative;
   width: 100%;
@@ -55,6 +57,11 @@ export default {};
       text-align: center;
     }
   }
+  .surf {
+    bottom: 0;
+    left: 0;
+    opacity: .6;
+  }
   .body {
     height: 80%;
     width: 100%;
@@ -64,12 +71,8 @@ export default {};
         width: 100%;
         margin-top: 1rem;
         .subject {
-          -webkit-appearance: none;
-          -moz-appearance: none;
+          color: black;
           appearance: none;
-          -webkit-box-sizing: border-box;
-          -moz-box-sizing: border-box;
-          -ms-sizing: border-box;
           box-sizing: border-box;
           font-family: 'Poiret One', serif;
           font-size: 1.4rem;
@@ -79,12 +82,8 @@ export default {};
           height: 40px;
         }
         .email {
-          -webkit-appearance: none;
-          -moz-appearance: none;
+          color: black;
           appearance: none;
-          -webkit-box-sizing: border-box;
-          -moz-box-sizing: border-box;
-          -ms-sizing: border-box;
           box-sizing: border-box;
           font-family: 'Poiret One', serif;
           border-radius: 5px;
@@ -93,8 +92,7 @@ export default {};
           height: 2rem;
         }
         .description {
-          -webkit-appearance: none;
-          -moz-appearance: none;
+          color: black;
           appearance: none;
           border-radius: 5px;
           border: solid 1px #e8e7e7;
@@ -108,7 +106,7 @@ export default {};
         }
       }
       .bt-start {
-        -webkit-appearance: none;
+        color: #7d7b7b;
         margin-top: 1.4rem;
         border: solid 1px;
         border-radius: 5px;

@@ -1,11 +1,11 @@
 <template>
-  <component :is="`works-${$mq}`" />
+  <component :is="`team-${$mq}`" />
 </template>
 
 <script>
 export default {
   components: {
-    "works-sm": () => import("./WorksSm.vue")
+    'team-sm': () => import('./TeamSm.vue')
   }
 };
 </script>

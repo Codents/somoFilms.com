@@ -7,18 +7,18 @@
 </template>
 
 <style lang="postcss" scoped>
-@import '../../../styles/flex.scss';
+@import '../../styles/flex.scss';
 @font-face {
   font-family: '28 Days Later';
   font-style: normal;
   font-weight: normal;
   src: local('28 Days Later'),
-    url('../../../assets/fonts/28_Days_Later.woff') format('woff');
+    url('../../assets/fonts/28_Days_Later.woff') format('woff');
 }
 .home-container {
   width: 100%;
   height: 100%;
-  background-image: url('../../../assets/img/background-portrait-mobile.jpg');
+  background-image: url('../../assets/img/background-portrait-mobile.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   .header {

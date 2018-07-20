@@ -242,7 +242,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-@import '../../../styles/base.scss';
+@import '../../styles/base.scss';
 .clients-container {
   position: relative;
   width: 100%;

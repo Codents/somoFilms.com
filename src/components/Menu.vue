@@ -70,9 +70,12 @@ export default {
   .menu {
     z-index: 97;
     color: #4e4045;
-    background-color: rgba(255, 255, 255, 0.75);
+    //background-color: rgba(255, 255, 255, 0.75);
     font-size: 3rem;
     font-family: '28 Days Later';
+      background-image: url('../assets/img/menu_bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   }
   .link {
     text-decoration: none;

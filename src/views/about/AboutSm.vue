@@ -10,7 +10,7 @@
 </template>
 
 <style lang="postcss" scoped>
-@import "../../../styles/flex.scss";
+@import "../../styles/flex.scss";
 .about {
   height: 100%;
   width: 100%;

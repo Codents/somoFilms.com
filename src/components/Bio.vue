@@ -37,7 +37,7 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100%;
-    .one {
+    .david {
       height: 50%;
       background-image: url('/static/team/team_landscape_david_palacios.jpg');
       background-repeat: no-repeat;
@@ -45,7 +45,7 @@ export default {
       background-position: center;
       border-radius: 5px;
     }
-    .two {
+    .salome {
       height: 50%;
       background-image: url('/static/team/team_landscape_salome_garcia.jpg');
       background-repeat: no-repeat;
@@ -53,7 +53,7 @@ export default {
       background-position: center;
       border-radius: 5px;
     }
-    .three {
+    .kike {
       height: 50%;
       background-image: url('/static/team/team_landscape_kike_palacios.jpg');
       background-repeat: no-repeat;
@@ -61,7 +61,7 @@ export default {
       background-position: center;
       border-radius: 5px;
     }
-    .four {
+    .pedro {
       height: 50%;
       background-image: url('/static/team/team_landscape_pedro_r_soto.jpg');
       background-repeat: no-repeat;

@@ -7,7 +7,8 @@ const es = {
     title: 'Contact Us',
     subject: 'Asunto',
     email: 'Correo Electronico',
-    description: 'Descripcion'
+    description: 'Descripcion',
+    post: 'Enviar'
   },
   inprogress: {
     title: 'In Progress'

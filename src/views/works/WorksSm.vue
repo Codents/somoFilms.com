@@ -256,8 +256,8 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-@import '../../../styles/flex.scss';
-@import '../../../styles/base.scss';
+@import '../../styles/flex.scss';
+@import '../../styles/base.scss';
 .photos {
   margin-top: 0.5rem;
 }
