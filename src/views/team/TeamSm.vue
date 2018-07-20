@@ -72,6 +72,8 @@ export default {
   }
   .body {
     height: 80%;
+    overflow-y: auto;
+    margin-bottom: .4rem;
     .img-wrapper {
       border-radius: 5px;
       overflow: hidden;
