@@ -78,7 +78,7 @@ export default {
       border-radius: 5px;
       overflow: hidden;
       width: 48%;
-      height: 50%;
+      height: 48%;
       margin: 0.2rem;
       .img {
         max-width: 240px;
