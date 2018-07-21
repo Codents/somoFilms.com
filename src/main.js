@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import VueMq from 'vue-mq';
-import Vue2TouchEvents from 'vue2-touch-events';
 import * as location from '@/assets/location';
 import App from '@/views/App';
 import router from './router';
@@ -10,7 +9,6 @@ import breakpoints from './constants';
 Vue.config.productionTip = false;
 
 Vue.use(VueI18n);
-Vue.use(Vue2TouchEvents);
 Vue.use(VueMq, { breakpoints });
 
 const i18n = new VueI18n(location);

@@ -1,6 +1,7 @@
 <template>
   <div class="bio"
        @click="$emit('click')">
+    <i class="icon-close icon-small-close p-absolute border-r icon-small-menu" />
     <div class="profile">
       <div :class="member">
       </div>
@@ -25,14 +26,18 @@ export default {
 .bio {
   position: absolute;
   overflow-y: auto;
-  height: 70%;
-  top: 4rem;
+  height: 100%;
   border-radius: 5px;
   background-color: white;
-  margin: 1rem;
   padding: 0.5rem;
   text-align: justify;
-  opacity: 0.9;
+  z-index: 100;
+  .icon-close {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 0.2rem;
+    right: 1rem;
+    top: 1rem;
+  }
   .profile {
     display: flex;
     flex-direction: column;

@@ -2,7 +2,7 @@
   <main id="main"
         class="main">
     <Menu />
-    <transition enter-active-class="animated fadeIn"
+    <transition :duration="{ enter: 500, leave: 500 }" enter-active-class="animated fadeIn"
                 leave-active-class="animated fadeOut">
       <router-view name="container"
                    class="child-view"></router-view>
@@ -13,6 +13,7 @@
         <div class="full-screen-image"
              v-show="$root.$data.showImageFullScreen"
              @click="$root.$data.showImageFullScreen = !$root.$data.showImageFullScreen">
+          <i class="icon-close icon-small-close p-absolute border-r icon-small-menu" />
           <img class="image-full" />
         </div>
       </transition>
@@ -21,6 +22,7 @@
         <div class="full-screen-video"
              v-show="$root.$data.showVideoFullScreen"
              @click="$root.$data.showVideoFullScreen = !$root.$data.showVideoFullScreen">
+          <i class="icon-close icon-small-close p-absolute border-r icon-small-menu" />
           <div class="embed-container">
             <iframe src=""
                     frameborder="0"
@@ -34,7 +36,7 @@
   </main>
 </template>
 <script>
-import Menu from '@/components/Menu';
+import Menu from '@/components/Menu/Menu';
 
 export default {
   components: { Menu }
@@ -65,11 +67,18 @@ textarea {
   height: 100%;
 }
 
+.icon-close {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 0.2rem;
+  right: 1rem;
+  top: 1rem;
+}
+
 .full-screen-image {
   position: absolute;
   height: 100%;
   width: 100%;
-  z-index: 20;
+  z-index: 100;
   top: 0;
   background-color: white;
   display: flex;
@@ -84,7 +93,7 @@ textarea {
   position: absolute;
   height: 100%;
   width: 100%;
-  z-index: 20;
+  z-index: 100;
   top: 0;
   background-color: white;
   display: flex;

@@ -26,19 +26,20 @@ export const menus = [
     route: '/works',
     text: 'menu.works'
   },
-  {
-    id: 'about',
-    active: true,
-    selected: false,
-    route: '/about',
-    text: 'menu.about'
-  },
+
   {
     id: 'clients',
     active: true,
     selected: false,
     route: '/clients',
     text: 'menu.clients'
+  },
+  {
+    id: 'inprogress',
+    active: true,
+    selected: false,
+    route: '/inprogress',
+    text: 'menu.inprogress'
   },
   {
     id: 'contact',
@@ -48,11 +49,11 @@ export const menus = [
     text: 'menu.contacts'
   },
   {
-    id: 'inprogress',
+    id: 'about',
     active: true,
     selected: false,
-    route: '/inprogress',
-    text: 'menu.inprogress'
+    route: '/about',
+    text: 'menu.about'
   }
 ];
 

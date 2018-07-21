@@ -54,8 +54,8 @@ export default {
 
 <style lang="postcss" scoped>
 @import 'animate.css/animate.min.css';
-@import '../styles/base.scss';
-@import '../styles/flex.scss';
+@import '../../styles/base.scss';
+@import '../../styles/flex.scss';
 
 .container-menu {
   font-size: 16px;
