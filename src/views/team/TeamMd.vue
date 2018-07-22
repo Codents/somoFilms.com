@@ -3,30 +3,27 @@
     <div class="header f f-column f-justify-center f-align-items-center f-shrink-0">
       <span class="title">{{ $t('team.title') }}</span>
     </div>
-    <div class="body w-100 f f-row f-justify-center f-align-items-center f-wrap">
+    <div class="body w-100 f f-row f-justify-center f-align-items-start f-wrap">
       <div v-for="(member, index) in team"
            :key="index"
-           class="img-wrapper f f-row f-justify-center f-align-items-center"
+           class="profile f f-column f-justify-start f-align-items-center border-r"
            @click="handleClick"
            :id="member.id"
-           :ref="member.id"
-           :data-name="member.name"
-           :data-role="member.role"
-           :data-bio-text="member.text">
-        <img :alt="member.name"
-             class="img"
-             :src="member.url[$mq]" />
+           :ref="member.id">
+        <div class="img-frame f f-column f-justify-center f-align-items-center border-rm w-100">
+          <img :alt="member.name"
+               class="img border-r"
+               :src="member.url[$mq]" />
+        </div>
+        <div class="text-container">
+          <span class="name">{{ $t(member.name) }}</span>
+          <span class="role">{{ $t(member.role) }}</span>
+          <div class="text">
+            {{ $t(member.text) }}
+          </div>
+        </div>
       </div>
     </div>
-    <transition enter-active-class="animated zoomIn"
-                leave-active-class="animated hinge">
-      <Bio :name="name"
-           :bioText="bioText"
-           :member="member"
-           :role="role"
-           v-show="showBio"
-           @click="showBio=false" />
-    </transition>
   </section>
 </template>
 
@@ -64,24 +61,44 @@ export default {
 .team-container {
   .header {
     height: 20%;
+    margin-bottom: 2rem;
     .title {
       padding: 0.3rem 0.5rem 0.3rem 0.5rem;
-      font-size: 2.2rem;
+      font-size: 4rem;
       text-align: center;
     }
   }
   .body {
     height: 80%;
-    overflow-y: auto;
-    margin-bottom: .4rem;
-    .img-wrapper {
-      border-radius: 5px;
-      overflow: hidden;
-      width: 48%;
-      height: 48%;
-      margin: 0.2rem;
-      .img {
-        max-width: 240px;
+    max-width: 1024px;
+    margin-bottom: 0.4rem;
+    .profile {
+      margin: 0.8rem;
+      width: 46%;
+      .img-frame {
+        height: 18rem;
+        .img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .text-container {
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        .role {
+          font-weight: bold;
+          font-size: 1.5rem;
+        }
+        .name {
+          font-size: 2rem;
+          margin-top: 0.2rem;
+        }
+        .text {
+          margin-top: 0.8rem;
+          text-align: justify;
+        }
       }
     }
   }

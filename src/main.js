@@ -4,7 +4,7 @@ import VueMq from 'vue-mq';
 import * as location from '@/assets/location';
 import App from '@/views/App';
 import router from './router';
-import breakpoints from './constants';
+import { breakpoints } from './constants';
 
 Vue.config.productionTip = false;
 

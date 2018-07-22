@@ -35,6 +35,13 @@
   height: 1.5rem;
 }
 
+.icon-medium-menu {
+  background-image: url("../assets/icons/baseline-menu-24px.svg");
+  background-size: 100% 100%;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
 .icon-small-add {
   background-image: url("../assets/icons/baseline-add_circle_outline-24px.svg");
   background-size: 100% 100%;
@@ -61,6 +68,13 @@
   background-size: 100% 100%;
   width: 1.5rem;
   height: 1.5rem;
+}
+
+.icon-medium-close {
+  background-image: url("../assets/icons/baseline-close-24px.svg");
+  background-size: 100% 100%;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 $small-width-pic: 200px;
