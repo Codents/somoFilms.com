@@ -65,7 +65,8 @@ export const team = [
     text: 'team.bio.david.text',
     url: {
       sm: '/static/team/team_portrait_david_palacios.jpg',
-      md: '/static/team/team_landscape_david_palacios.jpg'
+      md: '/static/team/team_landscape_david_palacios.jpg',
+      lg: '/static/team/team_landscape_david_palacios.jpg'
     }
   },
   {
@@ -75,7 +76,8 @@ export const team = [
     text: 'team.bio.salome.text',
     url: {
       sm: '/static/team/team_portrait_salome_garcia.jpg',
-      md: '/static/team/team_landscape_salome_garcia.jpg'
+      md: '/static/team/team_landscape_salome_garcia.jpg',
+      lg: '/static/team/team_landscape_salome_garcia.jpg'
     }
   },
   {
@@ -85,7 +87,8 @@ export const team = [
     text: 'team.bio.kike.text',
     url: {
       sm: '/static/team/team_portrait_kike_palacios.jpg',
-      md: '/static/team/team_landscape_kike_palacios.jpg'
+      md: '/static/team/team_landscape_kike_palacios.jpg',
+      lg: '/static/team/team_landscape_kike_palacios.jpg'
     }
   },
   {
@@ -95,7 +98,8 @@ export const team = [
     text: 'team.bio.pedro.text',
     url: {
       sm: '/static/team/team_portrait_pedro_r_soto.jpg',
-      md: '/static/team/team_landscape_pedro_r_soto.jpg'
+      md: '/static/team/team_landscape_pedro_r_soto.jpg',
+      lg: '/static/team/team_landscape_pedro_r_soto.jpg'
     }
   }
 ];
