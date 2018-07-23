@@ -19,7 +19,7 @@
       </div>
     </div>
     <transition enter-active-class="animated zoomIn"
-                leave-active-class="animated hinge">
+                leave-active-class="animated zoomOut">
       <Bio :name="name"
            :bioText="bioText"
            :member="member"
