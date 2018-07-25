@@ -76,7 +76,7 @@ export default {
       margin: 0.8rem;
       width: 46%;
       height: 35rem;
-      border: solid 1px;
+      border: solid 1px #eae6e6;
       padding: 0.4rem;
       .img-frame {
         height: 18rem;

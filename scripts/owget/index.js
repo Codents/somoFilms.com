@@ -3,12 +3,17 @@ const { spawn } = require('child_process');
 
 const Params = require('yargs')
   .usage('Usage: $0 [options]')
+
   .describe('in', 'Ruta al fichero con la lista de urls')
   .alias('i', 'in')
 
   .describe('out', 'Ruta donde dejar los ficheros descagados')
   .alias('o', 'out')
   .default('out', './out')
+
+  .describe('name', 'Nombre base de los ficheros')
+  .alias('n', 'name')
+  .default('name', 'file')
 
   .demandOption(['in'])
   .help('h')
@@ -17,7 +22,7 @@ const Params = require('yargs')
 const down = (urls, count = 0) => {
   const url = urls.shift();
   const cf = count < 10 ? `0${count}` : count;
-  const wget = spawn('wget', ['-O', `${Params.out}/file_${cf}.jpg`, url]);
+  const wget = spawn('wget', ['-O', `${Params.out}/${Params.name}${cf}.jpg`, url]);
   wget.stdout.on('data', data => {
     console.log(`stdout: ${data}`);
   });
