@@ -6,7 +6,8 @@
 export default {
   components: {
     'works-sm': () => import('./WorksSm.vue'),
-    'works-md': () => import('./WorksMd.vue')
+    'works-md': () => import('./WorksMd.vue'),
+    'works-lg': () => import('./WorksLg.vue')
   }
 };
 </script>
