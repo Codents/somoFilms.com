@@ -1,5 +1,7 @@
 const fs = require('fs');
 const sharp = require('sharp');
+const ora = require('ora');
+
 
 const Params = require('yargs')
   .usage('Usage: $0 [options]')
@@ -17,9 +19,9 @@ const Params = require('yargs')
   .alias('q', 'quality')
   .default('quality', '78')
 
-  .describe('nametmpl', 'Texto platilla para los nombres de los ficheros procesados')
-  .alias('nt', 'nametmpl')
-  .default('nametmpl', 'out')
+  .describe('filename', 'Nombre base para los fichero resdimensionados')
+  .alias('fn', 'filename')
+  .default('filename', 'out')
 
   .demandOption(['in', 'width'])
   .help('h')
@@ -37,20 +39,22 @@ const splitPath = path => {
   };
 };
 
-const onlyJpeg = k =>
-  splitPath(k).extension.toLowerCase() === 'jpg' ||
-  splitPath(k).extension.toLowerCase() === 'jpeg';
+const extensions = ['jpeg', 'jpg', 'png', 'gif', 'tiff'];
+const allowedExtensions = k =>
+  extensions.includes(splitPath(k).extension.toLowerCase());
 
 const resize = (files, count = 0) => {
   const file = files.shift();
   const cf = count < 10 ? `0${count}` : count;
+  const spinner = ora(`${Params.out}/${Params.filename}_${cf}.jpg`).start();
   sharp(`${Params.in}/${file}`)
     .resize(Params.width)
     .jpeg({
       quality: Number(Params.quality)
     })
-    .toFile(`${Params.out}/${Params.nametmpl}_${cf}.jpg`)
+    .toFile(`${Params.out}/${Params.filename}_${cf}.jpg`)
     .then(info => {
+      spinner.succeed();
       if (files.length) {
         return resize(files, count += 1);
       }
@@ -60,22 +64,13 @@ const resize = (files, count = 0) => {
 
 fs.readdir(Params.in, (err, files) => {
   if (err) throw err;
-  const jpeg = files.filter(onlyJpeg);
-  console.log(`Ficheros a tratar ${JSON.stringify(jpeg)}`);
+  const jpeg = files.filter(allowedExtensions);
+  console.log(`${jpeg.length} ficheros a procesar`);
   const size = jpeg.length;
   if (!fs.existsSync(Params.out)) {
     console.log(`Creado el directorio de salida ${Params.out}`);
     fs.mkdirSync(Params.out);
   }
+  console.log('Procesando: ');
   resize(jpeg);
-  console.log(`${size} fichero procesados. Resultado en ${Params.out}`)
 });
-
-/*
-sharp('5.jpg')
-  .resize(200)
-  .jpeg({
-    quality: 78
-  })
-  .toFile('5-mod.jpg');
-*/
