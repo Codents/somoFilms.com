@@ -27,6 +27,9 @@ const down = (urls, count = 0) => {
   });
 };
 
+const down2 = (urls, count = 0) => {
+};
+
 fs.readFile(Params.in, 'utf8', (err, data) => {
   if (err) throw err;
   const urls = data.split('\n').filter(Boolean);
