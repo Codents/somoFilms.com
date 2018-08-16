@@ -1,5 +1,6 @@
 const fs = require('fs');
-const { spawn } = require('child_process');
+const Axios = require('axios');
+const ora = require('ora');
 
 const Params = require('yargs')
   .usage('Usage: $0 [options]')
@@ -14,20 +15,25 @@ const Params = require('yargs')
   .help('h')
   .alias('h', 'help').argv;
 
-const down = (urls, count = 0) => {
-  const url = urls.shift();
-  const cf = count < 10 ? `0${count}` : count;
-  const wget = spawn('wget', ['-O', `${Params.out}/file_${cf}.jpg`, url]);
-  wget.stdout.on('data', data => {
-    console.log(`stdout: ${data}`);
-  });
-  wget.on('close', code => {
-    console.log(`${url} descargada`);
-    if (urls.length) down(urls, (count += 1));
-  });
-};
 
-const down2 = (urls, count = 0) => {
+const down = async (urls, path = '/tmp/', count = 0) => {
+  const url = urls.shift();
+  const ext = url.substr(url.lastIndexOf('.') + 1);
+  const fn = count < 10 ? `0${count}` : count;;
+  const resp = await Axios({
+    method: 'GET',
+    responseType: 'stream',
+    url
+  });
+  const spinner = ora(`${Params.out}/file_${fn}.${ext}`).start();
+  resp.data.pipe(fs.createWriteStream(`${Params.out}/file_${fn}.${ext}`));
+  resp.data.on('end', () => {
+    spinner.succeed();
+    if (urls.length) down(urls, path, (count += 1));
+  });
+  resp.data.on('error', () => {
+    spinner.fail();
+  });
 };
 
 fs.readFile(Params.in, 'utf8', (err, data) => {
@@ -38,5 +44,6 @@ fs.readFile(Params.in, 'utf8', (err, data) => {
     console.log(`Creado el directorio de salida ${Params.out}`);
     fs.mkdirSync(Params.out);
   }
+  console.log('Descargando: ');
   down(urls);
 });
