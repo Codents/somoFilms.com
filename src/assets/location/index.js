@@ -3,13 +3,12 @@ import esData from './es';
 
 const langs = {
   en: enData,
-  es: esData
+  es: esData,
 };
 
-const language =
-  (navigator.languages && navigator.languages[0]) ||
-  navigator.language ||
-  navigator.userLanguage;
+const language = (navigator.languages && navigator.languages[0])
+  || navigator.language
+  || navigator.userLanguage;
 const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
 const messages = { es: langs.es, en: langs.en };
 const fallbackLocale = 'es';
@@ -23,5 +22,5 @@ export {
   fallbackLocale,
   messages,
   languageWithoutRegionCode,
-  language
+  language,
 };

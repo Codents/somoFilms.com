@@ -1,17 +1,19 @@
 <template>
   <div class="scroll-container">
-    <div class="indexes"
+    <div v-show="!noIndex && pages.length > 1"
          ref="indexes"
-         v-show="!noIndex && pages.length > 1">
+         class="indexes">
       <div v-for="(page, index) in pages"
            :key="index"
            :class="['index', index === currentPage ? 'current' : '']"
-           @click="(ev) => goToPage({ index })">{{ index }}</div>
+           @click="(ev) => goToPage({ index })">
+        {{ index }}
+      </div>
     </div>
-    <div class="track"
-         @scroll="scrollFinishHandler"
+    <div ref="track"
+         class="track"
          :data-items-per-page="itemsPerPage"
-         ref="track">
+         @scroll="scrollFinishHandler">
       <div v-for="(item, index) in items"
            ref="items"
            :key="index"
@@ -24,8 +26,8 @@
               :item="item" />
       </div>
     </div>
-    <div class="controls"
-         v-show="!noControls && pages.length > 1">
+    <div v-show="!noControls && pages.length > 1"
+         class="controls">
       <i :class="['init', 'events', disableMovement ? 'disable' : 'enable' ]"
          @click="goToPage({ index: 0 })">INIT</i>
       <i :class="['left', 'events', disableMovement ? 'disable' : 'enable' ]"
@@ -52,17 +54,20 @@ const PARTIALY_VISIBLE_ALIGN_LEFT = 'PARTIALY_VISIBLE_ALIGN_LEFT';
 
 export default {
   props: {
-    items: Array,
+    items: {
+      type: Array,
+      default: () => [],
+    },
     noIndex: {
       type: Boolean,
-      default: false
+      default: false,
     },
     noControls: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-  data: function() {
+  data: function () {
     return {
       itemsPerPage: 3,
       itemWidth: 0,
@@ -71,18 +76,18 @@ export default {
       componentWasInit: false,
       currentPage: 0,
       disableMovement: false,
-      lastPosition: 0
+      lastPosition: 0,
     };
   },
   computed: {
-    pages: function() {
+    pages: function () {
       return chunk(this.items, this.itemsPerPage);
-    }
+    },
   },
   created() {
     window.addEventListener(
       'resize',
-      debounce(this.resize, DEBOUNCE_RESIZE_DELAY)
+      debounce(this.resize, DEBOUNCE_RESIZE_DELAY),
     );
   },
   mounted() {
@@ -95,7 +100,7 @@ export default {
   },
   updated() {
     if (!this.componentWasInit) {
-      this.$nextTick(function() {
+      this.$nextTick(function () {
         if (this.$refs.items && this.$refs.items.length) {
           this.componentWasInit = true;
           this.itemWidth = this.$refs.items[0].offsetWidth;
@@ -106,11 +111,11 @@ export default {
       });
     }
   },
-  beforeDestroy: function() {
+  beforeDestroy: function () {
     window.removeEventListener('resize', this.resize);
   },
   methods: {
-    scrollFinishHandler: debounce(function() {
+    scrollFinishHandler: debounce(function () {
       if (!this.$root.$data.showFullScreen) {
         this.lastPosition = this.$refs.track.scrollLeft;
       }
@@ -120,39 +125,43 @@ export default {
       this.updateDOMVisivility();
     }, DEBOUNCE_SCROLL_DELAY),
     updateDOMVisivility() {
-      this.$refs.items.forEach((item, index) => {
-        item.dataset.visibility = this.calcIsItemVisible(index);
-      });
+      this.$refs.items = this.$refs.items.map((item, index) => ({
+        ...item,
+        dataset: {
+          ...item.dataset,
+          visibility: this.calcIsItemVisible(index),
+        },
+      }));
     },
     calcItemsPerPage() {
       const itemsPerPage = Math.floor(
         isFinite(this.trackWidth / this.itemWidth)
           ? this.trackWidth / this.itemWidth
-          : 0
+          : 0,
       );
       return itemsPerPage <= 1 ? 1 : itemsPerPage;
     },
     resize() {
       if (
-        this.$refs.track &&
-        this.trackWidth !== this.$refs.track.offsetWidth
+        this.$refs.track
+        && this.trackWidth !== this.$refs.track.offsetWidth
       ) {
         this.trackWidth = this.$refs.track.offsetWidth;
         this.itemsPerPage = this.calcItemsPerPage();
         this.currentPage = this.calcCurrentPageIndex();
         this.goToPage({
           index: this.currentPage,
-          behavior: 'smooth'
+          behavior: 'smooth',
         });
       }
     },
     calcFirstItemInPage(pageIndex) {
       return chunk(
         Array.from({ length: this.pages.length }, (v, k) => k),
-        this.itemsPerPage
+        this.itemsPerPage,
       )[pageIndex][0];
     },
-    calcPageIndex: function(itemPerLastPage, itemIndex) {
+    calcPageIndex: function (itemPerLastPage, itemIndex) {
       const $track = this.$refs.track;
       if (!$track) return 0;
       if ($track.offsetWidth + $track.scrollLeft === $track.scrollWidth) {
@@ -160,14 +169,14 @@ export default {
       }
       return Math.floor(itemIndex / itemPerLastPage);
     },
-    calcCurrentPageIndex: function() {
+    calcCurrentPageIndex: function () {
       const firstVisibleIndex = this.calcVisibleItems().findIndex(Boolean);
       return this.calcPageIndex(this.itemsPerPage, firstVisibleIndex);
     },
     calcPositionOfNearLeftItem() {
       const itemPerLastPage = Math.ceil(
-        Math.abs(this.$refs.track.scrollLeft - this.$refs.track.scrollWidth) /
-          this.itemWidth
+        Math.abs(this.$refs.track.scrollLeft - this.$refs.track.scrollWidth)
+          / this.itemWidth,
       );
       return (this.items.length - itemPerLastPage) * this.itemWidth;
     },
@@ -193,14 +202,14 @@ export default {
       const max = this.$refs.track.scrollLeft + this.$refs.track.offsetWidth;
       if (x1 >= min && x1 < max && (x2 > min && x2 <= max)) {
         return VISIBLE;
-      } else if ((x1 > min && x1 < max) || (x2 > min && x2 < max)) {
+      } if ((x1 > min && x1 < max) || (x2 > min && x2 < max)) {
         return PARTIALY_VISIBLE;
-      } else if ((x1 === min && x1 < max) || (x2 > min && x2 <= max)) {
+      } if ((x1 === min && x1 < max) || (x2 > min && x2 <= max)) {
         return PARTIALY_VISIBLE_ALIGN_LEFT;
       }
       return NO_VISIBLE;
     },
-    moveLeft: debounce(function() {
+    moveLeft: debounce(function () {
       if (this.$refs.track.scrollLeft > 0) {
         this.disableMovement = true;
         const firstVisibleIndex = this.calcVisibleItems().findIndex(Boolean);
@@ -208,13 +217,12 @@ export default {
         let left = 0;
         const visbility = this.calcIsItemVisible(firstVisibleIndex);
         if (
-          visbility === VISIBLE ||
-          visbility === PARTIALY_VISIBLE_ALIGN_LEFT
+          visbility === VISIBLE
+          || visbility === PARTIALY_VISIBLE_ALIGN_LEFT
         ) {
-          left =
-            this.$refs.track.scrollLeft - this.itemWidth * this.itemsPerPage;
+          left = this.$refs.track.scrollLeft - this.itemWidth * this.itemsPerPage;
           this.move({ left, behavior: 'smooth' }).finally(
-            () => (this.disableMovement = false)
+            () => { this.disableMovement = false; },
           );
         } else if (visbility == PARTIALY_VISIBLE) {
           this.goToPage({
@@ -222,19 +230,18 @@ export default {
               currentPageIndex === this.pages.length - 1
                 ? currentPageIndex - 1
                 : currentPageIndex,
-            behavior: 'smooth'
+            behavior: 'smooth',
           });
         } else {
-          left =
-            this.calcPositionOfNearLeftItem() -
-            this.itemWidth * (this.itemsPerPage - 1);
+          left = this.calcPositionOfNearLeftItem()
+            - this.itemWidth * (this.itemsPerPage - 1);
           this.move({ left, behavior: 'smooth' }).finally(
-            () => (this.disableMovement = false)
+            () => { this.disableMovement = false; },
           );
         }
       }
     }, DEBOUNCE_DELAY),
-    moveRight: debounce(function() {
+    moveRight: debounce(function () {
       const currentPageIndex = this.currentPage;
       if (currentPageIndex < this.pages.length - 1) {
         this.disableMovement = true;
@@ -243,48 +250,46 @@ export default {
         let left = 0;
         const visbility = this.calcIsItemVisible(firstVisibleIndex);
         if (
-          visbility === VISIBLE ||
-          visbility === PARTIALY_VISIBLE_ALIGN_LEFT
+          visbility === VISIBLE
+          || visbility === PARTIALY_VISIBLE_ALIGN_LEFT
         ) {
-          left =
-            this.$refs.track.scrollLeft + this.itemWidth * this.itemsPerPage;
+          left = this.$refs.track.scrollLeft + this.itemWidth * this.itemsPerPage;
           this.move({ left, behavior: 'smooth' }).finally(
-            () => (this.disableMovement = false)
+            () => { this.disableMovement = false; },
           );
         } else if (visbility == PARTIALY_VISIBLE) {
           this.goToPage({
             index: currentPageIndex + 1,
-            behavior: 'smooth'
+            behavior: 'smooth',
           });
         }
       }
     }, DEBOUNCE_DELAY),
-    goToPage: function({ index = 0, behavior = 'auto' }) {
+    goToPage: function ({ index = 0, behavior = 'auto' }) {
       this.disableMovement = true;
       const indexPageToGo = Number(index);
       const lastIndexPage = this.pages.length - 1;
-      const left =
-        indexPageToGo === lastIndexPage
-          ? this.$refs.track.scrollWidth
-          : this.itemWidth * (this.itemsPerPage * indexPageToGo);
+      const left = indexPageToGo === lastIndexPage
+        ? this.$refs.track.scrollWidth
+        : this.itemWidth * (this.itemsPerPage * indexPageToGo);
       this.move({ left, behavior }).finally(() => {
         this.disableMovement = false;
       });
     },
-    move: function({ left = 0, behavior = 'auto' }) {
+    move: function ({ left = 0, behavior = 'auto' }) {
       const $track = this.$refs.track;
       if ($track.scrollLeft === left) return Promise.resolve();
       return new Promise(resolve => {
         this.$on('scroll-finish', resolve);
         $track.scrollTo({ left, behavior });
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .events {
   &.enable {
     color: green;

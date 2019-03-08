@@ -10,8 +10,12 @@
                  for="subject">{{ $t('contact.subject') }}</label>
           <select class="field subject"
                   name="subject">
-            <option value="oferta">Oferta</option>
-            <option value="general">General</option>
+            <option value="oferta">
+              Oferta
+            </option>
+            <option value="general">
+              General
+            </option>
           </select>
         </div>
         <div class="group-fields f f-column f-space-around f-align-items-center f-shrink-0">
@@ -20,7 +24,7 @@
           <input class="field email"
                  placeholder="email@hosting.com"
                  type="email"
-                 name="email" />
+                 name="email">
         </div>
         <div class="group-fields f f-column f-space-around f-align-items-center f-shrink-0">
           <label class="field"
@@ -30,11 +34,13 @@
                     class="field description"
                     cols="50" />
         </div>
-        <button class="bt-start f-shrink-0">{{ $t('contact.post') }}</button>
+        <button class="bt-start f-shrink-0">
+          {{ $t('contact.post') }}
+        </button>
         <div class="surf">
           <img class="w-100"
                alt="animaterd-surf"
-               src="../../assets/img/contact_bg.gif" />
+               src="../../assets/img/contact_bg.gif">
         </div>
       </form>
     </div>
@@ -45,8 +51,8 @@
 export default {};
 </script>
 
-<style lang="postcss" scoped>
-@import '../../styles/flex.scss';
+<style lang="scss" scoped>
+@import '@/styles/flex.scss';
 .contact {
   position: relative;
   width: 100%;

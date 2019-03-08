@@ -1,6 +1,6 @@
 <template>
-  <section class="works-container f f-column"
-           ref="worksContainer">
+  <section ref="worksContainer"
+           class="works-container f f-column">
     <div class="header f f-column f-justify-center f-align-items-center f-shrink-0">
       <span class="title-header">Works</span>
     </div>
@@ -9,23 +9,23 @@
         <div class="collection-title f f-row"
              @click="toggleExpand({ collectionName: 'collectionImageDetailContainer', section: 'photos'})">
           <span class="title">Photos</span>
-          <i class="icon-launcher icon-medium-expand-less"
+          <i v-if="iconExpand.photos"
              ref="menuIcon"
-             v-if="iconExpand.photos" />
-          <i class="icon-launcher icon-medium-expand-more"
+             class="icon-launcher icon-medium-expand-less" />
+          <i v-else
              ref="menuIcon"
-             v-else/>
+             class="icon-launcher icon-medium-expand-more" />
         </div>
-        <div class="carrusel f f-justify-center p-relative"
-             ref="collectionContainer">
-          <div class="track f f-row"
-               ref="collectionTrack">
-            <div class="square f-shrink-0"
-                 v-for="item in imagesCollections"
+        <div ref="collectionContainer"
+             class="carrusel f f-justify-center p-relative">
+          <div ref="collectionTrack"
+               class="track f f-row">
+            <div v-for="item in imagesCollections"
                  :key="item.name"
+                 class="square f-shrink-0"
                  @click="expandByIndex({ collectionName: 'collectionImageDetailContainer', section: 'photos', collection: item })">
               <div class="back-img"
-                   :style="{ backgroundImage: `url('${item.pictures[0].thumb}')` }"></div>
+                   :style="{ backgroundImage: `url('${item.pictures[0].thumb}')` }" />
             </div>
           </div>
           <i class="icon-nav-prev icon-medium-nav-prev p-absolute"
@@ -34,28 +34,28 @@
              @click="scrollRight" />
         </div>
         <div class="collection-detail">
-          <div class="carrusel f f-justify-center closed p-relative"
-               ref="collectionImageDetailContainer">
-            <div class="track f f-row"
-                 ref="collectionImageDetailTrack">
-              <div class="square f-shrink-0"
-                   v-for="(item, index) in imagesCollection"
-                   :key="index">
-                <span class="first-child f f-column f-justify-center f-align-items-center"
+          <div ref="collectionImageDetailContainer"
+               class="carrusel f f-justify-center closed p-relative">
+            <div ref="collectionImageDetailTrack"
+                 class="track f f-row">
+              <div v-for="(item, index) in imagesCollection"
+                   :key="index"
+                   class="square f-shrink-0">
+                <span v-if="index === 0"
                       :id="item.id"
-                      v-if="index === 0">{{ item.description }}</span>
-                <div class="back-img"
+                      class="first-child f f-column f-justify-center f-align-items-center">{{ item.description }}</span>
+                <div v-else
                      :id="`${item.name}-${index}`"
+                     class="back-img"
                      :style="{ backgroundImage: `url('${item.thumb}')` }"
-                     v-else
-                     @click="showImageFullScreenMd(item)"></div>
+                     @click="showImageFullScreenMd(item)" />
               </div>
             </div>
-            <i class="icon-nav-prev icon-medium-nav-prev p-absolute"
-               v-show="iconExpand.photos"
+            <i v-show="iconExpand.photos"
+               class="icon-nav-prev icon-medium-nav-prev p-absolute"
                @click="scrollLeft" />
-            <i class="icon-nav-next icon-medium-nav-next p-absolute"
-               v-show="iconExpand.photos"
+            <i v-show="iconExpand.photos"
+               class="icon-nav-next icon-medium-nav-next p-absolute"
                @click="scrollRight" />
           </div>
         </div>
@@ -65,54 +65,56 @@
         <div class="collection-title f f-row"
              @click="toggleExpand({ collectionName: 'collectionVideoDetailContainer', section: 'films'})">
           <span class="title">Films</span>
-          <i class="icon-launcher icon-medium-expand-less"
+          <i v-if="iconExpand.films"
              ref="menuIcon"
-             v-if="iconExpand.films" />
-          <i class="icon-launcher icon-medium-expand-more"
+             class="icon-launcher icon-medium-expand-less" />
+          <i v-else
              ref="menuIcon"
-             v-else/>
+             class="icon-launcher icon-medium-expand-more" />
         </div>
-        <div class="carrusel f f-justify-start"
-             ref="collectionContainer">
-          <div class="track f f-row"
-               ref="collectionTrack">
-            <div class="square f-shrink-0"
-                 v-for="item in videoCollections"
+        <div ref="collectionContainer"
+             class="carrusel f f-justify-start">
+          <div ref="collectionTrack"
+               class="track f f-row">
+            <div v-for="item in videoCollections"
                  :key="item.name"
+                 class="square f-shrink-0"
                  @click="expandByIndex({ collectionName: 'collectionVideoDetailContainer', section: 'films', collection: item })">
-              <div class="back-img"
-                   :id="item.name"
+              <div :id="item.name"
+                   class="back-img"
                    :data-alt="item.description"
-                   :style="{ backgroundImage: `url('${item.thumbnail}')` }"></div>
+                   :style="{ backgroundImage: `url('${item.thumbnail}')` }" />
             </div>
           </div>
         </div>
         <div class="collection-detail">
-          <div class="carrusel f f-justify-start closed p-relative"
-               ref="collectionVideoDetailContainer">
-            <div class="track f f-row"
-                 ref="collectionVideoDetailTrack">
-              <div class="square f-shrink-0"
-                   v-for="(item, index) in videoCollection"
-                   :key="index">
-                <span class="first-child f f-column f-justify-center f-align-items-center"
-                      v-if="index === 0">{{ item.description }}</span>
-                <div class="back-img"
-                     :data-alt="item.name"
+          <div ref="collectionVideoDetailContainer"
+               class="carrusel f f-justify-start closed p-relative">
+            <div ref="collectionVideoDetailTrack"
+                 class="track f f-row">
+              <div v-for="(item, index) in videoCollection"
+                   :key="index"
+                   class="square f-shrink-0">
+                <span v-if="index === 0"
+                      class="first-child f f-column f-justify-center f-align-items-center">{{ item.description }}</span>
+                <div v-else-if="item.resource_key"
                      :id="item.resource_key"
+                     class="back-img"
+                     :data-alt="item.name"
                      :style="{ backgroundImage: `url('${getBySize(200, item.pictures.sizes)}')` }"
-                     v-else-if="item.resource_key"
-                     @click="showVideoFullScreenMd(item)"></div>
-                <div class="spinner f f-column f-justify-center f-align-items-center"
-                     v-else><img :src="spinnerIcon"
-                       alt="Loadig...." /></div>
+                     @click="showVideoFullScreenMd(item)" />
+                <div v-else
+                     class="spinner f f-column f-justify-center f-align-items-center">
+                  <img :src="spinnerIcon"
+                       alt="Loadig....">
+                </div>
               </div>
             </div>
-            <i class="icon-nav-prev icon-medium-nav-prev p-absolute"
-               v-show="iconExpand.films"
+            <i v-show="iconExpand.films"
+               class="icon-nav-prev icon-medium-nav-prev p-absolute"
                @click="scrollLeft" />
-            <i class="icon-nav-next icon-medium-nav-next p-absolute"
-               v-show="iconExpand.films"
+            <i v-show="iconExpand.films"
+               class="icon-nav-next icon-medium-nav-next p-absolute"
                @click="scrollRight" />
           </div>
         </div>
@@ -133,7 +135,7 @@ const FILMS = 'films';
 
 export default {
   mixins: [workResources],
-  data: function() {
+  data: function () {
     return {
       spinnerIcon: spinner,
       iconExpand: { [PHOTOS]: false, [FILMS]: false },
@@ -141,7 +143,7 @@ export default {
       imagesCollection: [],
       collectionFiles: [],
       videoCollections: [],
-      videoCollection: []
+      videoCollection: [],
     };
   },
   async mounted() {
@@ -150,8 +152,8 @@ export default {
     this.loadImageCollection(this.imagesCollections[0]);
     this.loadVideoCollection(this.videoCollections[0]);
   },
-  updated: function() {
-    this.$nextTick(function() {
+  updated: function () {
+    this.$nextTick(function () {
       const lockContainerWidth = this.$refs.worksContainer.offsetWidth;
       this.$refs.worksContainer.style.width = `${lockContainerWidth}px`;
       const lockTrackWidth = this.$refs.collectionContainer.offsetWidth;
@@ -163,14 +165,14 @@ export default {
     showVideoFullScreenMd(item) {
       TweenLite.to(window, 1, {
         scrollTo: 0,
-        ease: Power2.easeOut
+        ease: Power2.easeOut,
       });
       this.showVideoFullScreen(item);
     },
     showImageFullScreenMd(item) {
       TweenLite.to(window, 1, {
         scrollTo: 0,
-        ease: Power2.easeOut
+        ease: Power2.easeOut,
       });
       this.showImageFullScreen(item);
     },
@@ -180,7 +182,7 @@ export default {
       const left = track.scrollLeft;
       TweenLite.to(track, 1, {
         scrollTo: { x: left - width < 0 ? 0 : left - width },
-        ease: Power2.easeOut
+        ease: Power2.easeOut,
       });
     },
     scrollRight(ev) {
@@ -189,24 +191,24 @@ export default {
       const left = track.scrollLeft;
       TweenLite.to(track, 1, {
         scrollTo: { x: left + width },
-        ease: Power2.easeOut
+        ease: Power2.easeOut,
       });
     },
     moveToTag(id) {
       TweenLite.to(this.$refs.imageTrack, 1, {
         scrollTo: `#${id}`,
-        ease: Power2.easeOut
+        ease: Power2.easeOut,
       });
     },
     moveToPosX(track, x) {
       TweenLite.to(track, 1, {
         scrollTo: { x },
-        ease: Power2.easeOut
+        ease: Power2.easeOut,
       });
     },
     showVideoFullScreen(video) {
       const $iframe = document.querySelector(
-        '.full-screen-video .embed-container iframe'
+        '.full-screen-video .embed-container iframe',
       );
       const id = video.uri.substr(video.uri.lastIndexOf('/') + 1);
       $iframe.src = `https://player.vimeo.com/video/${id}`;
@@ -217,11 +219,11 @@ export default {
     loadImageCollection(collection) {
       this.imagesCollection = collection.pictures.map(k => ({
         ...k,
-        name: collection.name
+        name: collection.name,
       }));
       this.imagesCollection.unshift({
         id: -1,
-        description: collection.description
+        description: collection.description,
       });
     },
     toggleExpand({ collectionName, section }) {
@@ -238,11 +240,11 @@ export default {
         $container.classList.remove('closed');
         TweenMax.set($container, {
           height: 'auto',
-          opacity: 1
+          opacity: 1,
         });
         TweenMax.from($container, 0.8, {
           height: 0,
-          opacity: 0
+          opacity: 0,
         });
       }
     },
@@ -251,7 +253,7 @@ export default {
       $container.classList.add('closed');
       TweenMax.to($container, 0.8, {
         height: 0,
-        opacity: 0
+        opacity: 0,
       });
     },
     expandByIndex({ collectionName, section, collection }) {
@@ -272,23 +274,23 @@ export default {
     },
     loadVideoCollection(collection) {
       const current = this.videoCollections.find(
-        k => k.name === collection.name
+        k => k.name === collection.name,
       );
       if (!current.cache) {
         this.videoCollection = Array.from(
           { length: collection.videoIds.length },
-          k => ({ name: k })
+          k => ({ name: k }),
         );
         this.videoCollection.unshift({
           id: -1,
-          description: collection.description
+          description: collection.description,
         });
         this.loadVideoThumbs(collection.videoIds).then(videos => {
           current.cache = videos;
           this.videoCollection = videos;
           this.videoCollection.unshift({
             id: -1,
-            description: collection.description
+            description: collection.description,
           });
         });
       } else {
@@ -297,14 +299,14 @@ export default {
     },
     getBySize(width, sizes) {
       return sizes.find(k => k.width === width).link_with_play_button;
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang="postcss" scoped>
-@import '../../styles/flex.scss';
-@import '../../styles/base.scss';
+<style lang="scss" scoped>
+@import '@/styles/flex.scss';
+@import '@/styles/base.scss';
 .icon-nav-prev {
   top: 50%;
   transform: translateY(-50%);

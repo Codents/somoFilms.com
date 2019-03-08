@@ -1,7 +1,7 @@
 export const breakpoints = {
   sm: 600,
   md: 1400,
-  lg: Infinity
+  lg: Infinity,
 };
 
 export const menus = [
@@ -10,21 +10,21 @@ export const menus = [
     active: true,
     selected: true,
     route: '/',
-    text: 'menu.home'
+    text: 'menu.home',
   },
   {
     id: 'team',
     active: true,
     selected: false,
     route: '/team',
-    text: 'menu.team'
+    text: 'menu.team',
   },
   {
     id: 'works',
     active: true,
     selected: false,
     route: '/works',
-    text: 'menu.works'
+    text: 'menu.works',
   },
 
   {
@@ -32,29 +32,29 @@ export const menus = [
     active: true,
     selected: false,
     route: '/clients',
-    text: 'menu.clients'
+    text: 'menu.clients',
   },
   {
     id: 'inprogress',
     active: true,
     selected: false,
     route: '/inprogress',
-    text: 'menu.inprogress'
+    text: 'menu.inprogress',
   },
   {
     id: 'contact',
     active: true,
     selected: false,
     route: '/contact',
-    text: 'menu.contacts'
+    text: 'menu.contacts',
   },
   {
     id: 'about',
     active: true,
     selected: false,
     route: '/about',
-    text: 'menu.about'
-  }
+    text: 'menu.about',
+  },
 ];
 
 export const team = [
@@ -64,10 +64,10 @@ export const team = [
     role: 'team.bio.david.role',
     text: 'team.bio.david.text',
     url: {
-      sm: '/static/team/team_portrait_david_palacios.jpg',
-      md: '/static/team/team_landscape_david_palacios.jpg',
-      lg: '/static/team/team_landscape_david_palacios.jpg'
-    }
+      sm: '/team/team_portrait_david_palacios.jpg',
+      md: '/team/team_landscape_david_palacios.jpg',
+      lg: '/team/team_landscape_david_palacios.jpg',
+    },
   },
   {
     id: 'salome',
@@ -75,10 +75,10 @@ export const team = [
     role: 'team.bio.salome.role',
     text: 'team.bio.salome.text',
     url: {
-      sm: '/static/team/team_portrait_salome_garcia.jpg',
-      md: '/static/team/team_landscape_salome_garcia.jpg',
-      lg: '/static/team/team_landscape_salome_garcia.jpg'
-    }
+      sm: '/team/team_portrait_salome_garcia.jpg',
+      md: '/team/team_landscape_salome_garcia.jpg',
+      lg: '/team/team_landscape_salome_garcia.jpg',
+    },
   },
   {
     id: 'kike',
@@ -86,10 +86,10 @@ export const team = [
     role: 'team.bio.kike.role',
     text: 'team.bio.kike.text',
     url: {
-      sm: '/static/team/team_portrait_kike_palacios.jpg',
-      md: '/static/team/team_landscape_kike_palacios.jpg',
-      lg: '/static/team/team_landscape_kike_palacios.jpg'
-    }
+      sm: '/team/team_portrait_kike_palacios.jpg',
+      md: '/team/team_landscape_kike_palacios.jpg',
+      lg: '/team/team_landscape_kike_palacios.jpg',
+    },
   },
   {
     id: 'pedro',
@@ -97,9 +97,9 @@ export const team = [
     role: 'team.bio.pedro.role',
     text: 'team.bio.pedro.text',
     url: {
-      sm: '/static/team/team_portrait_pedro_r_soto.jpg',
-      md: '/static/team/team_landscape_pedro_r_soto.jpg',
-      lg: '/static/team/team_landscape_pedro_r_soto.jpg'
-    }
-  }
+      sm: '/team/team_portrait_pedro_r_soto.jpg',
+      md: '/team/team_landscape_pedro_r_soto.jpg',
+      lg: '/team/team_landscape_pedro_r_soto.jpg',
+    },
+  },
 ];

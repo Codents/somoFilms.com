@@ -1,10 +1,12 @@
 <template>
   <section class="clients-container">
-    <button class="bt-start"
-            v-show="gameStoped"
-            @click="handle">START</button>
-    <div class="gameover"
-         v-show="gameOver">
+    <button v-show="gameStoped"
+            class="bt-start"
+            @click="handle">
+      START
+    </button>
+    <div v-show="gameOver"
+         class="gameover">
       <i class="icon-close icon-small-close"
          @click="gameOver = !gameOver" />
       <div class="header">
@@ -12,14 +14,14 @@
       </div>
       <div class="body">
         <div class="cli-carrousel">
-          <div class="controls"></div>
+          <div class="controls" />
           <div class="track">
-            <div v-for="(logo, index) in textures"
-                 :key="index">
+            <div v-for="(logo, i) in textures"
+                 :key="i">
               <div class="item">
                 <div class="w-logo">
                   <img alt="logo"
-                       :src="logo.src" />
+                       :src="logo.src">
                 </div>
                 <span class="title">{{ logo.name || 'Some name' }}</span>
               </div>
@@ -29,26 +31,26 @@
       </div>
     </div>
     <span class="score">{{ score }}</span>
-    <div class="world"
-         ref="world">
-    </div>
+    <div ref="world"
+         class="world" />
   </section>
 </template>
 
 <script>
+import get from 'lodash/get';
 import Matter from 'matter-js';
 import clientResources from '@/mixins/clientsResources';
 
-const Engine = Matter.Engine;
-const Render = Matter.Render;
-const Runner = Matter.Runner;
-const Events = Matter.Events;
-const MouseConstraint = Matter.MouseConstraint;
-const Composite = Matter.Composite;
-const Mouse = Matter.Mouse;
-const World = Matter.World;
-const Bodies = Matter.Bodies;
-const Bounds = Matter.Bounds;
+const { Engine } = Matter;
+const { Render } = Matter;
+const { Runner } = Matter;
+const { Events } = Matter;
+const { MouseConstraint } = Matter;
+const { Composite } = Matter;
+const { Mouse } = Matter;
+const { World } = Matter;
+const { Bodies } = Matter;
+const { Bounds } = Matter;
 
 let runner = null;
 let engine = null;
@@ -60,7 +62,7 @@ const INTERVAL = 1000;
 
 export default {
   mixins: [clientResources],
-  data: function() {
+  data: function () {
     return {
       intervalPtr: null,
       interval: INTERVAL,
@@ -70,7 +72,7 @@ export default {
       gameOver: false,
       index: 0,
       textures: this.loadTextures(),
-      worldHeight: window.innerHeight
+      worldHeight: window.innerHeight,
     };
   },
   mounted() {
@@ -110,14 +112,14 @@ export default {
         clearInterval(this.intervalPtr);
         this.intervalPtr = setInterval(
           this.updateLoop.bind(this),
-          this.interval
+          this.interval,
         );
       }
       this.clientBuilder();
     },
     initWorld() {
       engine = Engine.create();
-      world = engine.world;
+      world = get(engine, 'world');
       render = Render.create({
         element: this.$refs.world,
         engine: engine,
@@ -126,13 +128,13 @@ export default {
           height: this.worldHeight,
           background: 'transparent',
           wireframes: false,
-          showAngleIndicator: false
-        }
+          showAngleIndicator: false,
+        },
       });
       runner = Runner.create();
       Render.lookAt(render, {
         min: { x: 0, y: 0 },
-        max: { x: window.innerWidth, y: this.worldHeight }
+        max: { x: window.innerWidth, y: this.worldHeight },
       });
     },
     compoundWorld() {
@@ -169,9 +171,8 @@ export default {
     },
     handleMouseClick(ev) {
       const body = Composite.allBodies(world).filter(
-        k =>
-          k.label !== 'CONTAINER' &&
-          Bounds.contains(k.bounds, ev.mouse.position)
+        k => k.label !== 'CONTAINER'
+          && Bounds.contains(k.bounds, ev.mouse.position),
       );
       if (body.length) {
         this.score += Number(body[0].points);
@@ -183,30 +184,30 @@ export default {
       const width = window.innerWidth;
       const wallsWidth = 10;
       const render = {
-        fillStyle: 'rgba(0,0,0,0)'
+        fillStyle: 'rgba(0,0,0,0)',
       };
       return [
         // walls : Se calcula por su centro
         Bodies.rectangle(width / 2, 0, width, wallsWidth, {
           isStatic: true,
           render,
-          label: 'CONTAINER'
+          label: 'CONTAINER',
         }), // Top
         Bodies.rectangle(width / 2, height, width, wallsWidth, {
           isStatic: true,
           render,
-          label: 'CONTAINER'
+          label: 'CONTAINER',
         }), // Bottom
         Bodies.rectangle(width, height / 2, wallsWidth, height, {
           isStatic: true,
           render,
-          label: 'CONTAINER'
+          label: 'CONTAINER',
         }), // Right
         Bodies.rectangle(0, height / 2, wallsWidth, height, {
           isStatic: true,
           render,
-          label: 'CONTAINER'
-        }) // Left
+          label: 'CONTAINER',
+        }), // Left
       ];
     },
     createMouseConstrant() {
@@ -216,33 +217,33 @@ export default {
         constraint: {
           stiffness: 0.2,
           render: {
-            visible: false
-          }
-        }
+            visible: false,
+          },
+        },
       });
     },
     clientBuilder() {
       const chamfer = {
-        radius: 10
+        radius: 10,
       };
       const texture = this.getTexture();
       const body = Bodies.rectangle(40, 40, texture.w, texture.h, {
         chamfer,
         render: {
           sprite: {
-            texture: texture.src
-          }
+            texture: texture.src,
+          },
         },
-        points: texture.points
+        points: texture.points,
       });
       World.addBody(world, body);
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang="postcss" scoped>
-@import '../../styles/base.scss';
+<style lang="scss" scoped>
+@import '@/styles/base.scss';
 .clients-container {
   position: relative;
   width: 100%;
@@ -355,4 +356,3 @@ export default {
   color: #312f2f;
 }
 </style>
-

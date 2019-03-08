@@ -7,7 +7,7 @@ export default {
   components: {
     'team-sm': () => import('./TeamSm.vue'),
     'team-md': () => import('./TeamMd.vue'),
-    'team-lg': () => import('./TeamLg.vue')
-  }
+    'team-lg': () => import('./TeamLg.vue'),
+  },
 };
 </script>

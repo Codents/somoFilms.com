@@ -5,15 +5,15 @@
     </div>
     <div class="body w-100 f f-row f-justify-center f-align-items-start f-wrap">
       <div v-for="(member, index) in team"
-           :key="index"
-           class="profile f f-column f-justify-start f-align-items-center border-r"
-           @click="handleClick"
            :id="member.id"
-           :ref="member.id">
+           :key="index"
+           :ref="member.id"
+           class="profile f f-column f-justify-start f-align-items-center border-r"
+           @click="handleClick">
         <div class="img-frame f f-column f-justify-center f-align-items-center border-rm w-100">
           <img :alt="member.name"
                class="img border-r"
-               :src="member.url[$mq]" />
+               :src="member.url[$mq]">
         </div>
         <div class="text-container">
           <span class="name">{{ $t(member.name) }}</span>
@@ -33,14 +33,14 @@ import Bio from './components/BioSm';
 
 export default {
   components: { Bio },
-  data: function() {
+  data: function () {
     return {
       team,
       showBio: false,
       bioText: '',
       name: '',
       role: '',
-      member: 'one'
+      member: 'one',
     };
   },
   methods: {
@@ -50,14 +50,14 @@ export default {
       this.showBio = !this.showBio;
       this.role = this.$refs[ev.currentTarget.id][0].dataset.role;
       this.member = ev.currentTarget.id;
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang="postcss" scoped>
-@import '../../styles/flex.scss';
-@import 'animate.css/animate.min.css';
+<style lang="scss" scoped>
+@import '@/styles/flex.scss';
+@import '@/styles/animate.scss';
 .team-container {
   .header {
     height: 20%;

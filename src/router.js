@@ -1,20 +1,13 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-const Home = () =>
-  import(/* webpackChunkName: "HomeHub" */ '@/views/home/Home.vue');
-const Team = () =>
-  import(/* webpackChunkName: "TeamHub" */ '@/views/team/Team.vue');
-const Works = () =>
-  import(/* webpackChunkName: "WorksHub" */ '@/views/works/Works.vue');
-const Clients = () =>
-  import(/* webpackChunkName: "Clientshub" */ '@/views/clients/Clients.vue');
-const About = () =>
-  import(/* webpackChunkName: "AboutHub" */ '@/views/about/About.vue');
-const Contact = () =>
-  import(/* webpackChunkName: "ContactHub" */ '@/views/contact/Contact.vue');
-const InProgress = () =>
-  import(/* webpackChunkName: "InProgressHub" */ '@/views/inprogress/InProgress.vue');
+const Home = () => import(/* webpackChunkName: "HomeHub" */ '@/views/home/Home.vue');
+const Team = () => import(/* webpackChunkName: "TeamHub" */ '@/views/team/Team.vue');
+const Works = () => import(/* webpackChunkName: "WorksHub" */ '@/views/works/Works.vue');
+const Clients = () => import(/* webpackChunkName: "Clientshub" */ '@/views/clients/Clients.vue');
+const About = () => import(/* webpackChunkName: "AboutHub" */ '@/views/about/About.vue');
+const Contact = () => import(/* webpackChunkName: "ContactHub" */ '@/views/contact/Contact.vue');
+const InProgress = () => import(/* webpackChunkName: "InProgressHub" */ '@/views/inprogress/InProgress.vue');
 
 Vue.use(Router);
 
@@ -25,37 +18,37 @@ export default new Router({
     {
       name: 'home',
       path: '/',
-      components: { container: Home }
+      components: { container: Home },
     },
     {
       name: 'team',
       path: '/team',
-      components: { container: Team }
+      components: { container: Team },
     },
     {
       name: 'works',
       path: '/works',
-      components: { container: Works }
+      components: { container: Works },
     },
     {
       name: 'clients',
       path: '/clients',
-      components: { container: Clients }
+      components: { container: Clients },
     },
     {
       name: 'about',
       path: '/about',
-      components: { container: About }
+      components: { container: About },
     },
     {
       name: 'contact',
       path: '/contact',
-      components: { container: Contact }
+      components: { container: Contact },
     },
     {
       name: 'inprogress',
       path: '/inprogress',
-      components: { container: InProgress }
-    }
-  ]
+      components: { container: InProgress },
+    },
+  ],
 });
