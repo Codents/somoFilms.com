@@ -9,14 +9,14 @@
            muted
            poster="../../assets/img/background-portrait-mobile.jpg"
            loop>
-      <source src="/static/video/bg-md.mp4"
-              type="video/mp4" />
+      <source src="/video/bg-md.mp4"
+              type="video/mp4">
     </video>
   </section>
 </template>
 
-<style lang="postcss" scoped>
-@import '../../styles/flex.scss';
+<style lang="scss" scoped>
+@import '@/styles/flex.scss';
 @font-face {
   font-family: '28 Days Later';
   font-style: normal;
@@ -50,4 +50,3 @@
   }
 }
 </style>
-

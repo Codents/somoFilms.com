@@ -6,8 +6,8 @@
   </section>
 </template>
 
-<style lang="postcss" scoped>
-@import '../../styles/flex.scss';
+<style lang="scss" scoped>
+@import '@/styles/flex.scss';
 @font-face {
   font-family: '28 Days Later';
   font-style: normal;
@@ -33,4 +33,3 @@
   }
 }
 </style>
-

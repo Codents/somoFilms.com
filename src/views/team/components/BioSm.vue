@@ -1,10 +1,8 @@
 <template>
-  <div class="bio"
-       @click="$emit('click')">
+  <div class="bio" @click="$emit('click')">
     <i class="icon-close icon-small-close p-absolute border-r icon-small-menu" />
     <div class="profile">
-      <div :class="member">
-      </div>
+      <div :class="member" />
       <div class="text-container">
         <span class="name">{{ $t(name) }}</span>
         <span class="role">{{ $t(role) }}</span>
@@ -18,11 +16,28 @@
 
 <script>
 export default {
-  props: ['name', 'bioText', 'member', 'role']
+  props: {
+    name: {
+      type: String,
+      default: '',
+    },
+    bioText: {
+      type: String,
+      default: '',
+    },
+    member: {
+      type: String,
+      default: '',
+    },
+    role: {
+      type: String,
+      default: '',
+    },
+  },
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .bio {
   position: absolute;
   overflow-y: auto;
@@ -44,7 +59,7 @@ export default {
     height: 100%;
     .david {
       height: 50%;
-      background-image: url('/static/team/team_landscape_david_palacios.jpg');
+      background-image: url('/team/team_landscape_david_palacios.jpg');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -52,7 +67,7 @@ export default {
     }
     .salome {
       height: 50%;
-      background-image: url('/static/team/team_landscape_salome_garcia.jpg');
+      background-image: url('/team/team_landscape_salome_garcia.jpg');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -60,7 +75,7 @@ export default {
     }
     .kike {
       height: 50%;
-      background-image: url('/static/team/team_landscape_kike_palacios.jpg');
+      background-image: url('/team/team_landscape_kike_palacios.jpg');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -68,7 +83,7 @@ export default {
     }
     .pedro {
       height: 50%;
-      background-image: url('/static/team/team_landscape_pedro_r_soto.jpg');
+      background-image: url('/team/team_landscape_pedro_r_soto.jpg');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;

@@ -1,25 +1,35 @@
 <template>
-  <section class="team-container p-relative w-100 h-100 f f-column f-justify-start f-align-items-center">
-    <div class="header f f-column f-justify-center f-align-items-center f-shrink-0">
+  <section
+    class="team-container p-relative w-100 h-100 f f-column f-justify-start f-align-items-center"
+  >
+    <div
+      class="header f f-column f-justify-center f-align-items-center f-shrink-0"
+    >
       <span class="title">{{ $t('team.title') }}</span>
     </div>
     <div class="body w-100 f f-row f-justify-center f-align-items-start f-wrap">
-      <div v-for="(member, index) in team"
-           :key="index"
-           class="profile f f-column f-justify-start f-align-items-center border-r"
-           @click="handleClick"
-           :id="member.id"
-           :ref="member.id">
-        <div class="img-frame f f-column f-justify-center f-align-items-center border-rm w-100">
-          <img :alt="member.name"
-               class="img border-r"
-               :src="member.url[$mq]" />
+      <div
+        v-for="(memberItem, index) in team"
+        :id="memberItem.id"
+        :key="index"
+        :ref="memberItem.id"
+        class="profile f f-column f-justify-start f-align-items-center border-r"
+        @click="handleClick"
+      >
+        <div
+          class="img-frame f f-column f-justify-center f-align-items-center border-rm w-100"
+        >
+          <img
+            :alt="memberItem.name"
+            class="img border-r"
+            :src="memberItem.url[$mq]"
+          >
         </div>
         <div class="text-container">
-          <span class="name">{{ $t(member.name) }}</span>
-          <span class="role">{{ $t(member.role) }}</span>
+          <span class="name">{{ $t(memberItem.name) }}</span>
+          <span class="role">{{ $t(memberItem.role) }}</span>
           <div class="text">
-            {{ $t(member.text) }}
+            {{ $t(memberItem.text) }}
           </div>
         </div>
       </div>
@@ -29,18 +39,16 @@
 
 <script>
 import { team } from '@/constants';
-import Bio from './components/BioSm';
 
 export default {
-  components: { Bio },
-  data: function() {
+  data: function () {
     return {
       team,
       showBio: false,
       bioText: '',
       name: '',
       role: '',
-      member: 'one'
+      member: 'one',
     };
   },
   methods: {
@@ -50,14 +58,14 @@ export default {
       this.showBio = !this.showBio;
       this.role = this.$refs[ev.currentTarget.id][0].dataset.role;
       this.member = ev.currentTarget.id;
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang="postcss" scoped>
-@import '../../styles/flex.scss';
-@import 'animate.css/animate.min.css';
+<style lang="scss" scoped>
+@import '@/styles/flex.scss';
+@import '@/styles/animate.scss';
 .team-container {
   .header {
     height: 20%;

@@ -5,22 +5,22 @@
     <transition :duration="{ enter: 500, leave: 500 }" enter-active-class="animated fadeIn"
                 leave-active-class="animated fadeOut">
       <router-view name="container"
-                   class="child-view"></router-view>
+                   class="child-view" />
     </transition>
     <footer>
       <transition enter-active-class="animated zoomIn"
                   leave-active-class="animated zoomOut">
-        <div class="full-screen-image"
-             v-show="$root.$data.showImageFullScreen"
+        <div v-show="$root.$data.showImageFullScreen"
+             class="full-screen-image"
              @click="$root.$data.showImageFullScreen = !$root.$data.showImageFullScreen">
           <i class="icon-close icon-small-close p-absolute border-r icon-small-menu" />
-          <img class="image-full" />
+          <img class="image-full">
         </div>
       </transition>
       <transition enter-active-class="animated zoomIn"
                   leave-active-class="animated zoomOut">
-        <div class="full-screen-video"
-             v-show="$root.$data.showVideoFullScreen"
+        <div v-show="$root.$data.showVideoFullScreen"
+             class="full-screen-video"
              @click="$root.$data.showVideoFullScreen = !$root.$data.showVideoFullScreen">
           <i class="icon-close icon-small-close p-absolute border-r icon-small-menu" />
           <div class="embed-container">
@@ -28,7 +28,7 @@
                     frameborder="0"
                     webkitAllowFullScreen
                     mozallowfullscreen
-                    allowFullScreen></iframe>
+                    allowFullScreen />
           </div>
         </div>
       </transition>
@@ -36,17 +36,17 @@
   </main>
 </template>
 <script>
-import Menu from '@/components/Menu/Menu';
+import Menu from '@/components/Menu/Menu.vue';
 
 export default {
-  components: { Menu }
+  components: { Menu },
 };
 </script>
 
 
-<style lang="postcss">
-@import 'animate.css/animate.min.css';
-@import '../styles/base.scss';
+<style lang="scss">
+@import '@/styles/animate.scss';
+@import '@/styles/base.scss';
 body,
 html {
   width: 100%;

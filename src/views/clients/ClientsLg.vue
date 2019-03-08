@@ -9,14 +9,14 @@
            @click="scrollLeft" />
         <i class="icon-nav-next icon-medium-nav-next p-absolute"
            @click="scrollRight" />
-        <div class="track f f-row" ref="track">
+        <div ref="track" class="track f f-row">
           <div v-for="(logo, index) in clients"
                :key="index"
                class="item f f-column f-space-between f-shrink-0">
             <div class="logo f f-column f-justify-center f-align-items-center f-grow-1">
               <img alt="logo"
                    class="pic"
-                   :src="logo.src" />
+                   :src="logo.src">
             </div>
             <span class="title">{{ logo.name || 'Some name' }}</span>
           </div>
@@ -33,9 +33,9 @@ import clientResources from '@/mixins/clientsResources';
 
 export default {
   mixins: [clientResources],
-  data: function() {
+  data: function () {
     return {
-      clients: this.loadTextures()
+      clients: this.loadTextures(),
     };
   },
   methods: {
@@ -44,7 +44,7 @@ export default {
       const left = this.$refs.track.scrollLeft;
       TweenLite.to(this.$refs.track, 1, {
         scrollTo: { x: left - width < 0 ? 0 : left - width },
-        ease: Power2.easeOut
+        ease: Power2.easeOut,
       });
     },
     scrollRight() {
@@ -52,16 +52,16 @@ export default {
       const left = this.$refs.track.scrollLeft;
       TweenLite.to(this.$refs.track, 1, {
         scrollTo: { x: left + width },
-        ease: Power2.easeOut
+        ease: Power2.easeOut,
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang="postcss" scoped>
-@import '../../styles/base.scss';
-@import '../../styles/flex.scss';
+<style lang="scss" scoped>
+@import '@/styles/base.scss';
+@import '@/styles/flex.scss';
 .icon-nav-prev {
   top: 50%;
   transform: translateY(-50%);
@@ -127,4 +127,3 @@ export default {
   }
 }
 </style>
-

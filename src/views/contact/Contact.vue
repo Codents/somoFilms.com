@@ -5,7 +5,7 @@
 <script>
 export default {
   components: {
-    "contact-sm": () => import("./ContactSm.vue")
-  }
+    'contact-sm': () => import('./ContactSm.vue'),
+  },
 };
 </script>

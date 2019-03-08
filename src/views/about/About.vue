@@ -5,7 +5,7 @@
 <script>
 export default {
   components: {
-    "about-sm": () => import("./AboutSm.vue")
-  }
+    'about-sm': () => import('./AboutSm.vue'),
+  },
 };
 </script>

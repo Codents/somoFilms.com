@@ -5,26 +5,26 @@
     </div>
     <div class="body w-100 f f-row f-justify-center f-align-items-center f-wrap">
       <div v-for="(member, index) in team"
-           :key="index"
-           class="img-wrapper f f-row f-justify-center f-align-items-center"
-           @click="handleClick"
            :id="member.id"
+           :key="index"
            :ref="member.id"
+           class="img-wrapper f f-row f-justify-center f-align-items-center"
            :data-name="member.name"
            :data-role="member.role"
-           :data-bio-text="member.text">
+           :data-bio-text="member.text"
+           @click="handleClick">
         <img :alt="member.name"
              class="img"
-             :src="member.url[$mq]" />
+             :src="member.url[$mq]">
       </div>
     </div>
     <transition enter-active-class="animated zoomIn"
                 leave-active-class="animated zoomOut">
-      <Bio :name="name"
-           :bioText="bioText"
+      <Bio v-show="showBio"
+           :name="name"
+           :bio-text="bioText"
            :member="member"
            :role="role"
-           v-show="showBio"
            @click="showBio=false" />
     </transition>
   </section>
@@ -36,14 +36,14 @@ import Bio from './components/BioSm';
 
 export default {
   components: { Bio },
-  data: function() {
+  data: function () {
     return {
       team,
       showBio: false,
       bioText: '',
       name: '',
       role: '',
-      member: 'one'
+      member: 'one',
     };
   },
   methods: {
@@ -53,14 +53,14 @@ export default {
       this.showBio = !this.showBio;
       this.role = this.$refs[ev.currentTarget.id][0].dataset.role;
       this.member = ev.currentTarget.id;
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang="postcss" scoped>
-@import '../../styles/flex.scss';
-@import 'animate.css/animate.min.css';
+<style lang="scss" scoped>
+@import '@/styles/flex.scss';
+@import '@/styles/animate.scss';
 .team-container {
   .header {
     height: 20%;

@@ -9,7 +9,7 @@
   </section>
 </template>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 @import "../../styles/flex.scss";
 .about {
   height: 100%;

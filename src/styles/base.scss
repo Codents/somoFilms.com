@@ -2,21 +2,21 @@
   font-family: "Poiret One";
   font-style: normal;
   font-weight: 400;
-  src: url("../assets/fonts/poiret-one-v5-latin_cyrillic_latin-ext-regular.eot"); /* IE9 Compat Modes */
+  src: url("~@/assets/fonts/poiret-one-v5-latin_cyrillic_latin-ext-regular.eot"); /* IE9 Compat Modes */
   src: local("Poiret One"), local("PoiretOne-Regular"),
-    url("../assets/fonts/poiret-one-v5-latin_cyrillic_latin-ext-regular.eot?#iefix")
+    url("~@/assets/fonts/poiret-one-v5-latin_cyrillic_latin-ext-regular.eot?#iefix")
       format("embedded-opentype"),
     /* IE6-IE8 */
-      url("../assets/fonts/poiret-one-v5-latin_cyrillic_latin-ext-regular.woff2")
+      url("~@/assets/fonts/poiret-one-v5-latin_cyrillic_latin-ext-regular.woff2")
       format("woff2"),
     /* Super Modern Browsers */
-      url("../assets/fonts/poiret-one-v5-latin_cyrillic_latin-ext-regular.woff")
+      url("~@/assets/fonts/poiret-one-v5-latin_cyrillic_latin-ext-regular.woff")
       format("woff"),
     /* Modern Browsers */
-      url("../assets/fonts/poiret-one-v5-latin_cyrillic_latin-ext-regular.ttf")
+      url("~@/assets/fonts/poiret-one-v5-latin_cyrillic_latin-ext-regular.ttf")
       format("truetype"),
     /* Safari, Android, iOS */
-      url("../assets/fonts/poiret-one-v5-latin_cyrillic_latin-ext-regular.svg#PoiretOne")
+      url("~@/assets/fonts/poiret-one-v5-latin_cyrillic_latin-ext-regular.svg#PoiretOne")
       format("svg"); /* Legacy iOS */
 }
 
@@ -25,73 +25,73 @@
   font-style: normal;
   font-weight: normal;
   src: local("28 Days Later"),
-    url("../assets/fonts/28_Days_Later.woff") format("woff");
+    url("~@/assets/fonts/28_Days_Later.woff") format("woff");
 }
 
 .icon-small-menu {
-  background-image: url("../assets/icons/baseline-menu-24px.svg");
+  background-image: url("~@/assets/icons/baseline-menu-24px.svg");
   background-size: 100% 100%;
   width: 1.5rem;
   height: 1.5rem;
 }
 
 .icon-medium-menu {
-  background-image: url("../assets/icons/baseline-menu-24px.svg");
+  background-image: url("~@/assets/icons/baseline-menu-24px.svg");
   background-size: 100% 100%;
   width: 2.5rem;
   height: 2.5rem;
 }
 
 .icon-small-add {
-  background-image: url("../assets/icons/baseline-add_circle_outline-24px.svg");
+  background-image: url("~@/assets/icons/baseline-add_circle_outline-24px.svg");
   background-size: 100% 100%;
   width: 1.5rem;
   height: 1.5rem;
 }
 
 .icon-small-expand-less {
-  background-image: url("../assets/icons/baseline-expand_less-24px.svg");
+  background-image: url("~@/assets/icons/baseline-expand_less-24px.svg");
   background-size: 100% 100%;
   width: 1.5rem;
   height: 1.5rem;
 }
 
 .icon-small-expand-more {
-  background-image: url("../assets/icons/baseline-expand_more-24px.svg");
+  background-image: url("~@/assets/icons/baseline-expand_more-24px.svg");
   background-size: 100% 100%;
   width: 1.5rem;
   height: 1.5rem;
 }
 
 .icon-medium-expand-less {
-  background-image: url("../assets/icons/baseline-expand_less-24px.svg");
+  background-image: url("~@/assets/icons/baseline-expand_less-24px.svg");
   background-size: 100% 100%;
   width: 2.5rem;
   height: 2.5rem;
 }
 
 .icon-medium-expand-more {
-  background-image: url("../assets/icons/baseline-expand_more-24px.svg");
+  background-image: url("~@/assets/icons/baseline-expand_more-24px.svg");
   background-size: 100% 100%;
   width: 2.5rem;
   height: 2.5rem;
 }
 .icon-small-close {
-  background-image: url("../assets/icons/baseline-close-24px.svg");
+  background-image: url("~@/assets/icons/baseline-close-24px.svg");
   background-size: 100% 100%;
   width: 1.5rem;
   height: 1.5rem;
 }
 
 .icon-medium-close {
-  background-image: url("../assets/icons/baseline-close-24px.svg");
+  background-image: url("~@/assets/icons/baseline-close-24px.svg");
   background-size: 100% 100%;
   width: 2.5rem;
   height: 2.5rem;
 }
 
 .icon-medium-nav-next {
-  background-image: url("../assets/icons/baseline-navigate_next-24px.svg");
+  background-image: url("~@/assets/icons/baseline-navigate_next-24px.svg");
   background-size: 100% 100%;
   width: 4.5rem;
   height: 4.5rem;
@@ -99,7 +99,7 @@
 }
 
 .icon-medium-nav-prev {
-  background-image: url("../assets/icons/baseline-navigate_before-24px.svg");
+  background-image: url("~@/assets/icons/baseline-navigate_before-24px.svg");
   background-size: 100% 100%;
   width: 4.5rem;
   height: 4.5rem;

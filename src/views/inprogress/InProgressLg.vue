@@ -11,25 +11,36 @@
         <div class="block-wrapper f f-row f-justify-center f-align-items-center f-shrink-0">
           <img alt="Work in progress 1"
                class="img w-100"
-               src="../../../static/inprogress/in-progress-sm-1.jpg" />
+               :src="`${publicPath}inprogress/in-progress-sm-1.jpg`">
         </div>
         <div class="block-wrapper f f-row f-justify-center f-align-items-center f-shrink-0">
           <img alt="Work in progress 2"
                class="img w-100"
-               src="../../../static/inprogress/in-progress-sm-2.jpg" />
+               :src="`${publicPath}inprogress/in-progress-sm-2.jpg`">
         </div>
         <div class="block-wrapper f f-row f-justify-center f-align-items-center f-shrink-0">
           <img alt="Work in progress 3"
                class="img w-100"
-               src="../../../static/inprogress/in-progress-sm-3.jpg" />
+               :src="`${publicPath}inprogress/in-progress-sm-3.jpg`">
         </div>
       </div>
     </div>
   </section>
 </template>
 
-<style lang="postcss" scoped>
-@import '../../styles/flex.scss';
+<script>
+export default {
+  data() {
+    return {
+      publicPath: process.env.BASE_URL,
+    };
+  },
+};
+</script>
+
+
+<style lang="scss" scoped>
+@import '@/styles/flex.scss';
 .in-progress {
   .head {
     height: 20%;

@@ -1,4 +1,9 @@
-/build/
-/config/
 /dist/
-/*.js
+/src/__mocks__/
+/tests/e2e/fixtures/
+/tests/e2e/plugins/
+/tests/e2e/support/
+/json-server/
+/hooks/
+.eslintrc.js
+.postcssrc.js
