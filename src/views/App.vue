@@ -72,6 +72,7 @@ textarea {
   padding: 0.2rem;
   right: 1rem;
   top: 1rem;
+  z-index: 999;
 }
 
 .full-screen-image {

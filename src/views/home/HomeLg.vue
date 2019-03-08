@@ -9,7 +9,7 @@
            muted
            poster="../../assets/img/background-portrait-mobile.jpg"
            loop>
-      <source src="/static/video/bg-md.mp4.mp4"
+      <source src="/static/video/bg-md.mp4"
               type="video/mp4" />
     </video>
   </section>

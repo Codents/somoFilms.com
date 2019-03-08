@@ -130,8 +130,8 @@ export default {
     };
   },
   async mounted() {
-    this.imagesCollections = this.loadAllImagesCollections();
-    this.videoCollections = this.loadAllVideoCollections();
+    this.imagesCollections = this.loadAllImagesCollections(this.$mq);
+    this.videoCollections = this.loadAllVideoCollections(this.$mq);
     this.loadImageCollection(this.imagesCollections[0]);
     this.loadVideoCollection(this.videoCollections[0]);
   },
@@ -305,8 +305,8 @@ export default {
           overflow-x: auto;
           overflow-y: hidden;
           .square {
-            width: $small-width-pic;
-            height: $small-height-pic;
+            width: $sm-width-pic;
+            height: $sm-height-pic;
             background-color: #6c757d;
             margin-right: 0.2rem;
             .back-img {

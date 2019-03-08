@@ -63,6 +63,19 @@
   height: 1.5rem;
 }
 
+.icon-medium-expand-less {
+  background-image: url("../assets/icons/baseline-expand_less-24px.svg");
+  background-size: 100% 100%;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.icon-medium-expand-more {
+  background-image: url("../assets/icons/baseline-expand_more-24px.svg");
+  background-size: 100% 100%;
+  width: 2.5rem;
+  height: 2.5rem;
+}
 .icon-small-close {
   background-image: url("../assets/icons/baseline-close-24px.svg");
   background-size: 100% 100%;
@@ -77,8 +90,30 @@
   height: 2.5rem;
 }
 
-$small-width-pic: 200px;
-$small-height-pic: 150px;
+.icon-medium-nav-next {
+  background-image: url("../assets/icons/baseline-navigate_next-24px.svg");
+  background-size: 100% 100%;
+  width: 4.5rem;
+  height: 4.5rem;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.icon-medium-nav-prev {
+  background-image: url("../assets/icons/baseline-navigate_before-24px.svg");
+  background-size: 100% 100%;
+  width: 4.5rem;
+  height: 4.5rem;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+$sm-width-pic: 200px;
+$sm-height-pic: 150px;
+
+$md-width-pic: 500px;
+$md-height-pic: 350px;
+
+$lg-width-pic: 800px;
+$lg-height-pic: 550px;
 
 .w-100 {
   width: 100%;
