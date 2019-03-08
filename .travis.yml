@@ -3,7 +3,7 @@ node_js:
     - "10.10.0"
 branches:
   only:
-    - feature-rest-of-sizes
+    - master
 before_script:
   - npm install -g firebase-tools
   - npm install
