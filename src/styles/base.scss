@@ -106,6 +106,22 @@
   color: rgba(0, 0, 0, 0.54);
 }
 
+.icon-medium-mute {
+  background-image: url("~@/assets/icons/mute.svg");
+  background-size: 100% 100%;
+  width: 4.5rem;
+  height: 4.5rem;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.icon-medium-unmute {
+  background-image: url("~@/assets/icons/unmute.svg");
+  background-size: 100% 100%;
+  width: 4.5rem;
+  height: 4.5rem;
+  color: rgba(0, 0, 0, 0.54);
+}
+
 $sm-width-pic: 200px;
 $sm-height-pic: 150px;
 
