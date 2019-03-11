@@ -51,7 +51,7 @@ const en = {
     team: 'team',
     works: 'works',
     contacts: 'contact',
-    about: 'about',
+    about: 'about/contact',
     clients: 'clients',
     inprogress: 'in progress',
   },

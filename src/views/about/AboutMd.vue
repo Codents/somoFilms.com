@@ -24,9 +24,10 @@
     }
   }
   .body {
-    height: 80%;
+    height: 80%;    
     overflow-y: auto;
     .text {
+      max-width: 1024px;
       font-size: 1.5rem;
       text-align: justify;
       padding: 1rem;
