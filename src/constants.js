@@ -34,6 +34,7 @@ export const menus = [
     route: '/clients',
     text: 'menu.clients',
   },
+  /*
   {
     id: 'inprogress',
     active: true,
@@ -48,6 +49,7 @@ export const menus = [
     route: '/contact',
     text: 'menu.contacts',
   },
+*/
   {
     id: 'about',
     active: true,

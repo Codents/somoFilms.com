@@ -40,6 +40,7 @@ export default new Router({
       path: '/about',
       components: { container: About },
     },
+  /*
     {
       name: 'contact',
       path: '/contact',
@@ -50,5 +51,6 @@ export default new Router({
       path: '/inprogress',
       components: { container: InProgress },
     },
+    */
   ],
 });
