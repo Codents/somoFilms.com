@@ -113,6 +113,7 @@ import TweenMax from 'gsap/umd/TweenMax';
 import 'gsap/umd/ScrollToPlugin';
 import workResources from '@/mixins/workResources';
 import spinner from '@/assets/img/spinner.gif';
+import { setTimeout } from 'timers';
 
 const PHOTOS = 'photos';
 const FILMS = 'films';
@@ -160,6 +161,7 @@ export default {
       });
     },
     showVideoFullScreen(video) {
+      window.scrollTo(0, 0);
       const $iframe = document.querySelector(
         '.full-screen-video .embed-container iframe',
       );
@@ -188,6 +190,7 @@ export default {
       }
     },
     expandCollection({ $container, section }) {
+      console.log(section)
       if ($container.classList.contains('closed')) {
         this.iconExpand[section] = true;
         $container.classList.remove('closed');
@@ -198,6 +201,11 @@ export default {
         TweenMax.from($container, 0.8, {
           height: 0,
           opacity: 0,
+          onComplete: () => {
+            if (section === 'films') {
+              window.scrollTo(0, document.body.scrollHeight);
+            }
+          },
         });
       }
     },
@@ -281,8 +289,6 @@ export default {
     }
   }
   .works-body {
-    overflow-y: auto;
-    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     .collection-container {
       margin: 0.5rem 0.5rem 0.5rem 0.5rem;
