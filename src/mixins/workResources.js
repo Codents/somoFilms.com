@@ -1,12 +1,13 @@
 export default {
   methods: {
-    showImageFullScreen(image) {
+    showImageFullScreen(image) {      
       this.$root.$data.showImageFullScreen = true;
       const lazyImage = new Image();
       const $fullImg = document.querySelector('.full-screen-image .image-full');
       $fullImg.src = image.thumb;
       lazyImage.addEventListener('load', () => {
         $fullImg.src = image.full;
+        setTimeout(() => window.scrollTo(0, 0), 300);
       });
       lazyImage.src = image.full;
     },
